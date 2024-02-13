@@ -3,17 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package MytaskManager.Main;
-
+//BENDIJO - CPE
 import MytaskManager.Forms.Calendar;
 import MytaskManager.Forms.Completed;
 import MytaskManager.Forms.Dashboard;
 import MytaskManager.Forms.Deadline;
 import MytaskManager.Forms.Statistic;
 import MytaskManager.Forms.Todo;
+import MytaskManager.Forms.addTask;
+import MytaskManager.LoginPage.Login;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -28,12 +32,12 @@ public class Main extends javax.swing.JFrame {
     private Completed completed;
     private Calendar calendar;
     private Statistic statistic;
+    private addTask addtask;
     
     public Main() {
         initComponents();
         setBackground(new Color(0,0,0,0));
-        
-        
+             
         changeForm.setLayout(new BorderLayout());
         deadline = new Deadline();
         todo = new Todo();
@@ -41,9 +45,22 @@ public class Main extends javax.swing.JFrame {
         completed = new Completed();
         calendar = new Calendar();
         statistic = new Statistic();
+        addtask = new addTask();
         initMoving(this);
+        showForm(dashboard);
         
-      
+        todo.add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                  showForm(addtask);
+            }
+        });
+        addtask.back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                  showForm(todo);
+            }
+        });
     }
 
     private int x;
@@ -424,11 +441,13 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-           showForm(dashboard);
+        showForm(dashboard);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-   
+        Login l = new Login();
+        this.hide();
+        l.setVisible(true);   
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -440,15 +459,15 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-      showForm(completed);     
+        showForm(completed);     
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         showForm(deadline);
+        showForm(deadline);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-           showForm(todo);
+        showForm(todo);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     /**

@@ -45,18 +45,30 @@ public class Dashboard extends javax.swing.JPanel {
                     // Load and set the morning icon for changeimage JLabel
                     ImageIcon icon = new ImageIcon(getClass().getResource("/MytaskManager/icon/morning.png"));
                     changeimage.setIcon(icon);
+                    dayGreetings.removeAll();
+                    dayGreetings.repaint();
+                    dayGreetings.revalidate();
+                    dayGreetings.setText("Good Morning");
                 }
                 // Check if it's afternoon (after 12 PM and before 6 PM)
                 else if (currentHour >= 12 && currentHour < 18) {
                     // Load and set the afternoon icon for changeimage JLabel
                     ImageIcon icon = new ImageIcon(getClass().getResource("/MytaskManager/icon/afternoon.png"));
                     changeimage.setIcon(icon);
+                    dayGreetings.removeAll();
+                    dayGreetings.repaint();
+                    dayGreetings.revalidate();
+                    dayGreetings.setText("Good Afternoon");
                 }
                 // Check if it's evening (after 6 PM)
                 else {
                     // Load and set the evening icon for changeimage JLabel
                     ImageIcon icon = new ImageIcon(getClass().getResource("/MytaskManager/icon/evening.png"));
                     changeimage.setIcon(icon);
+                    dayGreetings.removeAll();
+                    dayGreetings.repaint();
+                    dayGreetings.revalidate();
+                    dayGreetings.setText("Good Evening");
                 }
             }
         });
@@ -69,7 +81,7 @@ public class Dashboard extends javax.swing.JPanel {
     private void initComponents() {
 
         panelRound1 = new MytaskManager.Components.PanelRound();
-        jLabel1 = new javax.swing.JLabel();
+        dayGreetings = new javax.swing.JLabel();
         t_time = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         changeimage = new javax.swing.JLabel();
@@ -89,9 +101,9 @@ public class Dashboard extends javax.swing.JPanel {
         panelRound1.setRoundTopLeft(90);
         panelRound1.setRoundTopRight(90);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(142, 117, 117));
-        jLabel1.setText("Good morning ");
+        dayGreetings.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        dayGreetings.setForeground(new java.awt.Color(142, 117, 117));
+        dayGreetings.setText("Good morning ");
 
         t_time.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         t_time.setForeground(new java.awt.Color(142, 117, 117));
@@ -99,6 +111,8 @@ public class Dashboard extends javax.swing.JPanel {
         t_time.setText("0");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 255, 51));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Admin");
 
         changeimage.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -111,26 +125,26 @@ public class Dashboard extends javax.swing.JPanel {
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelRound1Layout.createSequentialGroup()
-                                .addComponent(t_time, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(27, 27, 27)))
+                                .addContainerGap()
+                                .addComponent(t_time, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelRound1Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
                         .addComponent(changeimage, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addComponent(dayGreetings, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(dayGreetings, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,16 +269,16 @@ public class Dashboard extends javax.swing.JPanel {
         panelRound7Layout.setHorizontalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound7Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(49, 49, 49)
                 .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(46, 46, 46))
+                .addGap(45, 45, 45))
         );
         panelRound7Layout.setVerticalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound7Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                .addGap(22, 22, 22))
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -312,8 +326,8 @@ public class Dashboard extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel changeimage;
+    private javax.swing.JLabel dayGreetings;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
