@@ -1,4 +1,3 @@
-
 package MytaskManager.Database;
 
 import java.sql.Connection;
@@ -17,7 +16,7 @@ public class Database {
         private Database(){
         
     }
-            public void ConnectToDatabase() throws  SQLException, ClassNotFoundException{
+    public void ConnectToDatabase() throws  SQLException, ClassNotFoundException{
         String server = "127.0.0.1";
         String port = "3306";
         String database ="My_Task_Manager_System";

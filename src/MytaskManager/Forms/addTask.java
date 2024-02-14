@@ -2,6 +2,8 @@
 package MytaskManager.Forms;
 
 import com.raven.datechooser.DateChooser;
+import java.sql.SQLException;
+import library.database.DatabaseConnection;
 
 public class addTask extends javax.swing.JPanel {
 
@@ -16,6 +18,21 @@ public class addTask extends javax.swing.JPanel {
          mdeadline = new DateChooser();
          mdate.setTextField(date);
          mdeadline.setTextField(deadline);
+         init();
+    }
+    private void init() {
+       try {
+           DatabaseConnection.getInstance().ConnectToDatabase();
+       } catch (ClassNotFoundException |SQLException e) {
+          e.printStackTrace();
+       }
+    }
+
+    
+    public void addTaskButton(){
+        
+        
+        
     }
 
     /**
@@ -32,7 +49,7 @@ public class addTask extends javax.swing.JPanel {
         panelGradient1 = new MytaskManager.Components.PanelGradient();
         panelRound2 = new MytaskManager.Components.PanelRound();
         ass = new javax.swing.JLabel();
-        email = new javax.swing.JTextField();
+        task = new javax.swing.JTextField();
         date = new javax.swing.JTextField();
         deadline = new javax.swing.JTextField();
         time = new javax.swing.JTextField();
@@ -60,8 +77,8 @@ public class addTask extends javax.swing.JPanel {
         ass.setForeground(new java.awt.Color(142, 117, 117));
         ass.setText("Task:");
 
-        email.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        email.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(142, 117, 117)));
+        task.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        task.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(142, 117, 117)));
 
         date.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         date.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(142, 117, 117)));
@@ -87,6 +104,11 @@ public class addTask extends javax.swing.JPanel {
         jToggleButton1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jToggleButton1.setForeground(new java.awt.Color(142, 117, 117));
         jToggleButton1.setText("Add");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         back.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         back.setForeground(new java.awt.Color(142, 117, 117));
@@ -124,7 +146,7 @@ public class addTask extends javax.swing.JPanel {
                                 .addGap(37, 37, 37)
                                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(date)
-                                    .addComponent(email)
+                                    .addComponent(task)
                                     .addComponent(deadline, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(panelRound2Layout.createSequentialGroup()
                                 .addGap(75, 75, 75)
@@ -155,7 +177,7 @@ public class addTask extends javax.swing.JPanel {
                             .addComponent(jToggleButton2))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(task, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ass2)
@@ -229,6 +251,10 @@ public class addTask extends javax.swing.JPanel {
      timePicker1.showPopup(ass, 100, 100);
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+  addTaskButton();
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ass;
@@ -238,12 +264,12 @@ public class addTask extends javax.swing.JPanel {
     public javax.swing.JToggleButton back;
     private javax.swing.JTextField date;
     private javax.swing.JTextField deadline;
-    private javax.swing.JTextField email;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private MytaskManager.Components.PanelGradient panelGradient1;
     private MytaskManager.Components.PanelRound panelRound1;
     private MytaskManager.Components.PanelRound panelRound2;
+    private javax.swing.JTextField task;
     private javax.swing.JTextField time;
     private com.raven.swing.TimePicker timePicker1;
     // End of variables declaration//GEN-END:variables

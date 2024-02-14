@@ -117,7 +117,7 @@
                                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="date" max="32767" attributes="0"/>
-                                              <Component id="email" max="32767" attributes="0"/>
+                                              <Component id="task" max="32767" attributes="0"/>
                                               <Component id="deadline" alignment="0" min="-2" pref="183" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -162,7 +162,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="email" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="task" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="time" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -200,7 +200,7 @@
                     <Property name="text" type="java.lang.String" value="Task:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="email">
+                <Component class="javax.swing.JTextField" name="task">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="16" style="1"/>
@@ -299,6 +299,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Add"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JToggleButton" name="back">
                   <Properties>
