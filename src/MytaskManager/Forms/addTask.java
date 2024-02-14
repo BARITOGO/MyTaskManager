@@ -18,15 +18,15 @@ public class addTask extends javax.swing.JPanel {
          mdeadline = new DateChooser();
          mdate.setTextField(date);
          mdeadline.setTextField(deadline);
-         init();
+//         init();
     }
-    private void init() {
-       try {
-           DatabaseConnection.getInstance().ConnectToDatabase();
-       } catch (ClassNotFoundException |SQLException e) {
-          e.printStackTrace();
-       }
-    }
+//    private void init() {
+//       try {
+//           DatabaseConnection.getInstance().ConnectToDatabase();
+//       } catch (ClassNotFoundException |SQLException e) {
+//          e.printStackTrace();
+//       }
+//    }
 
     
     public void addTaskButton(){
@@ -59,6 +59,7 @@ public class addTask extends javax.swing.JPanel {
         jToggleButton1 = new javax.swing.JToggleButton();
         back = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
+        userID = new javax.swing.JLabel();
 
         timePicker1.setForeground(new java.awt.Color(186, 230, 151));
         timePicker1.setDisplayText(time);
@@ -128,6 +129,10 @@ public class addTask extends javax.swing.JPanel {
             }
         });
 
+        userID.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        userID.setForeground(new java.awt.Color(142, 117, 117));
+        userID.setText("userID");
+
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
         panelRound2Layout.setHorizontalGroup(
@@ -149,8 +154,10 @@ public class addTask extends javax.swing.JPanel {
                                     .addComponent(task)
                                     .addComponent(deadline, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(panelRound2Layout.createSequentialGroup()
-                                .addGap(75, 75, 75)
-                                .addComponent(ass)))
+                                .addGap(66, 66, 66)
+                                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(userID)
+                                    .addComponent(ass))))
                         .addGap(36, 36, 36)
                         .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
@@ -168,7 +175,8 @@ public class addTask extends javax.swing.JPanel {
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addComponent(userID)
+                        .addGap(12, 12, 12)
                         .addComponent(ass))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
                         .addContainerGap()
@@ -226,7 +234,7 @@ public class addTask extends javax.swing.JPanel {
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addComponent(panelGradient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
@@ -272,5 +280,6 @@ public class addTask extends javax.swing.JPanel {
     private javax.swing.JTextField task;
     private javax.swing.JTextField time;
     private com.raven.swing.TimePicker timePicker1;
+    private javax.swing.JLabel userID;
     // End of variables declaration//GEN-END:variables
 }

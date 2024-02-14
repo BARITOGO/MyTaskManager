@@ -116,7 +116,7 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel6.setText("Admin");
 
         changeimage.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        changeimage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Forms/afternoon-image.png"))); // NOI18N
+        changeimage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/morning.png"))); // NOI18N
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -132,12 +132,12 @@ public class Dashboard extends javax.swing.JPanel {
                             .addGroup(panelRound1Layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(changeimage, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(changeimage))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(dayGreetings, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +152,7 @@ public class Dashboard extends javax.swing.JPanel {
                         .addComponent(t_time, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34))
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(changeimage)
+                        .addComponent(changeimage, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -223,7 +223,7 @@ public class Dashboard extends javax.swing.JPanel {
         panelRound5Layout.setHorizontalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound5Layout.createSequentialGroup()
-                .addContainerGap(82, Short.MAX_VALUE)
+                .addContainerGap(91, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(87, 87, 87))
         );
@@ -325,7 +325,7 @@ public class Dashboard extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel changeimage;
+    public javax.swing.JLabel changeimage;
     private javax.swing.JLabel dayGreetings;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel2;
