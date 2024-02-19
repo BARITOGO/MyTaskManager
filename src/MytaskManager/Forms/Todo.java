@@ -37,7 +37,7 @@ public class Todo extends javax.swing.JPanel {
       populateTable();
     }
   
-   
+   //message
       public static void populateTable(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
