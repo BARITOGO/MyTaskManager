@@ -5,11 +5,23 @@ import com.raven.datechooser.DateChooser;
 import java.sql.SQLException;
 import library.database.DatabaseConnection;
 
+import com.toedter.calendar.JDateChooser;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class addTask extends javax.swing.JPanel {
 
     private DateChooser mdate;
     private DateChooser mdeadline; 
-    
+    Connection MyCon;
+    PreparedStatement ps;
+    ResultSet rs;
     
     public addTask() {
          initComponents();
@@ -261,6 +273,27 @@ public class addTask extends javax.swing.JPanel {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
   addTaskButton();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            MyCon =DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/My_Task_Manager_System", "root", "12345");
+            ps = MyCon.prepareStatement("insert into todo(task,date,deadline,time)values(?,?,?,?)");
+            
+            ps.setString(1, task.getText());
+            ps.setString(2, date.getText());
+            ps.setString(3, deadline.getText());
+            ps.setString(4, time.getText());
+
+             ps.execute();
+             populateTable();
+             JOptionPane.showMessageDialog(this,"success");
+            
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex,"Error",JOptionPane.ERROR_MESSAGE);
+        }
+             }
+        private void populateTable() {
+     
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
 
