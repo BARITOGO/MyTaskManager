@@ -3,7 +3,7 @@ package MytaskManager.Components;
 
 import MytaskManager.Database.Database;
 import java.sql.PreparedStatement;
-import library.database.DatabaseConnection;
+//import library.database.DatabaseConnection;
 
 
 public class addTaskController {
@@ -67,7 +67,7 @@ public class addTaskController {
     }
     public void addTaskToDatabase(){
         try {
-            PreparedStatement p = DatabaseConnection.getInstance().getConnection().prepareStatement("insert into todolist(id,userid,todo,date,deadline,time)values(?,?,?,?,?,?)");
+            PreparedStatement p = Database.getInstance().getConnection().prepareStatement("insert into todolist(id,userid,todo,date,deadline,time)values(?,?,?,?,?,?)");
             
         p.setString(1, id);
         p.setString(2, userid);
