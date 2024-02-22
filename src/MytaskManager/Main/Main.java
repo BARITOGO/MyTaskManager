@@ -34,6 +34,7 @@ public class Main extends javax.swing.JFrame {
     private Statistic statistic;
     private addTask addtask;
     
+    
     public Main() {
         initComponents();
         setBackground(new Color(0,0,0,0));
@@ -61,6 +62,7 @@ public class Main extends javax.swing.JFrame {
                   showForm(todo);
             }
         });
+        todo.populateTable();
     }
 
     private int x;
@@ -468,6 +470,8 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         showForm(todo);
+        
+        todo.populateTable();
     }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
@@ -489,7 +493,7 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private MytaskManager.Components.PanelGradient0 changeForm;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
+    public javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

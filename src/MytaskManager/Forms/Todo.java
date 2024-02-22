@@ -4,6 +4,7 @@
 package MytaskManager.Forms;
 
 
+import MytaskManager.Database.Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,6 +18,8 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.Vector;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 
 public class Todo extends javax.swing.JPanel {
@@ -24,43 +27,96 @@ public class Todo extends javax.swing.JPanel {
     Connection MyCon;
     PreparedStatement ps;
     ResultSet rs;
-  
+    
+    private DefaultTableCellRenderer centerRenderer;;
     public Todo() {
         initComponents();
           setOpaque(false);
-           populateTable();
+           
+          centerRenderer = new DefaultTableCellRenderer();
+          tableTextCenter();
+          populateTable();
     }
     
-    
-    public static void populateTable(){
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/My_Task_Manager_System", "root", "12345");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo");
+                private void tableTextCenter(){
+                centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+                for (int i = 0; i < table.getColumnCount(); i++) {
+                    table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+                }
+            }
+    public void refreshTable(){
+        populateTable();
+        repaint();
+        revalidate();
+        
+        System.out.println("Table refreshed.");
+    }
+public void populateTable() {
+    try {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+
+        
+        System.out.println("Establishing database connection...");
+        Database.getInstance().ConnectToDatabase();
+
+        
+        Connection connection = Database.getInstance().getConnection();
+        
+        if (connection != null) {
+            System.out.println("Database connection established.");
+
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM todo");
             ResultSet rs = ps.executeQuery();
 
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.setRowCount(0);
-
             while (rs.next()) {
-                String task = rs.getString("task");
-                String date = rs.getString("date");
-                String deadline = rs.getString("deadline");
-                String time =rs.getString("time");
-                model.addRow(new Object[]{task, date,  deadline, time});
+                Vector v = new Vector();
+                v.add(rs.getInt("id"));
+                v.add(rs.getString("task"));
+                v.add(rs.getString("date"));
+                v.add(rs.getString("deadline"));
+                v.add(rs.getString("time"));
+                model.addRow(v);
             }
+            
+           
+            table.setModel(model);
+            System.out.println("Table populated successfully.");
+        } else {
+            System.out.println("Database connection is null.");
+        }
+    } catch (SQLException | ClassNotFoundException ex) {
+        ex.printStackTrace();
+    }
+}
 
-            jTable1.setModel(model);
-            MyCon.close();
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+public void populateTest(){
+    try {
+         DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        String sql = "SELECT * FROM todo";
+        PreparedStatement Ps = Database.getInstance().getConnection().prepareStatement(sql);
+        ResultSet Rs = Ps.executeQuery();
+        
+        while (Rs.next()) {
+            Vector v = new Vector();
+            for (int i = 0; i < 35; i++) {
+                v.add(Rs.getInt("id"));
+                v.add(Rs.getString("task"));
+                v.add(Rs.getString("date"));
+                v.add(Rs.getString("deadline"));
+                v.add(Rs.getString("time"));
+            }
+            model.addRow(v);
         }
         
-   
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
 
 
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -69,7 +125,12 @@ public class Todo extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         add = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        t1 = new javax.swing.JTextField();
+        t2 = new javax.swing.JTextField();
+        t3 = new javax.swing.JTextField();
+        t4 = new javax.swing.JTextField();
 
         panelRound1.setRoundBottomLeft(90);
         panelRound1.setRoundBottomRight(90);
@@ -88,24 +149,33 @@ public class Todo extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Todo", "Date", "Deadline", "TIme"
+                "ID", "Todo", "Date", "Deadline", "TIme"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setCellRenderer(null);
-            jTable1.getColumnModel().getColumn(1).setCellRenderer(null);
-            jTable1.getColumnModel().getColumn(2).setCellRenderer(null);
-            jTable1.getColumnModel().getColumn(3).setCellRenderer(null);
-        }
+        jScrollPane1.setViewportView(table);
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        t1.setText("jTextField1");
+
+        t2.setText("jTextField2");
+
+        t3.setText("jTextField3");
+
+        t4.setText("jTextField4");
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -114,21 +184,46 @@ public class Todo extends javax.swing.JPanel {
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(add)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 862, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 862, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(35, Short.MAX_VALUE))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(add)
+                        .addGap(184, 184, 184)
+                        .addComponent(t1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(t2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(t3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(t4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(94, 94, 94))))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(24, 24, 24))
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(t1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(t2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(t3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(t4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -147,13 +242,35 @@ public class Todo extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_addActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            PreparedStatement Ps = Database.getInstance().getConnection().prepareStatement("insert into todo(task,date,deadline,time)values(?,?,?,?)");
+                                Ps.setString(1, t1.getText());
+                                Ps.setString(2, t2.getText());
+                                Ps.setString(3, t3.getText());
+                                Ps.setString(4, t4.getText());
+                                Ps.execute();
+                                JOptionPane.showMessageDialog(this,"Success");
+//                                populateTest();
+                                populateTest();
+                                
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JToggleButton add;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable1;
     private MytaskManager.Components.PanelRound panelRound1;
+    private javax.swing.JTextField t1;
+    private javax.swing.JTextField t2;
+    private javax.swing.JTextField t3;
+    private javax.swing.JTextField t4;
+    public javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 
 

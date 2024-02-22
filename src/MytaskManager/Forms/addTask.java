@@ -1,6 +1,7 @@
 
 package MytaskManager.Forms;
 
+import MytaskManager.Database.Database;
 import com.raven.datechooser.DateChooser;
 import java.sql.SQLException;
 import library.database.DatabaseConnection;
@@ -19,6 +20,7 @@ public class addTask extends javax.swing.JPanel {
 
     private DateChooser mdate;
     private DateChooser mdeadline; 
+    private Todo todo;
     Connection MyCon;
     PreparedStatement ps;
     ResultSet rs;
@@ -28,6 +30,7 @@ public class addTask extends javax.swing.JPanel {
          setOpaque(false);
          mdate = new DateChooser();
          mdeadline = new DateChooser();
+         todo = new Todo();
          mdate.setTextField(date);
          mdeadline.setTextField(deadline);
 //         init();
@@ -41,11 +44,7 @@ public class addTask extends javax.swing.JPanel {
 //    }
 
     
-    public void addTaskButton(){
-        
-        
-        
-    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -264,7 +263,7 @@ public class addTask extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
- 
+    todo.populateTable();
     }//GEN-LAST:event_backActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
@@ -272,11 +271,10 @@ public class addTask extends javax.swing.JPanel {
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-  addTaskButton();
+  todo.populateTable();
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            MyCon =DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/My_Task_Manager_System", "root", "12345");
-            ps = MyCon.prepareStatement("insert into todo(task,date,deadline,time)values(?,?,?,?)");
+            
+            ps = Database.getInstance().getConnection().prepareStatement("insert into todo(task,date,deadline,time)values(?,?,?,?)");
             
             ps.setString(1, task.getText());
             ps.setString(2, date.getText());
@@ -284,15 +282,17 @@ public class addTask extends javax.swing.JPanel {
             ps.setString(4, time.getText());
 
              ps.execute();
-             populateTable();
+             
              JOptionPane.showMessageDialog(this,"success");
+                    
+//            todo.populateTable();
+             
             
-            
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex,"Error",JOptionPane.ERROR_MESSAGE);
+        } catch ( SQLException ex) {
+            ex.printStackTrace();
         }
-             }
-        private void populateTable() {
+            
+         
      
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
