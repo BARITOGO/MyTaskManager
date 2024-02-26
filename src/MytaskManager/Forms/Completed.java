@@ -66,6 +66,8 @@ public class Completed extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
+        panelRound1.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound1.setForeground(new java.awt.Color(255, 255, 255));
         panelRound1.setRoundBottomLeft(90);
         panelRound1.setRoundBottomRight(90);
         panelRound1.setRoundTopLeft(90);

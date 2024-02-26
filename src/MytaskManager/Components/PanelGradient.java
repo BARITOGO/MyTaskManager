@@ -1,6 +1,5 @@
 
 package MytaskManager.Components;
-
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -147,3 +146,4 @@ public class PanelGradient extends JPanel{
     
     
 }
+
