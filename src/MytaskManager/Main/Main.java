@@ -22,6 +22,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 
 public class Main extends javax.swing.JFrame {
@@ -324,6 +325,7 @@ public class Main extends javax.swing.JFrame {
 
         changeForm.setLayout(new java.awt.BorderLayout());
 
+        mainID.setForeground(new java.awt.Color(142, 117, 117));
         mainID.setText("jLabel1");
 
         javax.swing.GroupLayout panelGradient2Layout = new javax.swing.GroupLayout(panelGradient2);
@@ -479,7 +481,12 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         showForm(todo);
-        
+        SwingUtilities.invokeLater(() -> {
+         todo.userid.removeAll();
+         todo.userid.repaint();
+         todo.userid.revalidate();
+         todo.userid.setText(mainID.getText());         
+        });
         todo.populateTable();
     }//GEN-LAST:event_jButton11ActionPerformed
 

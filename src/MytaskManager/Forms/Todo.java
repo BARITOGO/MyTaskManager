@@ -1,6 +1,7 @@
 
 
 
+
 package MytaskManager.Forms;
 
 
@@ -131,6 +132,7 @@ public void populateTest(){
         t2 = new javax.swing.JTextField();
         t3 = new javax.swing.JTextField();
         t4 = new javax.swing.JTextField();
+        userid = new javax.swing.JLabel();
 
         panelRound1.setRoundBottomLeft(90);
         panelRound1.setRoundBottomRight(90);
@@ -177,6 +179,8 @@ public void populateTest(){
 
         t4.setText("jTextField4");
 
+        userid.setText("jLabel2");
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
@@ -202,11 +206,17 @@ public void populateTest(){
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(94, 94, 94))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(userid)
+                .addGap(67, 67, 67))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(21, 21, 21)
+                .addComponent(userid)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
@@ -244,14 +254,14 @@ public void populateTest(){
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            PreparedStatement Ps = Database.getInstance().getConnection().prepareStatement("insert into todo(task,date,deadline,time)values(?,?,?,?)");
+            PreparedStatement Ps = Database.getInstance().getConnection().prepareStatement("insert into todo(userid, task,date,deadline,time)values(?,?,?,?,?)");
+                                
                                 Ps.setString(1, t1.getText());
                                 Ps.setString(2, t2.getText());
                                 Ps.setString(3, t3.getText());
                                 Ps.setString(4, t4.getText());
                                 Ps.execute();
                                 JOptionPane.showMessageDialog(this,"Success");
-//                                populateTest();
                                 populateTest();
                                 
         } catch (Exception e) {
@@ -271,6 +281,7 @@ public void populateTest(){
     private javax.swing.JTextField t3;
     private javax.swing.JTextField t4;
     public javax.swing.JTable table;
+    public javax.swing.JLabel userid;
     // End of variables declaration//GEN-END:variables
 
 

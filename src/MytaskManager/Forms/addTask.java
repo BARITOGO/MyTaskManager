@@ -1,7 +1,9 @@
 
 package MytaskManager.Forms;
 
+import MytaskManager.Controller.addtaskcontroller;
 import MytaskManager.Database.Database;
+import MytaskManager.Model.ModelAddTask;
 import com.raven.datechooser.DateChooser;
 import java.sql.SQLException;
 import library.database.DatabaseConnection;
@@ -12,7 +14,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,6 +28,7 @@ public class addTask extends javax.swing.JPanel {
     private DateChooser mdate;
     private DateChooser mdeadline; 
     private Todo todo;
+    private addtaskcontroller addTask;
     Connection MyCon;
     PreparedStatement ps;
     ResultSet rs;
@@ -33,6 +41,7 @@ public class addTask extends javax.swing.JPanel {
          todo = new Todo();
          mdate.setTextField(date);
          mdeadline.setTextField(deadline);
+         addTask = new addtaskcontroller();
 //         init();
     }
 //    private void init() {
@@ -63,6 +72,7 @@ public class addTask extends javax.swing.JPanel {
         back = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         userID = new javax.swing.JLabel();
+        uID = new javax.swing.JLabel();
 
         timePicker1.setForeground(new java.awt.Color(186, 230, 151));
         timePicker1.setDisplayText(time);
@@ -136,6 +146,8 @@ public class addTask extends javax.swing.JPanel {
         userID.setForeground(new java.awt.Color(142, 117, 117));
         userID.setText("userID");
 
+        uID.setText("124");
+
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
         panelRound2Layout.setHorizontalGroup(
@@ -170,7 +182,8 @@ public class addTask extends javax.swing.JPanel {
                                 .addGap(37, 37, 37))
                             .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                             .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(time))))
+                            .addComponent(time)
+                            .addComponent(uID))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         panelRound2Layout.setVerticalGroup(
@@ -183,6 +196,8 @@ public class addTask extends javax.swing.JPanel {
                         .addComponent(ass))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(uID)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ass3)
                             .addComponent(jToggleButton2))))
@@ -263,28 +278,17 @@ public class addTask extends javax.swing.JPanel {
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-//  todo.populateTable();
+        SimpleDateFormat date1 = new SimpleDateFormat("MM-dd-yyyy");
         try {
-            
-            ps = Database.getInstance().getConnection().prepareStatement("insert into todo(task,date,deadline,time)values(?,?,?,?)");
-            
-            ps.setString(1, task.getText());
-            ps.setString(2, date.getText());
-            ps.setString(3, deadline.getText());
-            ps.setString(4, time.getText());
-
-             ps.execute();
-             
-             JOptionPane.showMessageDialog(this,"success");
-                        todo.populateTable();
-//            todo.populateTable();
-             
-            
-        } catch ( SQLException ex) {
-            ex.printStackTrace();
+            Date deadLine = date1.parse(deadline.getText());
+            Date sDate = date1.parse(date.getText());
+             addTask.addtasktodatabase(new ModelAddTask(uID.getText(), task.getText(), sDate, deadLine, time.getText()));
+     
+        } catch (ParseException ex) {
+            Logger.getLogger(addTask.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-         
+       
      
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -305,6 +309,7 @@ public class addTask extends javax.swing.JPanel {
     private javax.swing.JTextField task;
     private javax.swing.JTextField time;
     private com.raven.swing.TimePicker timePicker1;
+    private javax.swing.JLabel uID;
     private javax.swing.JLabel userID;
     // End of variables declaration//GEN-END:variables
 }
