@@ -105,12 +105,14 @@ public class Login extends javax.swing.JFrame {
         ass.setText("Username:");
 
         username.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        username.setText("test");
         username.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(142, 117, 117)));
 
         as.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         as.setForeground(new java.awt.Color(142, 117, 117));
         as.setText("Password:");
 
+        password.setText("test");
         password.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(142, 117, 117)));
 
         jButton1.setBackground(new java.awt.Color(237, 195, 195));

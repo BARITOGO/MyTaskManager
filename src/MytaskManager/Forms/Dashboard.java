@@ -94,7 +94,7 @@ public class Dashboard extends javax.swing.JPanel {
         panelRound6 = new MytaskManager.Components.PanelRound();
         jLabel5 = new javax.swing.JLabel();
         panelRound7 = new MytaskManager.Components.PanelRound();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
+        calendar1 = new CalendarUI.calendar.Calendar();
 
         panelRound1.setRoundBottomLeft(90);
         panelRound1.setRoundBottomRight(90);
@@ -197,16 +197,16 @@ public class Dashboard extends javax.swing.JPanel {
         panelRound4Layout.setHorizontalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound4Layout.createSequentialGroup()
-                .addContainerGap(90, Short.MAX_VALUE)
+                .addContainerGap(104, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(114, 114, 114))
+                .addGap(100, 100, 100))
         );
         panelRound4Layout.setVerticalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addContainerGap(275, Short.MAX_VALUE))
         );
 
         panelRound5.setRoundBottomLeft(90);
@@ -269,16 +269,16 @@ public class Dashboard extends javax.swing.JPanel {
         panelRound7Layout.setHorizontalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound7Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(45, 45, 45))
+                .addGap(23, 23, 23)
+                .addComponent(calendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound7Layout.setVerticalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound7Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
+                .addContainerGap()
+                .addComponent(calendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -319,15 +319,15 @@ public class Dashboard extends javax.swing.JPanel {
                                 .addComponent(panelRound6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addComponent(panelRound7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private CalendarUI.calendar.Calendar calendar1;
     public javax.swing.JLabel changeimage;
     private javax.swing.JLabel dayGreetings;
-    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
