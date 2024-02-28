@@ -16,6 +16,7 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.SwingUtilities;
 import Calendar.swing.DynamicCell;
 import Calendar.swing.DynamicCellListener;
+import java.awt.Rectangle;
 
 /**
  *
@@ -87,6 +88,11 @@ public class PanelYear extends DynamicCell<Integer> {
             @Override
             public Integer previous(Integer first) {
                 return first - 1;
+            }
+
+            @Override
+            public void paintBackground(Graphics2D g2, DynamicCell<Integer> dynamicCell, Rectangle rectangle) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
     }

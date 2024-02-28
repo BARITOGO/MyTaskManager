@@ -161,6 +161,11 @@ public class PanelDay extends DynamicCell<ModelDate> {
                 }
                 return new ModelDate(addDate(first, -1));
             }
+
+            @Override
+            public void paintBackground(Graphics2D g2, DynamicCell<ModelDate> dynamicCell, Rectangle rectangle) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
         });
         month = new ModelMonth();
         init(getDisplayDate(month));

@@ -17,6 +17,7 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.SwingUtilities;
 import Calendar.swing.DynamicCell;
 import Calendar.swing.DynamicCellListener;
+import java.awt.Rectangle;
 /**
  *
  * @author Raven
@@ -115,6 +116,11 @@ public class PanelMonth extends DynamicCell<ModelMonth> {
                 } else {
                     return new ModelMonth(first.getYear(), first.getMonth() - 1);
                 }
+            }
+
+            @Override
+            public void paintBackground(Graphics2D g2, DynamicCell<ModelMonth> dynamicCell, Rectangle rectangle) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
 
