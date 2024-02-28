@@ -1,4 +1,4 @@
-package MytaskManager.Calendar.Utils;
+package Calendar.Utils;
 
 import java.awt.event.MouseEvent;
 

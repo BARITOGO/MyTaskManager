@@ -2,17 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package MytaskManager.Calendar.swing;
+package Calendar.Utils;
 
+
+import CalendarUI.model.ModelDate;
 import java.awt.event.MouseEvent;
 
 /**
  *
- * @author RAVEN
+ * @author Raven
  */
-public interface DynamicCellListener {
+public interface CalendarSelectedListener {
 
-    public void scrollChanged(boolean scrollNext);
-
-    public void mouseSelected(MouseEvent mouse);
+    public void selected(MouseEvent evt, ModelDate date);
 }

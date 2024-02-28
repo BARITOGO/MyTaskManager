@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package MytaskManager.Calendar.Utils;
+package Calendar.Utils;
 
 import CalendarUI.swing.DynamicCell;
-import MytaskManager.Calendar.swing.DynamicCellRender;
+import Calendar.swing.DynamicCellRender;
 import com.formdev.flatlaf.ui.FlatUIUtils;
 import com.formdev.flatlaf.util.UIScale;
 import java.awt.AlphaComposite;

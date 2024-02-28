@@ -1,5 +1,5 @@
 
-package MytaskManager.Calendar.Utils;
+package Calendar.Utils;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;

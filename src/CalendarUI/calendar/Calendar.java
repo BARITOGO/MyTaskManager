@@ -1,10 +1,15 @@
-package MytaskManager.Calendar;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package CalendarUI.calendar;
 
+import Calendar.Model.ModelMonth;
+import Calendar.Utils.CalendarCellListener;
+import Calendar.Utils.CalendarEventCellRender;
+import Calendar.Utils.CalendarSelectedListener;
+import Calendar.Utils.DefaultCalendarEventCellRender;
 import CalendarUI.model.ModelDate;
-import CalendarUI.model.ModelMonth;
-import MytaskManager.Calendar.Utils.CalendarEventCellRender;
-import MytaskManager.Calendar.Utils.CalendarSelectedListener;
-import MytaskManager.Calendar.Utils.DefaultCalendarEventCellRender;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.Animator;
 import com.formdev.flatlaf.util.CubicBezierEasing;
@@ -23,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JPanel;
-import CalendarUI.utils.CalendarCellListener;
 
 /**
  *
@@ -238,7 +242,7 @@ public class Calendar extends JPanel {
     }
 
     public Date getSelectedDate() {
-        MytaskManager.Calendar.Model.ModelDate selectedDate = panelDay.getSelectedDate();
+        ModelDate selectedDate = panelDay.getSelectedDate();
         return selectedDate == null ? null : selectedDate.toDate();
     }
 

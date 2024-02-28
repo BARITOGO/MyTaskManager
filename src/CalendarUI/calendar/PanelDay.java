@@ -1,15 +1,17 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package CalendarUI.calendar;
 
-package MytaskManager.Calendar;
-
-import CalendarUI.model.ModelMonth;
-import CalendarUI.swing.DynamicCell;
-import CalendarUI.swing.DynamicCellListener;
-import CalendarUI.utils.CalendarCellListener;
-import CalendarUI.utils.CellRenderCustom;
-import CalendarUI.utils.PanelDateListener;
-import MytaskManager.Calendar.Model.ModelDate;
+import Calendar.Model.ModelMonth;
+import Calendar.Utils.CalendarCellListener;
+import Calendar.Utils.CellRenderCustom;
+import Calendar.Utils.PanelDateListener;
+import CalendarUI.model.ModelDate;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.ui.FlatUIUtils;
+import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseMotionListener;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -20,6 +22,8 @@ import java.awt.geom.Rectangle2D;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.SwingUtilities;
+import Calendar.swing.DynamicCell;
+import Calendar.swing.DynamicCellListener;
 
 /**
  *

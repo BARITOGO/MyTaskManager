@@ -2,14 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package MytaskManager.Calendar;
+package CalendarUI.calendar;
 
-
-import CalendarUI.swing.DynamicCell;
-import CalendarUI.swing.DynamicCellListener;
-import CalendarUI.utils.CalendarCellListener;
-import CalendarUI.utils.CellRenderCustom;
 import com.formdev.flatlaf.FlatClientProperties;
+import Calendar.Utils.CalendarCellListener;
+import Calendar.Utils.CellRenderCustom;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -17,6 +14,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import javax.swing.SwingUtilities;
+import Calendar.swing.DynamicCell;
+import Calendar.swing.DynamicCellListener;
 
 /**
  *

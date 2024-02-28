@@ -1,10 +1,9 @@
 
-package MytaskManager.Calendar.Model;
+package Calendar.Model;
 
 
 import java.util.Calendar;
 import java.util.Date;
-import MytaskManager.Calendar.Model.ModelDate;
 
 /**
  *
