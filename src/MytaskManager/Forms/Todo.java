@@ -124,6 +124,7 @@ public class Todo extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
 
         timePicker1.setForeground(new java.awt.Color(186, 230, 151));
+        timePicker1.setDisplayText(time);
 
         setForeground(new java.awt.Color(255, 255, 255));
 

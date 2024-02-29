@@ -7,6 +7,9 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="97" green="e6" red="ba" type="rgb"/>
         </Property>
+        <Property name="displayText" type="javax.swing.JTextField" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="time"/>
+        </Property>
       </Properties>
     </Component>
   </NonVisualComponents>
