@@ -17,17 +17,29 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.Vector;
 import static MytaskManager.Forms.Todo.populateTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 
 public class Completed extends javax.swing.JPanel {
-
+     private DefaultTableCellRenderer centerRenderer;;
     
     public Completed() {
         initComponents();
          setOpaque(false);
          populateTable();
+        centerRenderer = new DefaultTableCellRenderer();
+        tableTextCenter();
     }
-
+    
+    
+    
+        private void tableTextCenter() {
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < jTable2.getColumnCount(); i++) {
+            jTable2.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+    }
     
      public static void populateTable(){
         try {
