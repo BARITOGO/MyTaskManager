@@ -4,6 +4,7 @@
  */
 package MytaskManager.Main;
 //BENDIJO - CPE
+import MytaskManager.Controller.userController;
 import MytaskManager.Forms.Calendar;
 import MytaskManager.Forms.Completed;
 import MytaskManager.Forms.Dashboard;
@@ -12,6 +13,7 @@ import MytaskManager.Forms.Statistic;
 import MytaskManager.Forms.Todo;
 import MytaskManager.Forms.addTask;
 import MytaskManager.LoginPage.Login;
+import MytaskManager.Model.ModelUser;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,6 +25,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import MytaskManager.Main.Main;
 
 
 public class Main extends javax.swing.JFrame {
@@ -357,7 +360,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
                         .addComponent(changeForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(208, 208, 208))
+                .addGap(85, 85, 85))
         );
 
         jButton8.setBackground(new java.awt.Color(253, 253, 253));
@@ -455,6 +458,8 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         showForm(dashboard);
+//         Dashboard db = new Dashboard();
+//         db.adminname.setText(get);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

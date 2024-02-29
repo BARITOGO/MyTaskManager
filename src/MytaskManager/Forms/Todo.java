@@ -1,9 +1,4 @@
-
-
-
-
 package MytaskManager.Forms;
-
 
 import MytaskManager.Database.Database;
 import java.sql.Connection;
@@ -21,7 +16,6 @@ import javax.swing.table.DefaultTableModel;
 import java.util.Vector;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
-
 
 public class Todo extends javax.swing.JPanel {
     

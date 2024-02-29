@@ -83,7 +83,7 @@ public class Dashboard extends javax.swing.JPanel {
         panelRound1 = new MytaskManager.Components.PanelRound();
         dayGreetings = new javax.swing.JLabel();
         t_time = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        adminname = new javax.swing.JLabel();
         changeimage = new javax.swing.JLabel();
         panelRound3 = new MytaskManager.Components.PanelRound();
         jLabel2 = new javax.swing.JLabel();
@@ -110,10 +110,10 @@ public class Dashboard extends javax.swing.JPanel {
         t_time.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         t_time.setText("0");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(51, 255, 51));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Admin");
+        adminname.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        adminname.setForeground(new java.awt.Color(51, 255, 51));
+        adminname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        adminname.setText("Admin");
 
         changeimage.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         changeimage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/morning.png"))); // NOI18N
@@ -131,7 +131,7 @@ public class Dashboard extends javax.swing.JPanel {
                                 .addComponent(t_time, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelRound1Layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(adminname, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(changeimage))
                     .addGroup(panelRound1Layout.createSequentialGroup()
@@ -147,7 +147,7 @@ public class Dashboard extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(adminname, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addComponent(t_time, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34))
@@ -325,6 +325,7 @@ public class Dashboard extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel adminname;
     private CalendarUI.calendar.Calendar calendar1;
     public javax.swing.JLabel changeimage;
     private javax.swing.JLabel dayGreetings;
@@ -332,7 +333,6 @@ public class Dashboard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private MytaskManager.Components.PanelRound panelRound1;
     private MytaskManager.Components.PanelRound panelRound3;
     private MytaskManager.Components.PanelRound panelRound4;
