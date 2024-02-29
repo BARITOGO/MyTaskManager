@@ -6,7 +6,7 @@ package MytaskManager.Forms;
 
 
 
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,15 +16,23 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import MytaskManager.Forms.addtask2;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+//import MytaskManager.Forms.addtask2;
+//import java.awt.BorderLayout;
+//import java.awt.Component;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.MouseAdapter;
+//import java.awt.event.MouseEvent;
+//import java.awt.event.MouseMotionAdapter;
+//import javax.swing.JFrame;
+import com.raven.datechooser.DateChooser;
+import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JFrame;
-
+import javax.swing.JOptionPane;
 
 
 public class Todo extends javax.swing.JPanel {
@@ -34,17 +42,22 @@ public class Todo extends javax.swing.JPanel {
      ResultSet rs;
      private DefaultTableCellRenderer centerRenderer;;
      private addtask2 addtask2;
+     private DateChooser mdate;
+     private DateChooser mdeadline;
      
     public Todo() {
         initComponents();
-          setOpaque(false);
-      populateTable();
-      centerRenderer = new DefaultTableCellRenderer();
+        setOpaque(false);
+        populateTable();
+        centerRenderer = new DefaultTableCellRenderer();
         tableTextCenter();
         
         panelRound5.setVisible(false);
         add.setVisible(false);
-      
+         mdate = new DateChooser();
+        mdeadline = new DateChooser();
+        mdate.setTextField(date);
+        mdeadline.setTextField(deadline);
     }
 
    
@@ -89,6 +102,7 @@ public class Todo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        timePicker1 = new com.raven.swing.TimePicker();
         panelRound1 = new MytaskManager.Components.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         add = new javax.swing.JToggleButton();
@@ -108,6 +122,8 @@ public class Todo extends javax.swing.JPanel {
         ass = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+
+        timePicker1.setForeground(new java.awt.Color(186, 230, 151));
 
         setForeground(new java.awt.Color(255, 255, 255));
 
@@ -295,14 +311,16 @@ public class Todo extends javax.swing.JPanel {
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
-                        .addGroup(panelRound1Layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel2)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRound1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(add)
@@ -436,8 +454,8 @@ public class Todo extends javax.swing.JPanel {
     }//GEN-LAST:event_timeActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+             timePicker1.showPopup(time, 100, 100);
 
-//        timePicker1.showPopup(time, 100, 100);
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void taskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskActionPerformed
@@ -465,35 +483,24 @@ public class Todo extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JToggleButton add;
     private javax.swing.JLabel ass;
-    private javax.swing.JLabel ass1;
     private javax.swing.JTextField date;
-    private javax.swing.JTextField date1;
     private javax.swing.JTextField deadline;
-    private javax.swing.JTextField deadline1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
     private MytaskManager.Components.PanelRound panelRound1;
     private MytaskManager.Components.PanelRound panelRound5;
-    private MytaskManager.Components.PanelRound panelRound6;
     private javax.swing.JTextField task;
-    private javax.swing.JTextField task1;
     private javax.swing.JTextField time;
-    private javax.swing.JTextField time1;
+    private com.raven.swing.TimePicker timePicker1;
     // End of variables declaration//GEN-END:variables
 
 
