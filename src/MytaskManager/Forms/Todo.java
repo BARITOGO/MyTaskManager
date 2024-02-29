@@ -61,7 +61,7 @@ public void populateTable() {
         if (connection != null) {
             System.out.println("Database connection established.");
 
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM todo");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM addtask");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
