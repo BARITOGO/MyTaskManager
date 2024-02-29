@@ -17,13 +17,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import static javax.swing.JOptionPane.showMessageDialog;
 
-/**
- *
- * @author Asus
- */
 public class signUp extends javax.swing.JFrame {
-//            String username, password, query;
-//            String SUrl, SUser, SPass;
     Connection MyCon;
     PreparedStatement ps;
     ResultSet rs;

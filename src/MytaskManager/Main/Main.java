@@ -40,6 +40,13 @@ public class Main extends javax.swing.JFrame {
     
     
     public Main() {
+        
+        SwingUtilities.invokeLater(() -> {
+         addtask.uID.removeAll();
+         addtask.uID.repaint();
+         addtask.uID.revalidate();
+         addtask.uID.setText(mainID.getText());         
+        });
         initComponents();
         setBackground(new Color(0,0,0,0));
              

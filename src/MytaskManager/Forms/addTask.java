@@ -287,7 +287,7 @@ public class addTask extends javax.swing.JPanel {
         } catch (ParseException ex) {
             Logger.getLogger(addTask.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+            todo.populateTable();
        
      
     }//GEN-LAST:event_jToggleButton1ActionPerformed
@@ -309,7 +309,7 @@ public class addTask extends javax.swing.JPanel {
     private javax.swing.JTextField task;
     private javax.swing.JTextField time;
     private com.raven.swing.TimePicker timePicker1;
-    private javax.swing.JLabel uID;
+    public javax.swing.JLabel uID;
     private javax.swing.JLabel userID;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,9 +17,7 @@ public class Database {
         private Database(){
         
     }
-
-   
-        
+     
     public void ConnectToDatabase() throws  SQLException, ClassNotFoundException{
         String server = "127.0.0.1";
         String port = "3306";
