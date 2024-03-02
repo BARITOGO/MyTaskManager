@@ -14,20 +14,44 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.Timer;
 
 public class Deadline extends javax.swing.JPanel {
 
     Connection MyCon;
     PreparedStatement ps;
     ResultSet rs;
+     private DefaultTableCellRenderer centerRenderer;;
+      private Timer timer;
     
     public Deadline() {
         initComponents();
           setOpaque(false);
           populateTable();
+          centerRenderer = new DefaultTableCellRenderer();
+          tableTextCenter();
+          
+          
+          timer = new Timer(5000, (e) -> {
+            populateTable();
+        });
+        timer.start();
+          
     }
     
+    
+    
+     private void tableTextCenter() {
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < jTable3.getColumnCount(); i++) {
+            jTable3.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+    }
+     
+     
     
  public void populateTable() {
         try {
@@ -133,7 +157,7 @@ public class Deadline extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable3;
+    public javax.swing.JTable jTable3;
     private javax.swing.JToggleButton jToggleButton1;
     private MytaskManager.Components.PanelRound panelRound1;
     // End of variables declaration//GEN-END:variables

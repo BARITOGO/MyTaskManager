@@ -52,8 +52,8 @@ public class Todo extends javax.swing.JPanel {
         mdate.setTextField(date);
         mdeadline.setTextField(deadline);
         
-        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(() -> checkDeadline(), 0, 1, TimeUnit.HOURS);
+//        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+//        scheduler.scheduleAtFixedRate(() -> checkDeadline(), 0, 1, TimeUnit.HOURS);
  
     }
 
@@ -86,6 +86,7 @@ public class Todo extends javax.swing.JPanel {
             }
 
             jTable1.setModel(model);
+            checkDeadline();
             MyCon.close();
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -93,35 +94,7 @@ public class Todo extends javax.swing.JPanel {
     }
      
 
-//         private void checkDeadline() {
-//    try {
-//        Class.forName("com.mysql.cj.jdbc.Driver");
-//        MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-//        PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo");
-//        ResultSet rs = ps.executeQuery();
-//
-//        while (rs.next()) {
-//            String task = rs.getString("task");
-//            String deadlineStr = rs.getString("deadline");
-//            LocalDate deadline = LocalDate.parse(deadlineStr, DateTimeFormatter.ofPattern("dd-MM-yyyy")); 
-//            LocalDate currentDate = LocalDate.now();
-//            long daysUntilDeadline = java.time.temporal.ChronoUnit.DAYS.between(currentDate, deadline);
-//
-//            if (daysUntilDeadline <= 3) {
-//                PreparedStatement movePs = MyCon.prepareStatement("INSERT INTO deadlinedata (task, deadline) VALUES (?, ?)");
-//                movePs.setString(1, task);
-//                
-//                movePs.setDate(2, Date.valueOf(deadline));
-//                movePs.executeUpdate();
-//            }
-//        }
-//
-//        
-//        MyCon.close();
-//    } catch (ClassNotFoundException | SQLException ex) {
-//        JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//    }
-//}
+
      
      
      private void checkDeadline() {

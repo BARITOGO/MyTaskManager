@@ -15,6 +15,9 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.Vector;
+import javax.swing.SwingConstants;
+import javax.swing.Timer;
+import javax.swing.table.DefaultTableCellRenderer;
 
 
 
@@ -22,12 +25,32 @@ public class Completed extends javax.swing.JPanel {
    Connection MyCon;
     PreparedStatement ps;
     ResultSet rs;
+    private DefaultTableCellRenderer centerRenderer;;
+      private Timer timer;
     
     public Completed() {
         initComponents();
          setOpaque(false);
          populateTable();
+         centerRenderer = new DefaultTableCellRenderer();
+          tableTextCenter();
+          
+          
+          timer = new Timer(5000, (e) -> {
+            populateTable();
+        });
+        timer.start();
+        
     }
+    
+    
+     private void tableTextCenter() {
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < jTable2.getColumnCount(); i++) {
+            jTable2.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+    }
+    
 
     
      public static void populateTable(){
