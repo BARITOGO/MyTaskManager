@@ -1,38 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package MytaskManager.Forms;
 
 
-
-//import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-//import MytaskManager.Forms.addtask2;
-//import java.awt.BorderLayout;
-//import java.awt.Component;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.MouseAdapter;
-//import java.awt.event.MouseEvent;
-//import java.awt.event.MouseMotionAdapter;
-//import javax.swing.JFrame;
 import com.raven.datechooser.DateChooser;
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 public class Todo extends javax.swing.JPanel {
@@ -41,9 +28,11 @@ public class Todo extends javax.swing.JPanel {
      PreparedStatement ps;
      ResultSet rs;
      private DefaultTableCellRenderer centerRenderer;;
-     private addtask2 addtask2;
      private DateChooser mdate;
      private DateChooser mdeadline;
+     
+
+     
      
     public Todo() {
         initComponents();
@@ -58,6 +47,8 @@ public class Todo extends javax.swing.JPanel {
         mdeadline = new DateChooser();
         mdate.setTextField(date);
         mdeadline.setTextField(deadline);
+        
+        
     }
 
    
@@ -70,10 +61,10 @@ public class Todo extends javax.swing.JPanel {
         }
     }
  
-      public static void populateTable(){
+       public void populateTable() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
             PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo");
             ResultSet rs = ps.executeQuery();
 
@@ -84,18 +75,58 @@ public class Todo extends javax.swing.JPanel {
                 String task = rs.getString("task");
                 String date = rs.getString("date");
                 String deadline = rs.getString("deadline");
-                String time =rs.getString("time");
-                model.addRow(new Object[]{task, date,  deadline, time});
+                String time = rs.getString("time");
+                model.addRow(new Object[]{task, date, deadline, time});
             }
 
             jTable1.setModel(model);
+            checkDeadline();
             MyCon.close();
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-   
     }
+      
+      
+      
+      
+       private void checkDeadline() {
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+        PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo");
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String task = rs.getString("task");
+            String deadlineStr = rs.getString("deadline");
+            LocalDate deadline = LocalDate.parse(deadlineStr, DateTimeFormatter.ofPattern("dd-MM-yyyy")); 
+            LocalDate currentDate = LocalDate.now();
+            long daysUntilDeadline = java.time.temporal.ChronoUnit.DAYS.between(currentDate, deadline);
+
+            if (daysUntilDeadline <= 3) {
+                PreparedStatement checkPs = MyCon.prepareStatement("SELECT COUNT(*) AS count FROM deadlinedata WHERE task = ?");
+                checkPs.setString(1, task);
+                ResultSet checkRs = checkPs.executeQuery();
+                
+                checkRs.next();
+                int count = checkRs.getInt("count");
+                
+                if (count == 0) {
+                    PreparedStatement movePs = MyCon.prepareStatement("INSERT INTO deadlinedata (task, deadline) VALUES (?, ?)");
+                    movePs.setString(1, task);
+                    movePs.setDate(2, Date.valueOf(deadline));
+                    movePs.executeUpdate();
+                }
+            }
+        }
+
+        MyCon.close();
+    } catch (ClassNotFoundException | SQLException ex) {
+        JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
 
     
     @SuppressWarnings("unchecked")
@@ -469,7 +500,7 @@ public class Todo extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/button (12).png")));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/done2.png")));
     }//GEN-LAST:event_jLabel7MouseEntered
 
     private void jLabel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseExited
@@ -495,7 +526,7 @@ public class Todo extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable1;
+    public javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton2;
     private MytaskManager.Components.PanelRound panelRound1;
     private MytaskManager.Components.PanelRound panelRound5;

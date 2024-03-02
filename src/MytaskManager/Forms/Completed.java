@@ -2,34 +2,36 @@
 package MytaskManager.Forms;
 
 
-import static MytaskManager.Forms.Todo.jTable1;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Vector;
-import javax.swing.table.DefaultTableModel;
-import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import java.util.Vector;
-import static MytaskManager.Forms.Todo.populateTable;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 
 
 public class Completed extends javax.swing.JPanel {
      private DefaultTableCellRenderer centerRenderer;;
-    
+     private Timer timer;
+     
+     
     public Completed() {
         initComponents();
          setOpaque(false);
          populateTable();
         centerRenderer = new DefaultTableCellRenderer();
         tableTextCenter();
+        
+        
+         timer = new Timer(5000, (e) -> {
+            populateTable();
+        });
+        timer.start();
     }
     
     
@@ -41,7 +43,7 @@ public class Completed extends javax.swing.JPanel {
         }
     }
     
-     public static void populateTable(){
+      public static void populateTable(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
@@ -64,8 +66,6 @@ public class Completed extends javax.swing.JPanel {
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-   
     }
     
     @SuppressWarnings("unchecked")
