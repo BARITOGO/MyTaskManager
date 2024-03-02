@@ -2,7 +2,6 @@
 package MytaskManager.Forms;
 
 
-import static MytaskManager.Forms.Todo.jTable1;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,11 +15,13 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.Vector;
-import static MytaskManager.Forms.Todo.populateTable;
+
 
 
 public class Completed extends javax.swing.JPanel {
-
+   Connection MyCon;
+    PreparedStatement ps;
+    ResultSet rs;
     
     public Completed() {
         initComponents();
@@ -52,9 +53,11 @@ public class Completed extends javax.swing.JPanel {
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-   
     }
+     
+     
+     
+     
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -65,6 +68,7 @@ public class Completed extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setForeground(new java.awt.Color(255, 255, 255));
@@ -106,17 +110,28 @@ public class Completed extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable2);
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jToggleButton1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelRound1Layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addGap(87, 87, 87))))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -126,8 +141,13 @@ public class Completed extends javax.swing.JPanel {
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                .addGap(36, 36, 36)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                        .addGap(36, 36, 36))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jToggleButton1)
@@ -156,8 +176,38 @@ public class Completed extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jTable2ComponentShown
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+         try {
+            int selectedRow = jTable2.getSelectedRow();
+             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            if (selectedRow != -1) {
+                String task = jTable2.getValueAt(selectedRow, 0).toString();
+                String date = jTable2.getValueAt(selectedRow, 1).toString();
+                String deadline = jTable2.getValueAt(selectedRow, 2).toString();
+                String time = jTable2.getValueAt(selectedRow, 3).toString();
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+                ps = MyCon.prepareStatement("insert into todo (task, date, deadline, time) values (?, ?, ?, ?)");
+                ps.setString(1, task);
+                ps.setString(2, date);
+                ps.setString(3, deadline);
+                ps.setString(4, time);
+                ps.execute();
+                populateTable();
+                model.removeRow(selectedRow);
+                JOptionPane.showMessageDialog(this, "Task completed successfully");
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select a row to transfer.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;

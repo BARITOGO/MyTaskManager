@@ -1,5 +1,6 @@
 
 package MytaskManager.Forms;
+import static MytaskManager.Forms.Completed.populateTable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -24,45 +25,33 @@ public class Deadline extends javax.swing.JPanel {
     public Deadline() {
         initComponents();
           setOpaque(false);
+          populateTable();
     }
     
     
-private void checkDeadline() {
-    DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
-    int rowCount = model.getRowCount();
-    LocalDate today = LocalDate.now();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+ public void populateTable() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM deadlinedata");
+            ResultSet rs = ps.executeQuery();
 
-    for (int i = 0; i < rowCount; i++) {
-        String deadlineStr = model.getValueAt(i, 2).toString(); 
-        LocalDate deadlineDate = LocalDate.parse(deadlineStr, formatter);
+            DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+            model.setRowCount(0);
 
-       
-        long daysUntilDeadline = today.until(deadlineDate).getDays();
-
-        if (daysUntilDeadline <= 3) {
-          
-            String task = model.getValueAt(i, 0).toString();
-            String date = model.getValueAt(i, 1).toString();
-            String deadline = model.getValueAt(i, 2).toString();
-            String time = model.getValueAt(i, 3).toString();
-
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-                ps = MyCon.prepareStatement("insert into deadline (task, date, deadline, time) values (?, ?, ?, ?)");
-                ps.setString(1, task);
-                ps.setString(2, date);
-                ps.setString(3, deadline);
-                ps.setString(4, time);
-                ps.execute();
-                JOptionPane.showMessageDialog(this, "Task added to deadline table");
-            } catch (ClassNotFoundException | SQLException ex) {
-                JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
+            while (rs.next()) {
+                String task = rs.getString("task");
+                String deadline = rs.getString("deadline");
+                model.addRow(new Object[]{task,deadline});
             }
+
+            jTable3.setModel(model);
+            MyCon.close();
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-}
+     
     
     
     @SuppressWarnings("unchecked")
@@ -88,15 +77,16 @@ private void checkDeadline() {
         jTable3.setForeground(new java.awt.Color(117, 118, 116));
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "task", "date", "deadline", "time"
+                "task", "deadline"
             }
         ));
+        jTable3.setToolTipText("");
         jTable3.setSelectionForeground(new java.awt.Color(117, 118, 116));
         jScrollPane1.setViewportView(jTable3);
 
@@ -111,9 +101,9 @@ private void checkDeadline() {
                 .addGap(30, 30, 30)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToggleButton1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 864, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

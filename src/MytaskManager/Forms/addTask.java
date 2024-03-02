@@ -1,7 +1,7 @@
 
 package MytaskManager.Forms;
 
-import static MytaskManager.Forms.Deadline.jTable3;
+
 import com.toedter.calendar.JDateChooser;
 import com.raven.datechooser.DateChooser;
 import java.sql.Connection;
@@ -45,43 +45,7 @@ public class addTask extends javax.swing.JPanel {
 
 
     
-  private void checkDeadline() {
-    DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
-    int rowCount = model.getRowCount();
-    LocalDate today = LocalDate.now();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-    for (int i = 0; i < rowCount; i++) {
-        String deadlineStr = model.getValueAt(i, 2).toString(); 
-        LocalDate deadlineDate = LocalDate.parse(deadlineStr, formatter);
-
-       
-        long daysUntilDeadline = today.until(deadlineDate).getDays();
-
-        if (daysUntilDeadline <= 3) {
-          
-            String task = model.getValueAt(i, 0).toString();
-            String date = model.getValueAt(i, 1).toString();
-            String deadline = model.getValueAt(i, 2).toString();
-            String time = model.getValueAt(i, 3).toString();
-
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-                ps = MyCon.prepareStatement("insert into deadline (task, date, deadline, time) values (?, ?, ?, ?)");
-                ps.setString(1, task);
-                ps.setString(2, date);
-                ps.setString(3, deadline);
-                ps.setString(4, time);
-                ps.execute();
-                JOptionPane.showMessageDialog(this, "Task added to deadline table");
-            } catch (ClassNotFoundException | SQLException ex) {
-                JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
-}
-    
+      
     public void addTaskButton(){
         
         
@@ -305,7 +269,7 @@ public class addTask extends javax.swing.JPanel {
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-      todo.populateTable();
+        todo.populateTable();
     }//GEN-LAST:event_backActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
