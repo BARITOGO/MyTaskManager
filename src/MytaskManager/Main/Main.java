@@ -493,13 +493,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         showForm(todo);
-        SwingUtilities.invokeLater(() -> {
-         todo.userid.removeAll();
-         todo.userid.repaint();
-         todo.userid.revalidate();
-         todo.userid.setText(mainID.getText());         
-        });
-        todo.populateTable();
+
     }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
