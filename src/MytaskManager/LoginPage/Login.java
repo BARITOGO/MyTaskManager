@@ -1,24 +1,23 @@
 
 package MytaskManager.LoginPage;
 
+import MytaskManager.Controller.userController;
 import MytaskManager.Main.Main;
+import MytaskManager.Model.ModelUser;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.Random;
+import java.util.UUID;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Asus
- */
+
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+   
     public Login() {
         initComponents();
         setBackground(new Color(0,0,0,0));
@@ -46,6 +45,18 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+     private static String generateUID(){
+        int userId = 6;
+        Random random = new Random();
+        StringBuilder userBuilder = new StringBuilder();
+        for (int i = 0; i < userId; i++) {
+            userBuilder.append(random.nextInt(10));
+        }
+        String uID = userBuilder.toString();
+        return uID;
+    }
    
     
     @SuppressWarnings("unchecked")
@@ -57,9 +68,9 @@ public class Login extends javax.swing.JFrame {
         panelRound2 = new MytaskManager.Components.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         ass = new javax.swing.JLabel();
-        email = new javax.swing.JTextField();
+        username = new javax.swing.JTextField();
         as = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        password = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -88,14 +99,14 @@ public class Login extends javax.swing.JFrame {
         ass.setForeground(new java.awt.Color(142, 117, 117));
         ass.setText("Username:");
 
-        email.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        email.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(142, 117, 117)));
+        username.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        username.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(142, 117, 117)));
 
         as.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         as.setForeground(new java.awt.Color(142, 117, 117));
         as.setText("Password:");
 
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(142, 117, 117)));
+        password.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(142, 117, 117)));
 
         jButton1.setBackground(new java.awt.Color(237, 195, 195));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -132,9 +143,9 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(as)
-                                .addComponent(email)
+                                .addComponent(username)
                                 .addComponent(ass)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))))
+                                .addComponent(password, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))))
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(143, 143, 143)
                         .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -152,11 +163,11 @@ public class Login extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addComponent(ass)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(as)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
@@ -261,9 +272,26 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Main m = new Main();
-        this.hide();
-        m.setVisible(true);
+//        Main m = new Main();
+//        this.hide();
+//        m.setVisible(true);
+
+             Main m = new Main();
+        String uname = username.getText();
+        char [] pWord = password.getPassword();
+        userController controller = new userController();
+        ModelUser login = new ModelUser();
+        login.setUserName(uname);
+        login.setPassWord(pWord);
+        ModelUser result = controller.Login(login);
+        if (result != null) {
+            m.mainID.setText(result.getUserId());
+            m.setVisible(true);
+            setVisible(false);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Incorrect Username or Password, please Try again!");
+        } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -286,6 +314,7 @@ public class Login extends javax.swing.JFrame {
         signUp s = new signUp();
         this.hide();
         s.setVisible(true);
+        s.genId.setText(generateUID());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -303,7 +332,6 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel as;
     private javax.swing.JLabel ass;
-    private javax.swing.JTextField email;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
@@ -311,9 +339,10 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
     private MytaskManager.Components.PanelGradient panelGradient1;
     private MytaskManager.Components.PanelRound panelRound1;
     private MytaskManager.Components.PanelRound panelRound2;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }
