@@ -19,7 +19,7 @@ import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 public class Dashboard extends javax.swing.JPanel {
-  
+        private Timer timer;
   
     public Dashboard() {
         initComponents();
@@ -27,6 +27,14 @@ public class Dashboard extends javax.swing.JPanel {
          populateTable();
         times();
          updateLabelCounts();
+         
+         
+         timer = new Timer(5000, (e) -> {
+            populateTable();
+    
+        });
+        timer.start();
+         
     }
     
     

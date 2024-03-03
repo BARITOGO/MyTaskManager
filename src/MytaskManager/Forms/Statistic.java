@@ -1,6 +1,7 @@
 
 package MytaskManager.Forms;
 
+import static MytaskManager.Forms.Completed.populateTable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,10 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.Timer;
 
 
 public class Statistic extends javax.swing.JPanel {
-
+        private Timer timer;
     
     public Statistic() {
         initComponents();
@@ -24,6 +26,14 @@ public class Statistic extends javax.swing.JPanel {
           jPanel1.setVisible(false);
            jPanel2.setVisible(false);
             jPanel3.setVisible(false);
+            
+            
+            timer = new Timer(5000, (e) -> {
+            populateTable1();
+            populateTable2();
+            populateTable3();
+        });
+        timer.start();
            
     }
     
