@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class Statistic extends javax.swing.JPanel {
@@ -16,14 +17,90 @@ public class Statistic extends javax.swing.JPanel {
         initComponents();
          setOpaque(false);
          updateLabelCounts();
-         
+         populateTable1();
+          populateTable2();
+          populateTable3();
          
           jPanel1.setVisible(false);
            jPanel2.setVisible(false);
             jPanel3.setVisible(false);
            
     }
+    
+    
+    public void populateTable1(){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo");
+            ResultSet rs = ps.executeQuery();
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+
+            while (rs.next()) {
+                String task = rs.getString("task");
+                
+                model.addRow(new Object[]{task});
+            }
+
+            jTable1.setModel(model);
+            MyCon.close();
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
         
+        public void populateTable2(){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM deadlinedata");
+            ResultSet rs = ps.executeQuery();
+
+            DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
+            model.setRowCount(0);
+
+            while (rs.next()) {
+                String task = rs.getString("task");
+                
+                model.addRow(new Object[]{task});
+            }
+
+            jTable4.setModel(model);
+            MyCon.close();
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+            
+        
+        
+        public void populateTable3(){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM completed");
+            ResultSet rs = ps.executeQuery();
+
+            DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
+            model.setRowCount(0);
+
+            while (rs.next()) {
+                String task = rs.getString("task");
+                
+                model.addRow(new Object[]{task});
+            }
+
+            jTable5.setModel(model);
+            MyCon.close();
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    
+    
     
      public void updateLabelCounts() {
         try {
@@ -149,6 +226,8 @@ public class Statistic extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(117, 118, 116));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -160,6 +239,12 @@ public class Statistic extends javax.swing.JPanel {
                 "Task"
             }
         ));
+        jTable1.setSelectionForeground(new java.awt.Color(117, 118, 116));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -183,6 +268,8 @@ public class Statistic extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTable4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTable4.setForeground(new java.awt.Color(117, 118, 116));
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -194,6 +281,12 @@ public class Statistic extends javax.swing.JPanel {
                 "Task"
             }
         ));
+        jTable4.setSelectionForeground(new java.awt.Color(117, 118, 116));
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable4MouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTable4);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -217,6 +310,8 @@ public class Statistic extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTable5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTable5.setForeground(new java.awt.Color(117, 118, 116));
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -228,6 +323,12 @@ public class Statistic extends javax.swing.JPanel {
                 "Task"
             }
         ));
+        jTable5.setSelectionForeground(new java.awt.Color(117, 118, 116));
+        jTable5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable5MouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(jTable5);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -279,6 +380,18 @@ public class Statistic extends javax.swing.JPanel {
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         jPanel3.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       jPanel1.setVisible(false);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
+        jPanel2.setVisible(false);
+    }//GEN-LAST:event_jTable4MouseClicked
+
+    private void jTable5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MouseClicked
+       jPanel3.setVisible(false);
+    }//GEN-LAST:event_jTable5MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
