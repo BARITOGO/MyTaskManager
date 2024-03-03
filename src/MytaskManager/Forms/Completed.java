@@ -87,7 +87,6 @@ public class Completed extends javax.swing.JPanel {
     private void initComponents() {
 
         panelRound1 = new MytaskManager.Components.PanelRound();
-        jToggleButton1 = new javax.swing.JToggleButton();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -99,14 +98,6 @@ public class Completed extends javax.swing.JPanel {
         panelRound1.setRoundBottomRight(90);
         panelRound1.setRoundTopLeft(90);
         panelRound1.setRoundTopRight(90);
-
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/addtask.png"))); // NOI18N
-        jToggleButton1.setBorder(null);
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
-            }
-        });
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(0, 204, 51));
@@ -148,13 +139,10 @@ public class Completed extends javax.swing.JPanel {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jToggleButton1)
-                            .addGroup(panelRound1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1)
-                                .addGap(87, 87, 87))))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(87, 87, 87))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -172,9 +160,7 @@ public class Completed extends javax.swing.JPanel {
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jToggleButton1)
-                .addGap(20, 20, 20))
+                .addGap(84, 84, 84))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -188,11 +174,6 @@ public class Completed extends javax.swing.JPanel {
             .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-       
-        
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jTable2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable2ComponentShown
 
@@ -234,7 +215,6 @@ public class Completed extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JToggleButton jToggleButton1;
     private MytaskManager.Components.PanelRound panelRound1;
     // End of variables declaration//GEN-END:variables
 }

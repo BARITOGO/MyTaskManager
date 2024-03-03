@@ -39,7 +39,7 @@ public class SignIn_LogIn {
             p.setString(1, data.getUserName());
             p.setString(2, new String(data.getPassWord()));
             ResultSet rs = p.executeQuery();
-            if (rs.next()) {
+             if (rs.next()) {
                 return new ModelUser(rs.getString("userId"), rs.getString("userName"), rs.getString("passWord").toCharArray());
             }
             else{
