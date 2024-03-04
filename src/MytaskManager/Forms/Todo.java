@@ -68,7 +68,7 @@ public class Todo extends javax.swing.JPanel {
      public void populateTable() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/My_Task_Manager_System", "root", "12345");
             PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo");
             ResultSet rs = ps.executeQuery();
 
@@ -98,7 +98,7 @@ public class Todo extends javax.swing.JPanel {
      private void checkDeadline() {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+        MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/My_Task_Manager_System", "root", "12345");
         PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo");
         ResultSet rs = ps.executeQuery();
 
@@ -420,7 +420,7 @@ public class Todo extends javax.swing.JPanel {
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/My_Task_Manager_System", "root", "12345");
             ps = MyCon.prepareStatement("insert into completed (task, date, deadline, time) values (?, ?, ?, ?)");
             ps.setString(1, task);
             ps.setString(2, date);
@@ -457,7 +457,7 @@ public class Todo extends javax.swing.JPanel {
         //add
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            MyCon =DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask","root","rootV12morjana");
+            MyCon =DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/My_Task_Manager_System","root","12345");
             ps = MyCon.prepareStatement("insert into todo(task,date,deadline,time)values(?,?,?,?)");
 
             ps.setString(1, task.getText());

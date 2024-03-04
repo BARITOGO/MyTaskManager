@@ -56,7 +56,7 @@ public class Deadline extends javax.swing.JPanel {
  public void populateTable() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/My_Task_Manager_System", "root", "12345");
             PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM deadlinedata");
             ResultSet rs = ps.executeQuery();
 

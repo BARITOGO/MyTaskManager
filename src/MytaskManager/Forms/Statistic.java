@@ -41,7 +41,7 @@ public class Statistic extends javax.swing.JPanel {
     public void populateTable1(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/My_Task_Manager_System", "root", "12345");
             PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo");
             ResultSet rs = ps.executeQuery();
 
@@ -64,7 +64,7 @@ public class Statistic extends javax.swing.JPanel {
         public void populateTable2(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/My_Task_Manager_System", "root", "12345");
             PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM deadlinedata");
             ResultSet rs = ps.executeQuery();
 
@@ -89,7 +89,7 @@ public class Statistic extends javax.swing.JPanel {
         public void populateTable3(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/My_Task_Manager_System", "root", "12345");
             PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM completed");
             ResultSet rs = ps.executeQuery();
 
@@ -115,7 +115,7 @@ public class Statistic extends javax.swing.JPanel {
      public void updateLabelCounts() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/My_Task_Manager_System", "root", "12345");
             
             PreparedStatement pstodo = MyCon.prepareStatement("SELECT COUNT(*) FROM todo");
             ResultSet rstodo = pstodo.executeQuery();

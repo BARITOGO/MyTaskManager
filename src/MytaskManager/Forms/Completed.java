@@ -56,7 +56,7 @@ public class Completed extends javax.swing.JPanel {
      public static void populateTable(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/My_Task_Manager_System", "root", "12345");
             PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM completed");
             ResultSet rs = ps.executeQuery();
 
@@ -191,7 +191,7 @@ public class Completed extends javax.swing.JPanel {
                 String deadline = jTable2.getValueAt(selectedRow, 2).toString();
                 String time = jTable2.getValueAt(selectedRow, 3).toString();
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+                MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/My_Task_Manager_System", "root", "12345");
                 ps = MyCon.prepareStatement("insert into todo (task, date, deadline, time) values (?, ?, ?, ?)");
                 ps.setString(1, task);
                 ps.setString(2, date);
