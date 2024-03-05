@@ -81,8 +81,7 @@ public class Qoutes {
             quotes.add("Life is trying things to see if they work. -Ray Bradbury");
             quotes.add("A truly rich man is one whose children run into his arms when his hands are empty. –Unknown");
             quotes.add("I would rather die of passion than of boredom. –Vincent van Gogh");
-           
-            };
+            quotes.add("\"The bad news is time flies. The good news is you're the pilot. -Michael Altshuler");            };
     public  String getRandomQuote() {
         Random random = new Random();
         return quotes.get(random.nextInt(quotes.size()));
