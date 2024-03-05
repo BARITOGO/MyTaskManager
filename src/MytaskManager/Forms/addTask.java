@@ -36,8 +36,10 @@ public class addTask extends javax.swing.JPanel {
          setOpaque(false);
          mdate = new DateChooser();
          mdeadline = new DateChooser();
+        String username = null;
          
-         todo = new Todo();
+//         todo = new Todo();
+         Todo todo = new Todo();
          mdate.setTextField(date);
          mdeadline.setTextField(deadline);
 

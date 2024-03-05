@@ -65,27 +65,43 @@ public class Database {
     public Connection getConnection() {
         return connection;
     }
-    
-    
-//   public static void main(String[] args) {  
-//        Connection con;
-//         PreparedStatement pst;
+ 
+}
+
+
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.SQLException;
+//
+//public class Database {
+//    private static Database instance = new Database();
+//    private Connection connection;
+//
+//    private static final String DB_HOST = "localhost";
+//    private static final String DB_PORT = "3307"; // Update with your MySQL port
+//    private static final String ROOT_USERNAME = "root"; // Update with your MySQL root username
+//    private static final String ROOT_PASSWORD = "rootV12morjana"; // Update with your MySQL root password
+//
+//    private Database() {
 //        try {
-//           
 //            Class.forName("com.mysql.cj.jdbc.Driver");
-//            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/mytask","root","rootV12morjana");
-//            System.out.println("sucess");
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
 //        }
-//        
 //    }
 //
-//    public static Connection getcon() {
-//        throw new UnsupportedOperationException("Not supported yet."); 
-//    } 
-}
+//    public static Database getInstance() {
+//        return instance;
+//    }
+//
+//    public Connection getConnection() {
+//        return connection;
+//    }
+//
+//    public void ConnectToDatabase(String databaseName) throws SQLException {
+//        String url = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + databaseName;
+//        connection = DriverManager.getConnection(url, ROOT_USERNAME, ROOT_PASSWORD);
+//    }
+//}
 
 

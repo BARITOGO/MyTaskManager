@@ -2,6 +2,11 @@
 package MytaskManager.Forms;
 
 
+import MytaskManager.Controller.userController;
+//import static MytaskManager.Forms.Completed.populateTable;
+import MytaskManager.LoginPage.signUp;
+import MytaskManager.Main.Main;
+import MytaskManager.Model.ModelUser;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -16,46 +21,55 @@ import java.sql.SQLException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-
-
+import java.util.Random;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 
 public class Todo extends javax.swing.JPanel {
-
+    
+    
      Connection MyCon;
      PreparedStatement ps;
      ResultSet rs;
      private DefaultTableCellRenderer centerRenderer;;
      private DateChooser mdate;
      private DateChooser mdeadline;
-     
+     private String userId = "yourUserId";
+     private Timer timer;
     
-     
 
-     
-     
     public Todo() {
+     
         initComponents();
         setOpaque(false);
+        todoid.setText(userId);
         populateTable();
         centerRenderer = new DefaultTableCellRenderer();
         tableTextCenter();
+      
         
         panelRound5.setVisible(false);
         add.setVisible(false);
-         mdate = new DateChooser();
+        mdate = new DateChooser();
         mdeadline = new DateChooser();
         mdate.setTextField(date);
         mdeadline.setTextField(deadline);
         
-//        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-//        scheduler.scheduleAtFixedRate(() -> checkDeadline(), 0, 1, TimeUnit.HOURS);
- 
+        
+         timer = new Timer(5000, (e) -> {
+            populateTable();
+        });
+        timer.start();
+        
     }
 
-   
+    public void setCurrentUserId(String userId) {
+        
+        todoid.setText(userId);
+        populateTable(); 
+    }
+    
     
     
     private void tableTextCenter() {
@@ -69,7 +83,8 @@ public class Todo extends javax.swing.JPanel {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo");
+            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo WHERE userId = ?");
+            ps.setString(1,todoid.getText());
             ResultSet rs = ps.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -92,8 +107,6 @@ public class Todo extends javax.swing.JPanel {
     }
      
 
-
-     
      
      private void checkDeadline() {
     try {
@@ -131,7 +144,11 @@ public class Todo extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
+            
+     
+    
 
+   
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -157,6 +174,7 @@ public class Todo extends javax.swing.JPanel {
         ass = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        todoid = new javax.swing.JLabel();
 
         timePicker1.setForeground(new java.awt.Color(186, 230, 151));
         timePicker1.setDisplayText(time);
@@ -342,6 +360,8 @@ public class Todo extends javax.swing.JPanel {
             }
         });
 
+        todoid.setText("jLabel8");
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
@@ -349,28 +369,38 @@ public class Todo extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                    .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelRound1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(add)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)))
-                .addGap(54, 54, 54))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(add)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)))
+                        .addGap(54, 54, 54))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(323, 323, 323)
+                        .addComponent(todoid)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jLabel1)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(todoid)
+                        .addGap(22, 22, 22)))
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
@@ -421,11 +451,12 @@ public class Todo extends javax.swing.JPanel {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            ps = MyCon.prepareStatement("insert into completed (task, date, deadline, time) values (?, ?, ?, ?)");
+            ps = MyCon.prepareStatement("insert into completed (userId, task, date, deadline, time) values (?,?, ?, ?, ?)");
             ps.setString(1, task);
-            ps.setString(2, date);
-            ps.setString(3, deadline);
-            ps.setString(4, time);
+            ps.setString(2, task);
+            ps.setString(3, date);
+            ps.setString(4, deadline);
+            ps.setString(5, time);
             ps.execute();
             
            
@@ -455,15 +486,17 @@ public class Todo extends javax.swing.JPanel {
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         //add
+     
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             MyCon =DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask","root","rootV12morjana");
-            ps = MyCon.prepareStatement("insert into todo(task,date,deadline,time)values(?,?,?,?)");
-
-            ps.setString(1, task.getText());
-            ps.setString(2, date.getText());
-            ps.setString(3, deadline.getText());
-            ps.setString(4, time.getText());
+            ps = MyCon.prepareStatement("insert into todo(userId,task,date,deadline,time)values(?,?,?,?,?)");
+            
+            ps.setString(1, todoid.getText());
+            ps.setString(2, task.getText());
+            ps.setString(3, date.getText());
+            ps.setString(4, deadline.getText());
+            ps.setString(5, time.getText());
 
             ps.execute();
             populateTable();
@@ -473,7 +506,8 @@ public class Todo extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, ex,"Error",JOptionPane.ERROR_MESSAGE);
         }
         
-       
+      
+    
 
     }//GEN-LAST:event_jLabel9MouseClicked
 
@@ -537,6 +571,7 @@ public class Todo extends javax.swing.JPanel {
     private javax.swing.JTextField task;
     private javax.swing.JTextField time;
     private com.raven.swing.TimePicker timePicker1;
+    public javax.swing.JLabel todoid;
     // End of variables declaration//GEN-END:variables
 
 

@@ -74,6 +74,7 @@ public class Login extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        userid = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -177,6 +178,8 @@ public class Login extends javax.swing.JFrame {
                 .addGap(36, 36, 36))
         );
 
+        userid.setText("jLabel3");
+
         javax.swing.GroupLayout panelGradient1Layout = new javax.swing.GroupLayout(panelGradient1);
         panelGradient1.setLayout(panelGradient1Layout);
         panelGradient1Layout.setHorizontalGroup(
@@ -184,7 +187,9 @@ public class Login extends javax.swing.JFrame {
             .addGroup(panelGradient1Layout.createSequentialGroup()
                 .addGap(166, 166, 166)
                 .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(166, 166, 166))
+                .addGap(39, 39, 39)
+                .addComponent(userid)
+                .addGap(90, 90, 90))
         );
         panelGradient1Layout.setVerticalGroup(
             panelGradient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,6 +197,10 @@ public class Login extends javax.swing.JFrame {
                 .addGap(91, 91, 91)
                 .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(102, 102, 102))
+            .addGroup(panelGradient1Layout.createSequentialGroup()
+                .addGap(211, 211, 211)
+                .addComponent(userid)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton9.setBackground(new java.awt.Color(253, 253, 253));
@@ -285,7 +294,7 @@ public class Login extends javax.swing.JFrame {
         login.setPassWord(pWord);
         ModelUser result = controller.Login(login);
         if (result != null) {
-            m.mainID.setText(result.getUserId());
+            m.MainID.setText(result.getUserId());
             m.setVisible(true);
             setVisible(false);
         }
@@ -343,6 +352,7 @@ public class Login extends javax.swing.JFrame {
     private MytaskManager.Components.PanelRound panelRound1;
     private MytaskManager.Components.PanelRound panelRound2;
     private javax.swing.JPasswordField password;
+    public javax.swing.JLabel userid;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

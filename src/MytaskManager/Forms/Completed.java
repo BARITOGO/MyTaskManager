@@ -22,18 +22,20 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 
 public class Completed extends javax.swing.JPanel {
-   Connection MyCon;
-    PreparedStatement ps;
-    ResultSet rs;
-    private DefaultTableCellRenderer centerRenderer;;
-      private Timer timer;
+     Connection MyCon;
+     PreparedStatement ps;
+     ResultSet rs;
+     private DefaultTableCellRenderer centerRenderer;;
+     private Timer timer;
+     private String userId = "yourUserId";
     
     public Completed() {
         initComponents();
-         setOpaque(false);
-         populateTable();
-         centerRenderer = new DefaultTableCellRenderer();
-          tableTextCenter();
+        setOpaque(false);
+        compid.setText(userId);
+        populateTable();
+        centerRenderer = new DefaultTableCellRenderer();
+        tableTextCenter();
           
           
           timer = new Timer(5000, (e) -> {
@@ -41,6 +43,13 @@ public class Completed extends javax.swing.JPanel {
         });
         timer.start();
         
+    }
+    
+    
+     public void setCurrentUserId(String userId) {
+        
+        compid.setText(userId);
+        populateTable(); 
     }
     
     
@@ -53,11 +62,12 @@ public class Completed extends javax.swing.JPanel {
     
 
     
-     public static void populateTable(){
+     public void populateTable(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM completed");
+            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM completed WHERE userId = ?");
+            ps.setString(1,compid.getText());
             ResultSet rs = ps.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
@@ -90,7 +100,7 @@ public class Completed extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        compid = new javax.swing.JLabel();
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setForeground(new java.awt.Color(255, 255, 255));
@@ -124,12 +134,7 @@ public class Completed extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable2);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        compid.setText("jLabel1");
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -141,8 +146,8 @@ public class Completed extends javax.swing.JPanel {
                         .addGap(48, 48, 48)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(87, 87, 87))
+                        .addComponent(compid)
+                        .addGap(307, 307, 307))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -157,7 +162,7 @@ public class Completed extends javax.swing.JPanel {
                         .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                         .addGap(36, 36, 36))
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(compid)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(84, 84, 84))
@@ -180,40 +185,11 @@ public class Completed extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jTable2ComponentShown
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-         try {
-            int selectedRow = jTable2.getSelectedRow();
-             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-            if (selectedRow != -1) {
-                String task = jTable2.getValueAt(selectedRow, 0).toString();
-                String date = jTable2.getValueAt(selectedRow, 1).toString();
-                String deadline = jTable2.getValueAt(selectedRow, 2).toString();
-                String time = jTable2.getValueAt(selectedRow, 3).toString();
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-                ps = MyCon.prepareStatement("insert into todo (task, date, deadline, time) values (?, ?, ?, ?)");
-                ps.setString(1, task);
-                ps.setString(2, date);
-                ps.setString(3, deadline);
-                ps.setString(4, time);
-                ps.execute();
-                populateTable();
-                model.removeRow(selectedRow);
-                JOptionPane.showMessageDialog(this, "Task completed successfully");
-            } else {
-                JOptionPane.showMessageDialog(this, "Please select a row to transfer.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
-            }
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    public javax.swing.JLabel compid;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable2;
+    public javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private MytaskManager.Components.PanelRound panelRound1;
     // End of variables declaration//GEN-END:variables

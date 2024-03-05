@@ -71,7 +71,9 @@ public class Dashboard extends javax.swing.JPanel {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo");
+            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo WHERE userId = ?");
+            ps.setString(1,userId.getText());
+            
             ResultSet rs = ps.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
@@ -168,8 +170,7 @@ public class Dashboard extends javax.swing.JPanel {
         calendar1 = new CalendarUI.calendar.Calendar();
         panelRound5 = new MytaskManager.Components.PanelRound();
         jLabel8 = new javax.swing.JLabel();
-
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        userId = new javax.swing.JLabel();
 
         panelRound1.setRoundBottomLeft(90);
         panelRound1.setRoundBottomRight(90);
@@ -231,8 +232,6 @@ public class Dashboard extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 20, -1, -1));
-
         panelRound3.setRoundBottomLeft(90);
         panelRound3.setRoundBottomRight(90);
         panelRound3.setRoundTopLeft(90);
@@ -267,7 +266,7 @@ public class Dashboard extends javax.swing.JPanel {
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,8 +277,6 @@ public class Dashboard extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
-
-        add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 260, 221, -1));
 
         panelRound4.setRoundBottomLeft(90);
         panelRound4.setRoundBottomRight(90);
@@ -351,8 +348,6 @@ public class Dashboard extends javax.swing.JPanel {
                         .addGap(55, 55, 55))))
         );
 
-        add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(263, 20, -1, -1));
-
         panelRound7.setRoundBottomLeft(90);
         panelRound7.setRoundBottomRight(90);
         panelRound7.setRoundTopLeft(90);
@@ -374,8 +369,6 @@ public class Dashboard extends javax.swing.JPanel {
                 .addComponent(calendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(41, Short.MAX_VALUE))
         );
-
-        add(panelRound7, new org.netbeans.lib.awtextra.AbsoluteConstraints(263, 342, -1, -1));
 
         panelRound5.setRoundBottomLeft(90);
         panelRound5.setRoundBottomRight(90);
@@ -404,7 +397,46 @@ public class Dashboard extends javax.swing.JPanel {
                 .addContainerGap(250, Short.MAX_VALUE))
         );
 
-        add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 20, -1, -1));
+        userId.setText("jLabel9");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(userId))
+                    .addComponent(panelRound7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addComponent(userId)))
+                        .addGap(6, 6, 6)
+                        .addComponent(panelRound7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -428,5 +460,6 @@ public class Dashboard extends javax.swing.JPanel {
     private MytaskManager.Components.PanelRound panelRound5;
     private MytaskManager.Components.PanelRound panelRound7;
     private javax.swing.JLabel t_time;
+    public javax.swing.JLabel userId;
     // End of variables declaration//GEN-END:variables
 }
