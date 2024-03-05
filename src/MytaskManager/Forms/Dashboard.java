@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package MytaskManager.Forms;
 
 import java.awt.event.ActionEvent;
@@ -15,21 +11,28 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class Dashboard extends javax.swing.JPanel {
         private Timer timer;
-  
+        private Dashboard dashboard;
+        private DefaultTableCellRenderer centerRenderer;;
+        
     public Dashboard() {
+   
         initComponents();
         setOpaque(false);
-         populateTable();
+        populateTable();
         times();
-         updateLabelCounts();
+        updateLabelCounts();
+        centerRenderer = new DefaultTableCellRenderer();
+        tableTextCenter();
          
-         
-         timer = new Timer(5000, (e) -> {
+        timer = new Timer(5000, (e) -> {
             populateTable();
     
         });
@@ -144,7 +147,12 @@ public class Dashboard extends javax.swing.JPanel {
         t.start();
     }
 
-
+         private void tableTextCenter(){
+                centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+                for (int i = 0; i < jTable5.getColumnCount(); i++) {
+                    jTable5.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+                }
+            }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -168,6 +176,7 @@ public class Dashboard extends javax.swing.JPanel {
         calendar1 = new CalendarUI.calendar.Calendar();
         panelRound5 = new MytaskManager.Components.PanelRound();
         jLabel8 = new javax.swing.JLabel();
+        userId = new javax.swing.JLabel();
 
         panelRound1.setRoundBottomLeft(90);
         panelRound1.setRoundBottomRight(90);
@@ -355,16 +364,16 @@ public class Dashboard extends javax.swing.JPanel {
         panelRound7Layout.setHorizontalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound7Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(calendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         panelRound7Layout.setVerticalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound7Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(17, 17, 17)
                 .addComponent(calendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         panelRound5.setRoundBottomLeft(90);
@@ -394,6 +403,8 @@ public class Dashboard extends javax.swing.JPanel {
                 .addContainerGap(250, Short.MAX_VALUE))
         );
 
+        userId.setText("jLabel9");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -408,7 +419,9 @@ public class Dashboard extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(userId))
                     .addComponent(panelRound7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
@@ -423,7 +436,10 @@ public class Dashboard extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(userId)))
                         .addGap(6, 6, 6)
                         .addComponent(panelRound7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
@@ -443,12 +459,13 @@ public class Dashboard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable5;
+    public javax.swing.JTable jTable5;
     private MytaskManager.Components.PanelRound panelRound1;
     private MytaskManager.Components.PanelRound panelRound3;
     private MytaskManager.Components.PanelRound panelRound4;
     private MytaskManager.Components.PanelRound panelRound5;
     private MytaskManager.Components.PanelRound panelRound7;
     private javax.swing.JLabel t_time;
+    public javax.swing.JLabel userId;
     // End of variables declaration//GEN-END:variables
 }

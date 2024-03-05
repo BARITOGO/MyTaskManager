@@ -17,6 +17,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 
 public class Main extends javax.swing.JFrame {
@@ -28,6 +29,7 @@ public class Main extends javax.swing.JFrame {
     private Statistic statistic;
     
     public Main() {
+        
         initComponents();
         setBackground(new Color(0,0,0,0));
              
@@ -39,6 +41,7 @@ public class Main extends javax.swing.JFrame {
         statistic = new Statistic();
         initMoving(this);
         showForm(dashboard);
+        idtext();
         
 //        todo.add.addActionListener(new ActionListener() {
 //            @Override
@@ -57,6 +60,38 @@ public class Main extends javax.swing.JFrame {
     private int x;
     private int y;
 
+    public void idtext(){
+         SwingUtilities.invokeLater(() -> {
+         dashboard.userId.removeAll();
+         dashboard.userId.repaint();
+         dashboard.userId.revalidate();
+         dashboard.userId.setText(MainID.getText());         
+        });
+         SwingUtilities.invokeLater(() -> {
+         statistic.statid.removeAll();
+         statistic.statid.repaint();
+         statistic.statid.revalidate();
+         statistic.statid.setText(MainID.getText());         
+        }); 
+         SwingUtilities.invokeLater(() -> {
+         deadline.deadid.removeAll();
+         deadline.deadid.repaint();
+         deadline.deadid.revalidate();
+         deadline.deadid.setText(MainID.getText());         
+        }); 
+         SwingUtilities.invokeLater(() -> {
+         completed.compid.removeAll();
+         completed.compid.repaint();
+         completed.compid.revalidate();
+         completed.compid.setText(MainID.getText());         
+        }); 
+         SwingUtilities.invokeLater(() -> {
+         todo.todoid.removeAll();
+         todo.todoid.repaint();
+         todo.todoid.revalidate();
+         todo.todoid.setText(MainID.getText());         
+        });
+    }
     public void initMoving(JFrame frame){
         panelRound1.addMouseListener(new MouseAdapter() {
             @Override
@@ -105,7 +140,7 @@ public class Main extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         changeForm = new MytaskManager.Components.PanelGradient0();
-        mainID = new javax.swing.JLabel();
+        MainID = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
@@ -250,7 +285,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelRound2.setBackground(new java.awt.Color(255, 255, 255));
@@ -296,7 +331,7 @@ public class Main extends javax.swing.JFrame {
 
         changeForm.setLayout(new java.awt.BorderLayout());
 
-        mainID.setText("jLabel1");
+        MainID.setText("userid");
 
         javax.swing.GroupLayout panelGradient2Layout = new javax.swing.GroupLayout(panelGradient2);
         panelGradient2.setLayout(panelGradient2Layout);
@@ -312,14 +347,14 @@ public class Main extends javax.swing.JFrame {
                 .addGap(23, 23, 23))
             .addGroup(panelGradient2Layout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(mainID)
+                .addComponent(MainID)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelGradient2Layout.setVerticalGroup(
             panelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGradient2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(mainID)
+                .addComponent(MainID)
                 .addGap(18, 18, 18)
                 .addGroup(panelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -327,7 +362,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
                         .addComponent(changeForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(208, 208, 208))
+                .addGap(188, 188, 188))
         );
 
         jButton8.setBackground(new java.awt.Color(253, 253, 253));
@@ -389,7 +424,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelGradient2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -466,6 +501,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel MainID;
     private MytaskManager.Components.PanelGradient0 changeForm;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -480,7 +516,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField1;
-    public javax.swing.JLabel mainID;
     private MytaskManager.Components.PanelGradient panelGradient2;
     private MytaskManager.Components.PanelRound panelRound1;
     private MytaskManager.Components.PanelRound panelRound2;

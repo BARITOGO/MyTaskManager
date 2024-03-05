@@ -285,7 +285,7 @@ public class Login extends javax.swing.JFrame {
         login.setPassWord(pWord);
         ModelUser result = controller.Login(login);
         if (result != null) {
-            m.mainID.setText(result.getUserId());
+            m.MainID.setText(result.getUserId());
             m.setVisible(true);
             setVisible(false);
         }

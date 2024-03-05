@@ -166,6 +166,7 @@ public class Statistic extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
+        statid = new javax.swing.JLabel();
 
         panelRound1.setRoundBottomLeft(90);
         panelRound1.setRoundBottomRight(90);
@@ -360,6 +361,9 @@ public class Statistic extends javax.swing.JPanel {
 
         panelRound2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 343, -1, -1));
 
+        statid.setText("jLabel7");
+        panelRound2.add(statid, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, -1, -1));
+
         panelRound1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 590));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -423,5 +427,6 @@ public class Statistic extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField1;
     private MytaskManager.Components.PanelRound panelRound1;
     private MytaskManager.Components.PanelRound panelRound2;
+    public javax.swing.JLabel statid;
     // End of variables declaration//GEN-END:variables
 }
