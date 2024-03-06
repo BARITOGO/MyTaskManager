@@ -68,6 +68,7 @@ public class Completed extends javax.swing.JPanel {
             Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
             PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM completed WHERE userId = ?");
             ps.setString(1,compid.getText());
+            
             ResultSet rs = ps.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();

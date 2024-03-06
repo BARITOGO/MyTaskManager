@@ -443,6 +443,7 @@ public class Todo extends javax.swing.JPanel {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
          int selectedRow = jTable1.getSelectedRow();
         if (selectedRow != -1) { 
+       
         String task = jTable1.getValueAt(selectedRow, 0).toString();
         String date = jTable1.getValueAt(selectedRow, 1).toString();
         String deadline = jTable1.getValueAt(selectedRow, 2).toString();
@@ -452,14 +453,20 @@ public class Todo extends javax.swing.JPanel {
             Class.forName("com.mysql.cj.jdbc.Driver");
             MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
             ps = MyCon.prepareStatement("insert into completed (userId, task, date, deadline, time) values (?,?, ?, ?, ?)");
-            ps.setString(1, task);
+              ps.setString(1,todoid.getText());
             ps.setString(2, task);
             ps.setString(3, date);
             ps.setString(4, deadline);
             ps.setString(5, time);
             ps.execute();
             
-           
+            ps = MyCon.prepareStatement("DELETE FROM todo WHERE task = ? AND date = ? AND deadline = ? AND time = ?");
+            ps.setString(1, task);
+            ps.setString(2, date);
+            ps.setString(3, deadline);
+            ps.setString(4, time);
+            ps.execute();
+            
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.removeRow(selectedRow);
             jTable1.setModel(model);
