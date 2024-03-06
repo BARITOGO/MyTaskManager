@@ -14,14 +14,16 @@ import javax.swing.Timer;
 
 public class Statistic extends javax.swing.JPanel {
         private Timer timer;
-    
-    public Statistic() {
+         private String userId = "yourUserId";
+ 
+         public Statistic() {
         initComponents();
          setOpaque(false);
          updateLabelCounts();
          populateTable1();
           populateTable2();
           populateTable3();
+          statid.setText(userId);
          
           jPanel1.setVisible(false);
            jPanel2.setVisible(false);
@@ -29,6 +31,7 @@ public class Statistic extends javax.swing.JPanel {
             
             
             timer = new Timer(5000, (e) -> {
+            updateLabelCounts();
             populateTable1();
             populateTable2();
             populateTable3();
@@ -37,12 +40,21 @@ public class Statistic extends javax.swing.JPanel {
            
     }
     
+         
+          public void setCurrentUserId(String userId) {
+        
+        statid.setText(userId);
+         populateTable1();
+          populateTable2();
+          populateTable3();
+    }
     
     public void populateTable1(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo");
+            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo WHERE userId = ?");
+            ps.setString(1,statid.getText());
             ResultSet rs = ps.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -65,7 +77,8 @@ public class Statistic extends javax.swing.JPanel {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM deadlinedata");
+            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM deadlinedata WHERE userId = ?");
+            ps.setString(1,statid.getText());
             ResultSet rs = ps.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
@@ -90,7 +103,8 @@ public class Statistic extends javax.swing.JPanel {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM completed");
+            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM completed WHERE userId = ?");
+            ps.setString(1,statid.getText());
             ResultSet rs = ps.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
@@ -117,19 +131,22 @@ public class Statistic extends javax.swing.JPanel {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
             
-            PreparedStatement pstodo = MyCon.prepareStatement("SELECT COUNT(*) FROM todo");
+            PreparedStatement pstodo = MyCon.prepareStatement("SELECT COUNT(*) FROM todo WHERE userId = ? ");
+            pstodo.setString(1, statid.getText());
             ResultSet rstodo = pstodo.executeQuery();
             rstodo.next();
             int todoCount = rstodo.getInt(1);
             
             
-            PreparedStatement psDeadline = MyCon.prepareStatement("SELECT COUNT(*) FROM deadlinedata");
+            PreparedStatement psDeadline = MyCon.prepareStatement("SELECT COUNT(*) FROM deadlinedata WHERE userId = ?");
+            psDeadline.setString(1, statid.getText());
             ResultSet rsDeadline = psDeadline.executeQuery();
             rsDeadline.next();
             int deadlineCount = rsDeadline.getInt(1);
             
            
-            PreparedStatement psCompleted = MyCon.prepareStatement("SELECT COUNT(*) FROM completed");
+            PreparedStatement psCompleted = MyCon.prepareStatement("SELECT COUNT(*) FROM completed WHERE userId = ?");
+            psCompleted.setString(1, statid.getText());
             ResultSet rsCompleted = psCompleted.executeQuery();
             rsCompleted.next();
             int completedCount = rsCompleted.getInt(1);
@@ -143,6 +160,10 @@ public class Statistic extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+        
+    
+     
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -409,9 +430,9 @@ public class Statistic extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    public javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel2;
+    public javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

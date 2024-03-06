@@ -31,7 +31,7 @@ public class Dashboard extends javax.swing.JPanel {
          
          timer = new Timer(5000, (e) -> {
             populateTable();
-    
+            updateLabelCounts();
         });
         timer.start();
          
@@ -44,13 +44,15 @@ public class Dashboard extends javax.swing.JPanel {
             Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
             
           
-            PreparedStatement psDeadline = MyCon.prepareStatement("SELECT COUNT(*) FROM deadlinedata");
+            PreparedStatement psDeadline = MyCon.prepareStatement("SELECT COUNT(*) FROM deadlinedata WHERE userId = ?");
+            psDeadline.setString(1, userId.getText());
             ResultSet rsDeadline = psDeadline.executeQuery();
             rsDeadline.next();
             int deadlineCount = rsDeadline.getInt(1);
             
            
-            PreparedStatement psCompleted = MyCon.prepareStatement("SELECT COUNT(*) FROM completed");
+            PreparedStatement psCompleted = MyCon.prepareStatement("SELECT COUNT(*) FROM completed WHERE userId = ?");
+            psCompleted.setString(1, userId.getText());
             ResultSet rsCompleted = psCompleted.executeQuery();
             rsCompleted.next();
             int completedCount = rsCompleted.getInt(1);
