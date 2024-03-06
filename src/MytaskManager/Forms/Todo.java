@@ -112,7 +112,8 @@ public class Todo extends javax.swing.JPanel {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-        PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo");
+        PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo WHERE userId = ?");
+        ps.setString(1,todoid.getText());
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
@@ -131,9 +132,10 @@ public class Todo extends javax.swing.JPanel {
                 int count = checkRs.getInt("count");
                 
                 if (count == 0) {
-                    PreparedStatement movePs = MyCon.prepareStatement("INSERT INTO deadlinedata (task, deadline) VALUES (?, ?)");
-                    movePs.setString(1, task);
-                    movePs.setDate(2, Date.valueOf(deadline));
+                    PreparedStatement movePs = MyCon.prepareStatement("INSERT INTO deadlinedata (userId,task, deadline) VALUES (?, ?, ?)");
+                     movePs.setString(1, todoid.getText()); 
+                    movePs.setString(2, task);
+                    movePs.setDate(3, Date.valueOf(deadline));
                     movePs.executeUpdate();
                 }
             }
@@ -453,14 +455,16 @@ public class Todo extends javax.swing.JPanel {
             Class.forName("com.mysql.cj.jdbc.Driver");
             MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
             ps = MyCon.prepareStatement("insert into completed (userId, task, date, deadline, time) values (?,?, ?, ?, ?)");
-              ps.setString(1,todoid.getText());
+            ps.setString(1,todoid.getText());
             ps.setString(2, task);
             ps.setString(3, date);
             ps.setString(4, deadline);
             ps.setString(5, time);
             ps.execute();
             
+           
             ps = MyCon.prepareStatement("DELETE FROM todo WHERE task = ? AND date = ? AND deadline = ? AND time = ?");
+          
             ps.setString(1, task);
             ps.setString(2, date);
             ps.setString(3, deadline);

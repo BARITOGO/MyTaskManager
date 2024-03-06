@@ -25,10 +25,12 @@ public class Deadline extends javax.swing.JPanel {
     ResultSet rs;
      private DefaultTableCellRenderer centerRenderer;;
       private Timer timer;
+     
     
     public Deadline() {
         initComponents();
           setOpaque(false);
+           
           populateTable();
           centerRenderer = new DefaultTableCellRenderer();
           tableTextCenter();
@@ -41,6 +43,7 @@ public class Deadline extends javax.swing.JPanel {
           
     }
     
+   
     
     
      private void tableTextCenter() {
@@ -56,7 +59,8 @@ public class Deadline extends javax.swing.JPanel {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM deadlinedata");
+            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM deadlinedata WHERE userId = ?");
+             ps.setString(1,deadid.getText());
             ResultSet rs = ps.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
