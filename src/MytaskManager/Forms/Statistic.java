@@ -18,16 +18,17 @@ public class Statistic extends javax.swing.JPanel {
  
          public Statistic() {
         initComponents();
-         setOpaque(false);
-         updateLabelCounts();
-         populateTable1();
-          populateTable2();
-          populateTable3();
-          statid.setText(userId);
-         
-          jPanel1.setVisible(false);
-           jPanel2.setVisible(false);
-            jPanel3.setVisible(false);
+        setOpaque(false);
+        updateLabelCounts();
+        populateTable1();
+        populateTable2();
+        populateTable3();
+        statid.setText(userId);
+        statid.setVisible(false);
+        
+        jPanel1.setVisible(false);
+        jPanel2.setVisible(false);
+        jPanel3.setVisible(false);
             
             
             timer = new Timer(5000, (e) -> {

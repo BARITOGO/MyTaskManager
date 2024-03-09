@@ -36,7 +36,7 @@ public class Completed extends javax.swing.JPanel {
         populateTable();
         centerRenderer = new DefaultTableCellRenderer();
         tableTextCenter();
-          
+        compid.setVisible(false);  
           
           timer = new Timer(5000, (e) -> {
             populateTable();
@@ -102,6 +102,7 @@ public class Completed extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         compid = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,6 +138,13 @@ public class Completed extends javax.swing.JPanel {
 
         compid.setText("jLabel1");
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
@@ -148,7 +156,9 @@ public class Completed extends javax.swing.JPanel {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(compid)
-                        .addGap(307, 307, 307))
+                        .addGap(109, 109, 109)
+                        .addComponent(jButton1)
+                        .addGap(123, 123, 123))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -160,7 +170,9 @@ public class Completed extends javax.swing.JPanel {
                 .addGap(42, 42, 42)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                            .addComponent(jButton1))
                         .addGap(36, 36, 36))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(compid)
@@ -186,9 +198,58 @@ public class Completed extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jTable2ComponentShown
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      int selectedRow = jTable2.getSelectedRow();
+    if (selectedRow != -1) { 
+        String task = jTable2.getValueAt(selectedRow, 0).toString();
+        String date = jTable2.getValueAt(selectedRow, 1).toString();
+        String deadline = jTable2.getValueAt(selectedRow, 2).toString();
+        String time = jTable2.getValueAt(selectedRow, 3).toString();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+
+            // Prepare the delete statement
+            PreparedStatement deleteFromDeadlinedata = MyCon.prepareStatement("DELETE FROM completed WHERE task = ? AND date = ? AND deadline = ? AND time = ?");
+            deleteFromDeadlinedata.setString(1, task);
+            deleteFromDeadlinedata.setString(2, date);
+             deleteFromDeadlinedata.setString(3, deadline);
+              deleteFromDeadlinedata.setString(4, time);
+
+            // Execute the delete statement
+            int rowsAffected = deleteFromDeadlinedata.executeUpdate();
+
+            // Check if the deletion was successful
+            if (rowsAffected > 0) {
+                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                model.removeRow(selectedRow);
+                jTable2.setModel(model);
+                
+                JOptionPane.showMessageDialog(this, "Success");
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to delete the row from deadlinedata", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                if (MyCon != null) {
+                    MyCon.close();
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Error closing connection: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a row to complete", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel compid;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;

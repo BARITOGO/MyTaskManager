@@ -29,8 +29,9 @@ public class signUp extends javax.swing.JFrame {
    
     public signUp() {
         initComponents();
-         controller = new userController();
+        controller = new userController();
         userData = new ModelUser();
+        genId.setVisible(false);
         
         setBackground(new Color(0,0,0,0));
         initMoving(this);

@@ -51,6 +51,7 @@ public class Main extends javax.swing.JFrame {
         initMoving(this);
         showForm(dashboard);
         idtext();
+        MainID.setVisible(false);
         
 //        todo.add.addActionListener(new ActionListener() {
 //            @Override

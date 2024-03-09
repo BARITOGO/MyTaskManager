@@ -47,7 +47,7 @@ public class Todo extends javax.swing.JPanel {
         populateTable();
         centerRenderer = new DefaultTableCellRenderer();
         tableTextCenter();
-      
+        todoid.setVisible(false);
         
         panelRound5.setVisible(false);
         add.setVisible(false);
@@ -122,7 +122,8 @@ public class Todo extends javax.swing.JPanel {
             LocalDate deadline = LocalDate.parse(deadlineStr, DateTimeFormatter.ofPattern("dd-MM-yyyy")); 
             LocalDate currentDate = LocalDate.now();
             long daysUntilDeadline = java.time.temporal.ChronoUnit.DAYS.between(currentDate, deadline);
-
+           
+            
             if (daysUntilDeadline <= 3) {
                 PreparedStatement checkPs = MyCon.prepareStatement("SELECT COUNT(*) AS count FROM deadlinedata WHERE task = ?");
                 checkPs.setString(1, task);
@@ -132,7 +133,7 @@ public class Todo extends javax.swing.JPanel {
                 int count = checkRs.getInt("count");
                 
                 if (count == 0) {
-                    PreparedStatement movePs = MyCon.prepareStatement("INSERT INTO deadlinedata (userId,task, deadline) VALUES (?, ?, ?)");
+                    PreparedStatement movePs = MyCon.prepareStatement("INSERT INTO deadlinedata (userId, task, deadline) VALUES (?, ?, ?)");
                      movePs.setString(1, todoid.getText()); 
                     movePs.setString(2, task);
                     movePs.setDate(3, Date.valueOf(deadline));
@@ -407,9 +408,7 @@ public class Todo extends javax.swing.JPanel {
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(jLabel2))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelRound1Layout.createSequentialGroup()
@@ -443,45 +442,106 @@ public class Todo extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1ComponentShown
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-         int selectedRow = jTable1.getSelectedRow();
-        if (selectedRow != -1) { 
-       
-        String task = jTable1.getValueAt(selectedRow, 0).toString();
-        String date = jTable1.getValueAt(selectedRow, 1).toString();
-        String deadline = jTable1.getValueAt(selectedRow, 2).toString();
-        String time = jTable1.getValueAt(selectedRow, 3).toString();
+int selectedRow = jTable1.getSelectedRow();
+if (selectedRow != -1) { 
+    String task = jTable1.getValueAt(selectedRow, 0).toString();
+    String date = jTable1.getValueAt(selectedRow, 1).toString();
+    String deadline = jTable1.getValueAt(selectedRow, 2).toString();
+    String time = jTable1.getValueAt(selectedRow, 3).toString();
+
+    try (Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana")) {
         
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            ps = MyCon.prepareStatement("insert into completed (userId, task, date, deadline, time) values (?,?, ?, ?, ?)");
-            ps.setString(1,todoid.getText());
-            ps.setString(2, task);
-            ps.setString(3, date);
-            ps.setString(4, deadline);
-            ps.setString(5, time);
-            ps.execute();
-            
-           
-            ps = MyCon.prepareStatement("DELETE FROM todo WHERE task = ? AND date = ? AND deadline = ? AND time = ?");
-          
-            ps.setString(1, task);
-            ps.setString(2, date);
-            ps.setString(3, deadline);
-            ps.setString(4, time);
-            ps.execute();
-            
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.removeRow(selectedRow);
-            jTable1.setModel(model);
-            
-            JOptionPane.showMessageDialog(this, "Success");
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
+       
+        try (PreparedStatement insertCompleted = MyCon.prepareStatement("INSERT INTO completed (userId, task, date, deadline, time) VALUES (?, ?, ?, ?, ?)")) {
+            insertCompleted.setString(1, todoid.getText());
+            insertCompleted.setString(2, task);
+            insertCompleted.setString(3, date);
+            insertCompleted.setString(4, deadline);
+            insertCompleted.setString(5, time);
+            insertCompleted.executeUpdate();
         }
-         } else {
-        JOptionPane.showMessageDialog(this, "Please select a row to complete", "Error", JOptionPane.ERROR_MESSAGE);
+
+      
+        try (PreparedStatement deleteFromTodo = MyCon.prepareStatement("DELETE FROM todo WHERE task = ? AND date = ? AND deadline = ? AND time = ?")) {
+            deleteFromTodo.setString(1, task);
+            deleteFromTodo.setString(2, date);
+            deleteFromTodo.setString(3, deadline);
+            deleteFromTodo.setString(4, time);
+            deleteFromTodo.executeUpdate();
         }
+
+   
+        try (PreparedStatement deleteFromDeadlinedata = MyCon.prepareStatement("DELETE FROM deadlinedata WHERE task = ? AND deadline = ?")) {
+           deleteFromDeadlinedata.setString(1, task);
+            deleteFromDeadlinedata.setString(2, deadline);
+            int rowsDeleted = deleteFromDeadlinedata.executeUpdate();
+            System.out.println(rowsDeleted + " row(s) deleted from deadlinedata table");
+        }
+
+      
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.removeRow(selectedRow);
+        JOptionPane.showMessageDialog(this, "Success");
+
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(this, "An error occurred: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+} else {
+    JOptionPane.showMessageDialog(this, "Please select a row to complete", "Error", JOptionPane.ERROR_MESSAGE);
+}
+
+
+
+
+
+
+//         int selectedRow = jTable1.getSelectedRow();
+//        if (selectedRow != -1) { 
+//       
+//        String task = jTable1.getValueAt(selectedRow, 0).toString();
+//        String date = jTable1.getValueAt(selectedRow, 1).toString();
+//        String deadline = jTable1.getValueAt(selectedRow, 2).toString();
+//        String time = jTable1.getValueAt(selectedRow, 3).toString();
+//        
+//        try {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+//            ps = MyCon.prepareStatement("insert into completed (userId, task, date, deadline, time) values (?,?, ?, ?, ?)");
+//            ps.setString(1,todoid.getText());
+//            ps.setString(2, task);
+//            ps.setString(3, date);
+//            ps.setString(4, deadline);
+//            ps.setString(5, time);
+//            ps.execute();
+//            
+//           
+//            ps = MyCon.prepareStatement("DELETE FROM todo WHERE task = ? AND date = ? AND deadline = ? AND time = ?");
+//          
+//            ps.setString(1, task);
+//            ps.setString(2, date);
+//            ps.setString(3, deadline);
+//            ps.setString(4, time);
+//            ps.execute();
+//            
+//            
+//            ps = MyCon.prepareStatement("DELETE FROM deadlinedata WHERE task = ? AND deadline = ?");
+//          
+//            ps.setString(1, task);
+//            ps.setString(2, deadline);
+//            ps.execute();
+//            
+//            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+//            model.removeRow(selectedRow);
+//            jTable1.setModel(model);
+//            
+//            JOptionPane.showMessageDialog(this, "Success");
+//        } catch (ClassNotFoundException | SQLException ex) {
+//            JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
+//        }
+//         } else {
+//        JOptionPane.showMessageDialog(this, "Please select a row to complete", "Error", JOptionPane.ERROR_MESSAGE);
+//        }
              
          
         

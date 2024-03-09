@@ -22,6 +22,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         setBackground(new Color(0,0,0,0));
         initMoving(this);
+        userid.setVisible(false);
     }
  private int x;
     private int y;

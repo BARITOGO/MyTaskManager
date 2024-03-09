@@ -24,10 +24,10 @@ public class Dashboard extends javax.swing.JPanel {
     public Dashboard() {
         initComponents();
         setOpaque(false);
-         populateTable();
+        populateTable();
         times();
-         updateLabelCounts();
-         
+        updateLabelCounts();
+        userId.setVisible(false); 
          
          timer = new Timer(5000, (e) -> {
             populateTable();
