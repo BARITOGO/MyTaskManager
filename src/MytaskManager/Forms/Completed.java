@@ -37,7 +37,9 @@ public class Completed extends javax.swing.JPanel {
         centerRenderer = new DefaultTableCellRenderer();
         tableTextCenter();
         compid.setVisible(false);  
-          
+        jButton1.setVisible(false);  
+        
+        
           timer = new Timer(5000, (e) -> {
             populateTable();
         });

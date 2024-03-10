@@ -57,8 +57,16 @@ public class Dashboard extends javax.swing.JPanel {
             rsCompleted.next();
             int completedCount = rsCompleted.getInt(1);
             
-            jLabel1.setText("" + deadlineCount);
-            jLabel4.setText("" + completedCount);
+            
+            PreparedStatement psTodo = MyCon.prepareStatement("SELECT COUNT(*) FROM todo WHERE userId = ?");
+            psTodo.setString(1, userId.getText());
+            ResultSet rsTodo = psTodo.executeQuery();
+            rsTodo.next();
+            int todoCount = rsTodo.getInt(1);
+            
+            jLabel9.setText("" + todoCount);
+            jLabel4.setText("" + deadlineCount);
+            jLabel1.setText("" + completedCount);
             
             MyCon.close();
         } catch (ClassNotFoundException | SQLException ex) {
@@ -162,6 +170,7 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
         panelRound4 = new MytaskManager.Components.PanelRound();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -259,6 +268,8 @@ public class Dashboard extends javax.swing.JPanel {
         jTable5.setSelectionForeground(new java.awt.Color(117, 118, 116));
         jScrollPane1.setViewportView(jTable5);
 
+        jLabel9.setForeground(new java.awt.Color(117, 118, 116));
+
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
@@ -267,14 +278,19 @@ public class Dashboard extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addGroup(panelRound3Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel2)
+                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(24, Short.MAX_VALUE))
@@ -454,6 +470,7 @@ public class Dashboard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable5;
     private MytaskManager.Components.PanelRound panelRound1;
