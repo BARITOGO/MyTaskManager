@@ -189,19 +189,22 @@ public class Deadline extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-    int selectedRow = jTable3.getSelectedRow();
-    if (selectedRow != -1) { 
+        int selectedRow = jTable3.getSelectedRow();
         String task = jTable3.getValueAt(selectedRow, 0).toString();
-        String deadline = jTable3.getValueAt(selectedRow, 1).toString();
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            
-            PreparedStatement deleteFromDeadlinedata = MyCon.prepareStatement("DELETE FROM deadlinedata WHERE task = ? AND deadline = ?");
+
+           
+            PreparedStatement deleteFromDeadlinedata = MyCon.prepareStatement("DELETE FROM deadlinedata WHERE task = ?");
             deleteFromDeadlinedata.setString(1, task);
-            deleteFromDeadlinedata.setString(2, deadline);
             int rowsAffected = deleteFromDeadlinedata.executeUpdate();
+
+          
+            PreparedStatement deleteFromTodo = MyCon.prepareStatement("DELETE FROM todo WHERE task = ?");
+            deleteFromTodo.setString(1, task);
+            rowsAffected = deleteFromTodo.executeUpdate();
 
             if (rowsAffected > 0) {
                 DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
@@ -209,8 +212,9 @@ public class Deadline extends javax.swing.JPanel {
                 jTable3.setModel(model);
                 JOptionPane.showMessageDialog(this, "Success");
             } else {
-                JOptionPane.showMessageDialog(this, "Failed to delete the row from deadlinedata", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Failed to delete the row from the database", "Error", JOptionPane.ERROR_MESSAGE);
             }
+
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -222,9 +226,11 @@ public class Deadline extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Error closing connection: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "Please select a row to complete", "Error", JOptionPane.ERROR_MESSAGE);
-    }
+
+
+
+
+
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
