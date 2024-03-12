@@ -24,6 +24,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import java.sql.Timestamp;
 
 
 public class Todo extends javax.swing.JPanel {
@@ -133,10 +134,13 @@ public class Todo extends javax.swing.JPanel {
                 int count = checkRs.getInt("count");
                 
                 if (count == 0) {
-                    PreparedStatement movePs = MyCon.prepareStatement("INSERT INTO deadlinedata (userId, task, deadline) VALUES (?, ?, ?)");
+                    PreparedStatement movePs = MyCon.prepareStatement("INSERT INTO deadlinedata (userId, task, deadline, timestamp) VALUES (?, ?, ?, ?)");
                      movePs.setString(1, todoid.getText()); 
                     movePs.setString(2, task);
                     movePs.setDate(3, Date.valueOf(deadline));
+                    
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    movePs.setTimestamp(4, timestamp);
                     movePs.executeUpdate();
                 }
             }
@@ -465,12 +469,15 @@ public class Todo extends javax.swing.JPanel {
     try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-              ps = MyCon.prepareStatement("insert into completed (userId, task, date, deadline, time) values (?,?, ?, ?, ?)");
+              ps = MyCon.prepareStatement("insert into completed (userId, task, date, deadline, time, timestamp) values (?, ?, ?, ?, ?, ?)");
             ps.setString(1,todoid.getText());
             ps.setString(2, task);
             ps.setString(3, date);
             ps.setString(4, deadline);
             ps.setString(5, time);
+            
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            ps.setTimestamp(6, timestamp);
             ps.execute();
 
             PreparedStatement deleteFromDeadlinedata = MyCon.prepareStatement("DELETE FROM deadlinedata WHERE task = ?");
@@ -517,26 +524,31 @@ public class Todo extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        //add
      
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            MyCon =DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask","root","rootV12morjana");
-            ps = MyCon.prepareStatement("insert into todo(userId,task,date,deadline,time)values(?,?,?,?,?)");
-            
-            ps.setString(1, todoid.getText());
-            ps.setString(2, task.getText());
-            ps.setString(3, date.getText());
-            ps.setString(4, deadline.getText());
-            ps.setString(5, time.getText());
+     
+            try {
+         Class.forName("com.mysql.cj.jdbc.Driver");
+         MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+         ps = MyCon.prepareStatement("INSERT INTO todo (userId, task, date, deadline, time, timestamp) VALUES (?, ?, ?, ?, ?, ?)");
 
-            ps.execute();
-            populateTable();
-            JOptionPane.showMessageDialog(this,"success");
+         ps.setString(1, todoid.getText());
+         ps.setString(2, task.getText());
+         ps.setString(3, date.getText());
+         ps.setString(4, deadline.getText());
+         ps.setString(5, time.getText());
 
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex,"Error",JOptionPane.ERROR_MESSAGE);
-        }
+       
+         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+         ps.setTimestamp(6, timestamp);
+
+         ps.execute();
+         populateTable();
+         JOptionPane.showMessageDialog(this, "Success");
+
+     } catch (ClassNotFoundException | SQLException ex) {
+         JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
+     }
+
         
       
     

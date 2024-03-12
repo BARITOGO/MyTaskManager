@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 
 public class SignIn_LogIn {
 
@@ -19,11 +20,14 @@ public class SignIn_LogIn {
     }
     public boolean addUserToDatabase(ModelUser data){
         try {
-            String sql = "INSERT INTO userdata(userId,userName,passWord)values (?,?,?)";
+            String sql = "INSERT INTO userdata(userId,userName,passWord,timestamp)values (?,?,?,?)";
             PreparedStatement p = Database.getInstance().getConnection().prepareStatement(sql);
             p.setString(1, data.getUserId());
             p.setString(2, data.getUserName());
             p.setString(3, new String(data.getPassWord()));
+            
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            p.setTimestamp(4, timestamp);
             
             p.executeUpdate();
             return true;
