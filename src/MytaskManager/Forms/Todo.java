@@ -2,26 +2,19 @@
 package MytaskManager.Forms;
 
 
-import MytaskManager.Controller.userController;
-//import static MytaskManager.Forms.Completed.populateTable;
-import MytaskManager.LoginPage.signUp;
-import MytaskManager.Main.Main;
-import MytaskManager.Model.ModelUser;
+
+import MytaskManager.Database.Database;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import com.raven.datechooser.DateChooser;
-import com.raven.swing.TimePicker;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import java.sql.Timestamp;
@@ -43,6 +36,13 @@ public class Todo extends javax.swing.JPanel {
     public Todo() {
      
         initComponents();
+         try {
+            Database.getInstance().ConnectToDatabase();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
         setOpaque(false);
         todoid.setText(userId);
         populateTable();
@@ -82,10 +82,10 @@ public class Todo extends javax.swing.JPanel {
  
      public void populateTable() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo WHERE userId = ?");
+            String sql = "SELECT * FROM todo WHERE userId = ?";
+            ps = Database.getInstance().getConnection().prepareStatement(sql); 
             ps.setString(1,todoid.getText());
+            
             ResultSet rs = ps.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -101,8 +101,8 @@ public class Todo extends javax.swing.JPanel {
 
             jTable1.setModel(model);
             checkDeadline();
-            MyCon.close();
-        } catch (ClassNotFoundException | SQLException ex) {
+            ps.close();
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -111,10 +111,9 @@ public class Todo extends javax.swing.JPanel {
      
      private void checkDeadline() {
     try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-        PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo WHERE userId = ?");
-        ps.setString(1,todoid.getText());
+       String sql = "SELECT * FROM todo WHERE userId = ?";
+          ps = Database.getInstance().getConnection().prepareStatement(sql); 
+          ps.setString(1,todoid.getText());
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
@@ -126,7 +125,8 @@ public class Todo extends javax.swing.JPanel {
            
             
             if (daysUntilDeadline <= 3) {
-                PreparedStatement checkPs = MyCon.prepareStatement("SELECT COUNT(*) AS count FROM deadlinedata WHERE task = ?");
+                
+                PreparedStatement checkPs = Database.getInstance().getConnection().prepareStatement("SELECT COUNT(*) AS count FROM deadlinedata WHERE task = ?");
                 checkPs.setString(1, task);
                 ResultSet checkRs = checkPs.executeQuery();
                 
@@ -134,7 +134,7 @@ public class Todo extends javax.swing.JPanel {
                 int count = checkRs.getInt("count");
                 
                 if (count == 0) {
-                    PreparedStatement movePs = MyCon.prepareStatement("INSERT INTO deadlinedata (userId, task, deadline, timestamp) VALUES (?, ?, ?, ?)");
+                    PreparedStatement movePs = Database.getInstance().getConnection().prepareStatement("INSERT INTO deadlinedata (userId, task, deadline, timestamp) VALUES (?, ?, ?, ?)");
                      movePs.setString(1, todoid.getText()); 
                     movePs.setString(2, task);
                     movePs.setDate(3, Date.valueOf(deadline));
@@ -146,8 +146,8 @@ public class Todo extends javax.swing.JPanel {
             }
         }
 
-        MyCon.close();
-    } catch (ClassNotFoundException | SQLException ex) {
+        ps.close();
+    } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
@@ -458,19 +458,18 @@ public class Todo extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1ComponentShown
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
- int selectedRow = jTable1.getSelectedRow();
-        String task = jTable1.getValueAt(selectedRow, 0).toString();
-
+        int selectedRow = jTable1.getSelectedRow();
         if (selectedRow != -1) { 
+        String task = jTable1.getValueAt(selectedRow, 0).toString();    
         String date = jTable1.getValueAt(selectedRow, 1).toString();
         String deadline = jTable1.getValueAt(selectedRow, 2).toString();
         String time = jTable1.getValueAt(selectedRow, 3).toString();
         
     try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-              ps = MyCon.prepareStatement("insert into completed (userId, task, date, deadline, time, timestamp) values (?, ?, ?, ?, ?, ?)");
-            ps.setString(1,todoid.getText());
+        
+          String sql = "insert into completed (userId, task, date, deadline, time, timestamp) values (?, ?, ?, ?, ?, ?)";
+          ps = Database.getInstance().getConnection().prepareStatement(sql); 
+          ps.setString(1,todoid.getText());
             ps.setString(2, task);
             ps.setString(3, date);
             ps.setString(4, deadline);
@@ -480,11 +479,11 @@ public class Todo extends javax.swing.JPanel {
             ps.setTimestamp(6, timestamp);
             ps.execute();
 
-            PreparedStatement deleteFromDeadlinedata = MyCon.prepareStatement("DELETE FROM deadlinedata WHERE task = ?");
+            PreparedStatement deleteFromDeadlinedata = Database.getInstance().getConnection().prepareStatement("DELETE FROM deadlinedata WHERE task = ?");
             deleteFromDeadlinedata.setString(1, task);
             int rowsAffected = deleteFromDeadlinedata.executeUpdate();
 
-            PreparedStatement deleteFromTodo = MyCon.prepareStatement("DELETE FROM todo WHERE task = ?");
+           PreparedStatement deleteFromTodo = Database.getInstance().getConnection().prepareStatement("DELETE FROM todo WHERE task = ?");
             deleteFromTodo.setString(1, task);
             rowsAffected = deleteFromTodo.executeUpdate();
 
@@ -496,20 +495,12 @@ public class Todo extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(this, "Failed to delete the row from the database", "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            try {
-                if (MyCon != null) {
-                    MyCon.close();
-                }
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Error closing connection: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
 
-        }
+        
 
 
         
@@ -526,11 +517,11 @@ public class Todo extends javax.swing.JPanel {
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
      
      
-            try {
-         Class.forName("com.mysql.cj.jdbc.Driver");
-         MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-         ps = MyCon.prepareStatement("INSERT INTO todo (userId, task, date, deadline, time, timestamp) VALUES (?, ?, ?, ?, ?, ?)");
-
+        try {
+          String sql = "INSERT INTO todo (userId, task, date, deadline, time, timestamp) VALUES (?, ?, ?, ?, ?, ?)";
+          ps = Database.getInstance().getConnection().prepareStatement(sql); 
+                
+         
          ps.setString(1, todoid.getText());
          ps.setString(2, task.getText());
          ps.setString(3, date.getText());
@@ -545,7 +536,7 @@ public class Todo extends javax.swing.JPanel {
          populateTable();
          JOptionPane.showMessageDialog(this, "Success");
 
-     } catch (ClassNotFoundException | SQLException ex) {
+     } catch (SQLException ex) {
          JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
      }
 

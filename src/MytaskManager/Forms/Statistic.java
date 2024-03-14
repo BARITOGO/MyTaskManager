@@ -2,6 +2,7 @@
 package MytaskManager.Forms;
 
 //import static MytaskManager.Forms.Completed.populateTable;
+import MytaskManager.Database.Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,6 +19,13 @@ public class Statistic extends javax.swing.JPanel {
  
          public Statistic() {
         initComponents();
+        try {
+            Database.getInstance().ConnectToDatabase();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
         setOpaque(false);
         updateLabelCounts();
         populateTable1();
@@ -52,9 +60,8 @@ public class Statistic extends javax.swing.JPanel {
     
     public void populateTable1(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo WHERE userId = ?");
+              String sql = "SELECT * FROM todo WHERE userId = ?";
+            PreparedStatement ps = Database.getInstance().getConnection().prepareStatement(sql);
             ps.setString(1,statid.getText());
             ResultSet rs = ps.executeQuery();
 
@@ -68,19 +75,18 @@ public class Statistic extends javax.swing.JPanel {
             }
 
             jTable1.setModel(model);
-            MyCon.close();
-        } catch (ClassNotFoundException | SQLException ex) {
+            ps.close();
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
         
         public void populateTable2(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM deadlinedata WHERE userId = ?");
-            ps.setString(1,statid.getText());
-            ResultSet rs = ps.executeQuery();
+            String sql = "SELECT * FROM deadlinedata WHERE userId = ?";
+            PreparedStatement pdeadlinedata = Database.getInstance().getConnection().prepareStatement(sql);
+           pdeadlinedata.setString(1,statid.getText());
+            ResultSet rs = pdeadlinedata.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
             model.setRowCount(0);
@@ -92,8 +98,8 @@ public class Statistic extends javax.swing.JPanel {
             }
 
             jTable4.setModel(model);
-            MyCon.close();
-        } catch (ClassNotFoundException | SQLException ex) {
+            pdeadlinedata.close();
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -102,11 +108,10 @@ public class Statistic extends javax.swing.JPanel {
         
         public void populateTable3(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM completed WHERE userId = ?");
-            ps.setString(1,statid.getText());
-            ResultSet rs = ps.executeQuery();
+            String sql = "SELECT * FROM completed WHERE userId = ?";
+            PreparedStatement pcomplete = Database.getInstance().getConnection().prepareStatement(sql);
+            pcomplete.setString(1,statid.getText());
+            ResultSet rs = pcomplete.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
             model.setRowCount(0);
@@ -118,8 +123,8 @@ public class Statistic extends javax.swing.JPanel {
             }
 
             jTable5.setModel(model);
-            MyCon.close();
-        } catch (ClassNotFoundException | SQLException ex) {
+            pcomplete.close();
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -127,40 +132,39 @@ public class Statistic extends javax.swing.JPanel {
     
     
     
-     public void updateLabelCounts() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            
-            PreparedStatement pstodo = MyCon.prepareStatement("SELECT COUNT(*) FROM todo WHERE userId = ? ");
-            pstodo.setString(1, statid.getText());
-            ResultSet rstodo = pstodo.executeQuery();
-            rstodo.next();
-            int todoCount = rstodo.getInt(1);
-            
-            
-            PreparedStatement psDeadline = MyCon.prepareStatement("SELECT COUNT(*) FROM deadlinedata WHERE userId = ?");
-            psDeadline.setString(1, statid.getText());
-            ResultSet rsDeadline = psDeadline.executeQuery();
-            rsDeadline.next();
-            int deadlineCount = rsDeadline.getInt(1);
-            
-           
-            PreparedStatement psCompleted = MyCon.prepareStatement("SELECT COUNT(*) FROM completed WHERE userId = ?");
-            psCompleted.setString(1, statid.getText());
-            ResultSet rsCompleted = psCompleted.executeQuery();
-            rsCompleted.next();
-            int completedCount = rsCompleted.getInt(1);
-            
-            jLabel1.setText("" + todoCount);
-            jLabel2.setText("" + deadlineCount);
-            jLabel3.setText("" + completedCount);
-            
-            MyCon.close();
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+    public void updateLabelCounts() {
+    try {
+        String sql = "SELECT COUNT(*) FROM todo WHERE userId = ?";
+        PreparedStatement p = Database.getInstance().getConnection().prepareStatement(sql);
+        p.setString(1, statid.getText());
+        ResultSet rstodo = p.executeQuery();
+        rstodo.next(); // Move the cursor to the first row
+        int todoCount = rstodo.getInt(1);
+
+        String sql2 = "SELECT COUNT(*) FROM deadlinedata WHERE userId = ?";
+        PreparedStatement psDeadline = Database.getInstance().getConnection().prepareStatement(sql2);
+        psDeadline.setString(1, statid.getText());
+        ResultSet rsDeadline = psDeadline.executeQuery();
+        rsDeadline.next();
+        int deadlineCount = rsDeadline.getInt(1);
+
+        String sql3 = "SELECT COUNT(*) FROM completed WHERE userId = ?";
+        PreparedStatement psCompleted = Database.getInstance().getConnection().prepareStatement(sql3);
+        psCompleted.setString(1, statid.getText());
+        ResultSet rsCompleted = psCompleted.executeQuery();
+        rsCompleted.next();
+        int completedCount = rsCompleted.getInt(1);
+
+        jLabel1.setText("" + todoCount);
+        jLabel2.setText("" + deadlineCount);
+        jLabel3.setText("" + completedCount);
+
+        p.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
+}
+
         
     
      

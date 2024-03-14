@@ -1,5 +1,6 @@
 
 package MytaskManager.Forms;
+import MytaskManager.Database.Database;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -29,6 +30,13 @@ public class Deadline extends javax.swing.JPanel {
     
     public Deadline() {
         initComponents();
+        try {
+            Database.getInstance().ConnectToDatabase();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
         setOpaque(false);
         populateTable();
         centerRenderer = new DefaultTableCellRenderer();
@@ -62,10 +70,9 @@ public class Deadline extends javax.swing.JPanel {
     
  public void populateTable() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM deadlinedata WHERE userId = ?");
-             ps.setString(1,deadid.getText());
+             String sql = "SELECT * FROM deadlinedata WHERE userId = ?";
+             ps = Database.getInstance().getConnection().prepareStatement(sql);
+            ps.setString(1,deadid.getText());
             ResultSet rs = ps.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
@@ -78,8 +85,8 @@ public class Deadline extends javax.swing.JPanel {
             }
 
             jTable3.setModel(model);
-            MyCon.close();
-        } catch (ClassNotFoundException | SQLException ex) {
+            ps.close();
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -193,18 +200,16 @@ public class Deadline extends javax.swing.JPanel {
         String task = jTable3.getValueAt(selectedRow, 0).toString();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-
-           
-            PreparedStatement deleteFromDeadlinedata = MyCon.prepareStatement("DELETE FROM deadlinedata WHERE task = ?");
-            deleteFromDeadlinedata.setString(1, task);
-            int rowsAffected = deleteFromDeadlinedata.executeUpdate();
+              String sql = "DELETE FROM deadlinedata WHERE task = ?";
+             ps = Database.getInstance().getInstance().getConnection().prepareStatement(sql);
+             ps.setString(1, task);
+             int rowsAffected = ps.executeUpdate();
 
           
-            PreparedStatement deleteFromTodo = MyCon.prepareStatement("DELETE FROM todo WHERE task = ?");
-            deleteFromTodo.setString(1, task);
-            rowsAffected = deleteFromTodo.executeUpdate();
+            String sqlv = "DELETE FROM todo WHERE task = ?";
+            ps = Database.getInstance().getInstance().getConnection().prepareStatement(sqlv);
+            ps.setString(1, task);
+            rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {
                 DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
@@ -214,18 +219,10 @@ public class Deadline extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(this, "Failed to delete the row from the database", "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            try {
-                if (MyCon != null) {
-                    MyCon.close();
-                }
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Error closing connection: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }
+        
 
 
 

@@ -1,6 +1,9 @@
 
 package MytaskManager.Forms;
 
+import MytaskManager.Components.Qoutes;
+import MytaskManager.Components.Riddle;
+import MytaskManager.Database.Database;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -10,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -17,57 +21,84 @@ import javax.swing.table.DefaultTableModel;
 
 public class Dashboard extends javax.swing.JPanel {
         private Timer timer;
-  
+        private Riddle randomRiddle;
+         PreparedStatement p;
     public Dashboard() {
         initComponents();
+        try {
+            Database.getInstance().ConnectToDatabase();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
         setOpaque(false);
         populateTable();
         times();
-        updateLabelCounts();
+         updateDeadline();
+        updateCompleted();
+        updatetodo();
         userId.setVisible(false); 
          
          timer = new Timer(5000, (e) -> {
             populateTable();
-            updateLabelCounts();
+            updateDeadline();
+            updateCompleted();
+            updatetodo();
+            
         });
         timer.start();
+        
+      
          
     }
     
     
-          public void updateLabelCounts() {
+          public void updateDeadline(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            
+            String sql = "SELECT * FROM deadlinedata WHERE userId = ?";
+            String sqlv1 = "SELECT COUNT(*) FROM deadlinedata WHERE userId = ?";
+            p = Database.getInstance().getConnection().prepareStatement(sql);
+           p = Database.getInstance().getConnection().prepareStatement(sqlv1);
           
-            PreparedStatement psDeadline = MyCon.prepareStatement("SELECT COUNT(*) FROM deadlinedata WHERE userId = ?");
-            psDeadline.setString(1, userId.getText());
-            ResultSet rsDeadline = psDeadline.executeQuery();
+            p.setString(1, userId.getText());
+            ResultSet rsDeadline = p.executeQuery();
             rsDeadline.next();
             int deadlineCount = rsDeadline.getInt(1);
-            
-           
-            PreparedStatement psCompleted = MyCon.prepareStatement("SELECT COUNT(*) FROM completed WHERE userId = ?");
-            psCompleted.setString(1, userId.getText());
-            ResultSet rsCompleted = psCompleted.executeQuery();
+             jLabel4.setText("" + deadlineCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateCompleted(){
+        try {
+            String sql2 = "SELECT COUNT(*) FROM completed WHERE userId = ?";
+            String sqlv2 = "SELECT COUNT(*) FROM completed WHERE userId = ?";
+            p = Database.getInstance().getConnection().prepareStatement(sql2);
+            p = Database.getInstance().getConnection().prepareStatement(sqlv2);
+            p.setString(1, userId.getText());
+            ResultSet rsCompleted = p.executeQuery();
             rsCompleted.next();
             int completedCount = rsCompleted.getInt(1);
-            
-            
-            PreparedStatement psTodo = MyCon.prepareStatement("SELECT COUNT(*) FROM todo WHERE userId = ?");
-            psTodo.setString(1, userId.getText());
-            ResultSet rsTodo = psTodo.executeQuery();
+            jLabel1.setText("" + completedCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+    }
+    public  void updatetodo(){
+        try {
+                        
+            String sql3 = "SELECT COUNT(*) FROM todo WHERE userId = ?";
+            String sqlv3 = "SELECT COUNT(*) FROM todo WHERE userId = ?";
+            p = Database.getInstance().getConnection().prepareStatement(sql3);
+            p = Database.getInstance().getConnection().prepareStatement(sqlv3);
+            p.setString(1, userId.getText());
+            ResultSet rsTodo = p.executeQuery();
             rsTodo.next();
             int todoCount = rsTodo.getInt(1);
-            
             jLabel9.setText("" + todoCount);
-            jLabel4.setText("" + deadlineCount);
-            jLabel1.setText("" + completedCount);
-            
-            MyCon.close();
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
@@ -76,13 +107,12 @@ public class Dashboard extends javax.swing.JPanel {
           
      public void populateTable(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo WHERE userId = ?");
-            ps.setString(1,userId.getText());
+           String sql = "SELECT * FROM todo WHERE userId = ?";
+            PreparedStatement p = Database.getInstance().getConnection().prepareStatement(sql);
+            p.setString(1,userId.getText());           
+            ResultSet rs = p.executeQuery();
             
-            ResultSet rs = ps.executeQuery();
-
+           
             DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
             model.setRowCount(0);
 
@@ -93,8 +123,8 @@ public class Dashboard extends javax.swing.JPanel {
             }
 
             jTable5.setModel(model);
-            MyCon.close();
-        } catch (ClassNotFoundException | SQLException ex) {
+            p.close();
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -178,6 +208,8 @@ public class Dashboard extends javax.swing.JPanel {
         calendar1 = new CalendarUI.calendar.Calendar();
         panelRound5 = new MytaskManager.Components.PanelRound();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         userId = new javax.swing.JLabel();
 
         panelRound1.setRoundBottomLeft(90);
@@ -393,23 +425,29 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(142, 117, 117));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Statistics");
+        jLabel8.setText("Qoute of the Day");
+
+        jScrollPane2.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
         panelRound5.setLayout(panelRound5Layout);
         panelRound5Layout.setHorizontalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound5Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jLabel8)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         panelRound5Layout.setVerticalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound5Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         userId.setText("jLabel9");
@@ -469,7 +507,9 @@ public class Dashboard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable5;
+    private javax.swing.JTextPane jTextPane1;
     private MytaskManager.Components.PanelRound panelRound1;
     private MytaskManager.Components.PanelRound panelRound3;
     private MytaskManager.Components.PanelRound panelRound4;
