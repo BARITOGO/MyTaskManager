@@ -18,6 +18,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 
 public class Main extends javax.swing.JFrame {
@@ -45,24 +46,59 @@ public class Main extends javax.swing.JFrame {
         addtask = new addTask();
         initMoving(this);
         showForm(dashboard);
+         idtext();
+        MainID.setVisible(false);
         
-        todo.add.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                  showForm(addtask);
-            }
-        });
-        addtask.back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                  showForm(todo);
-            }
-        });
-        todo.populateTable();
+//        todo.add.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                  showForm(addtask);
+//            }
+//        });
+//        addtask.back.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                  showForm(todo);
+//            }
+//        });
+//        todo.populateTable();
     }
 
     private int x;
     private int y;
+    
+     public void idtext(){
+         SwingUtilities.invokeLater(() -> {
+         dashboard.userId.removeAll();
+         dashboard.userId.repaint();
+         dashboard.userId.revalidate();
+         dashboard.userId.setText(MainID.getText());         
+        });
+         SwingUtilities.invokeLater(() -> {
+         statistic.statid.removeAll();
+         statistic.statid.repaint();
+         statistic.statid.revalidate();
+         statistic.statid.setText(MainID.getText());         
+        }); 
+         SwingUtilities.invokeLater(() -> {
+         deadline.deadid.removeAll();
+         deadline.deadid.repaint();
+         deadline.deadid.revalidate();
+         deadline.deadid.setText(MainID.getText());         
+        }); 
+         SwingUtilities.invokeLater(() -> {
+         completed.compid.removeAll();
+         completed.compid.repaint();
+         completed.compid.revalidate();
+         completed.compid.setText(MainID.getText());         
+        }); 
+         SwingUtilities.invokeLater(() -> {
+         todo.todoid.removeAll();
+         todo.todoid.repaint();
+         todo.todoid.revalidate();
+         todo.todoid.setText(MainID.getText());         
+        });
+    }
 
     public void initMoving(JFrame frame){
         panelRound1.addMouseListener(new MouseAdapter() {
@@ -104,7 +140,6 @@ public class Main extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
@@ -113,6 +148,7 @@ public class Main extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         changeForm = new MytaskManager.Components.PanelGradient0();
+        MainID = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
@@ -186,19 +222,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(253, 253, 253));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(142, 117, 117));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/calendaricon.png"))); // NOI18N
-        jButton5.setText("Calendar");
-        jButton5.setBorder(null);
-        jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
         jButton4.setBackground(new java.awt.Color(253, 253, 253));
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton4.setForeground(new java.awt.Color(142, 117, 117));
@@ -250,9 +273,7 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
-                                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(3, 3, 3))
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -272,13 +293,11 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(31, 31, 31)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         panelRound2.setBackground(new java.awt.Color(255, 255, 255));
@@ -324,6 +343,8 @@ public class Main extends javax.swing.JFrame {
 
         changeForm.setLayout(new java.awt.BorderLayout());
 
+        MainID.setText("jLabel1");
+
         javax.swing.GroupLayout panelGradient2Layout = new javax.swing.GroupLayout(panelGradient2);
         panelGradient2.setLayout(panelGradient2Layout);
         panelGradient2Layout.setHorizontalGroup(
@@ -336,11 +357,17 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(changeForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(23, 23, 23))
+            .addGroup(panelGradient2Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(MainID)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelGradient2Layout.setVerticalGroup(
             panelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGradient2Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(21, 21, 21)
+                .addComponent(MainID)
+                .addGap(18, 18, 18)
                 .addGroup(panelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelGradient2Layout.createSequentialGroup()
@@ -457,10 +484,6 @@ public class Main extends javax.swing.JFrame {
         showForm(statistic);
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        showForm(calendar);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         showForm(completed);     
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -472,7 +495,7 @@ public class Main extends javax.swing.JFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         showForm(todo);
         
-        todo.populateTable();
+     
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
@@ -497,13 +520,13 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel MainID;
     private MytaskManager.Components.PanelGradient0 changeForm;
     private javax.swing.JButton jButton10;
     public javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

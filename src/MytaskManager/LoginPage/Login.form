@@ -124,11 +124,15 @@
                                   <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="as" min="-2" max="-2" attributes="0"/>
-                                          <Component id="email" max="32767" attributes="0"/>
-                                          <Component id="ass" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jPasswordField1" alignment="0" pref="274" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="as" min="-2" max="-2" attributes="0"/>
+                                              <Component id="username" max="32767" attributes="0"/>
+                                              <Component id="ass" min="-2" max="-2" attributes="0"/>
+                                              <Component id="password" alignment="0" pref="274" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace pref="39" max="32767" attributes="0"/>
+                                          <Component id="userid" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -144,7 +148,7 @@
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="97" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -155,11 +159,14 @@
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="ass" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="email" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="username" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="userid" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="as" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPasswordField1" min="-2" max="-2" attributes="0"/>
+                          <Component id="password" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" pref="33" max="-2" attributes="0"/>
                           <EmptySpace pref="44" max="32767" attributes="0"/>
@@ -190,7 +197,7 @@
                     <Property name="text" type="java.lang.String" value="Username:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="email">
+                <Component class="javax.swing.JTextField" name="username">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="16" style="1"/>
@@ -215,7 +222,7 @@
                     <Property name="text" type="java.lang.String" value="Password:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+                <Component class="javax.swing.JPasswordField" name="password">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
@@ -267,6 +274,14 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="userid">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jLabel3"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

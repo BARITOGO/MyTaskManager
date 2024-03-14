@@ -2,6 +2,7 @@ package MytaskManager.Forms;
 
 import MytaskManager.Components.Qoutes;
 import MytaskManager.Components.Riddle;
+import MytaskManager.Database.Database;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,9 +25,13 @@ import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class Dashboard extends javax.swing.JPanel {
+      private Timer timer;
+      PreparedStatement p;
+         
     private Riddle randomRiddle;
     private String currentQuote;
     private String currentRiddle;
@@ -32,77 +40,179 @@ public class Dashboard extends javax.swing.JPanel {
 
     public Dashboard() {
         initComponents();
+          try {
+            Database.getInstance().ConnectToDatabase();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
         setOpaque(false);
         jTextPane1.setBorder(null);
         jTextPane1.setBorder(BorderFactory.createEmptyBorder());
         jScrollPane1.setBorder(null);
         jScrollPane1.setBorder(BorderFactory.createEmptyBorder());
-        jTextPane2.setBorder(null);
-        jTextPane2.setBorder(BorderFactory.createEmptyBorder());
-        jScrollPane2.setBorder(null);
-        jScrollPane2.setBorder(BorderFactory.createEmptyBorder());
+//        jTextPane2.setBorder(null);
+//        jTextPane2.setBorder(BorderFactory.createEmptyBorder());
+//        jScrollPane2.setBorder(null);
+//        jScrollPane2.setBorder(BorderFactory.createEmptyBorder());
+      
+        
         times();
         displayQoutes();
-        displayRiddle();
-        loadCurrentRiddle();
+//        displayRiddle();
+//        loadCurrentRiddle();
+        updateDeadline();
+        updateCompleted();
+//        updatetodo();
+        userId.setVisible(false); 
+         
+         timer = new Timer(5000, (e) -> {
+//            populateTable();
+            updateDeadline();
+            updateCompleted();
+//            updatetodo();
+            
+        });
+        timer.start();
  
     }
-
-     public void displayRiddle(){
-        randomRiddle = Riddle.getRiddle();
-        jTextPane2.setText(randomRiddle.getQuestion());   
-        jTextField1.setVisible(true);
-        jLabel1.setVisible(true);
-        saveCurrentRiddle();
-
- try {
-        FileWriter writer = new FileWriter("riddle.txt");
-        writer.write(randomRiddle.getQuestion());
-        writer.close();
-        currentRiddle = randomRiddle.getQuestion();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-
-    // Add a window listener to save the current riddle question when the window closes
-    addWindowListener(new WindowAdapter() {
-        @Override
-        public void windowClosing(WindowEvent e) {
-            try {
-                FileWriter writer = new FileWriter("riddle.txt");
-                writer.write(randomRiddle.getQuestion());
-                writer.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+    
+        
+          public void updateDeadline(){
+        try {
+            String sql = "SELECT * FROM deadlinedata WHERE userId = ?";
+            String sqlv1 = "SELECT COUNT(*) FROM deadlinedata WHERE userId = ?";
+            p = Database.getInstance().getConnection().prepareStatement(sql);
+           p = Database.getInstance().getConnection().prepareStatement(sqlv1);
+          
+            p.setString(1, userId.getText());
+            ResultSet rsDeadline = p.executeQuery();
+            rsDeadline.next();
+            int deadlineCount = rsDeadline.getInt(1);
+             jLabel4.setText("" + deadlineCount);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    });
     }
+    public void updateCompleted(){
+        try {
+            String sql2 = "SELECT COUNT(*) FROM completed WHERE userId = ?";
+            String sqlv2 = "SELECT COUNT(*) FROM completed WHERE userId = ?";
+            p = Database.getInstance().getConnection().prepareStatement(sql2);
+            p = Database.getInstance().getConnection().prepareStatement(sqlv2);
+            p.setString(1, userId.getText());
+            ResultSet rsCompleted = p.executeQuery();
+            rsCompleted.next();
+            int completedCount = rsCompleted.getInt(1);
+            jLabel2.setText("" + completedCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+    }
+//    public  void updatetodo(){
+//        try {
+//                        
+//            String sql3 = "SELECT COUNT(*) FROM todo WHERE userId = ?";
+//            String sqlv3 = "SELECT COUNT(*) FROM todo WHERE userId = ?";
+//            p = Database.getInstance().getConnection().prepareStatement(sql3);
+//            p = Database.getInstance().getConnection().prepareStatement(sqlv3);
+//            p.setString(1, userId.getText());
+//            ResultSet rsTodo = p.executeQuery();
+//            rsTodo.next();
+//            int todoCount = rsTodo.getInt(1);
+//            jLabel9.setText("" + todoCount);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+    
+    
+          
+          
+//     public void populateTable(){
+//        try {
+//           String sql = "SELECT * FROM todo WHERE userId = ?";
+//            PreparedStatement p = Database.getInstance().getConnection().prepareStatement(sql);
+//            p.setString(1,userId.getText());           
+//            ResultSet rs = p.executeQuery();
+//            
+//           
+//            DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
+//            model.setRowCount(0);
+//
+//            while (rs.next()) {
+//                String task = rs.getString("task");
+//                
+//                model.addRow(new Object[]{task});
+//            }
+//
+//            jTable5.setModel(model);
+//            p.close();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//        }
+//    }
+    
+    
+    
+    
 
-private void saveCurrentRiddle() {
-    try {
-        FileWriter writer = new FileWriter("riddle.txt");
-        writer.write(randomRiddle.getQuestion());
-        writer.close();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}
-private void loadCurrentRiddle() {
-    try {
-        BufferedReader reader = new BufferedReader(new FileReader("riddle.txt"));
-        String riddle = reader.readLine();
-        reader.close();
-        if (riddle != null) {
-            randomRiddle = Riddle.getRiddle();
-            jTextPane2.setText(randomRiddle.getQuestion());
-            jTextField1.setVisible(true);
-            jLabel1.setVisible(true);
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}
+//     public void displayRiddle(){
+//        randomRiddle = Riddle.getRiddle();
+//        jTextPane2.setText(randomRiddle.getQuestion());   
+//        jTextField1.setVisible(true);
+//        jLabel1.setVisible(true);
+//        saveCurrentRiddle();
+//
+// try {
+//        FileWriter writer = new FileWriter("riddle.txt");
+//        writer.write(randomRiddle.getQuestion());
+//        writer.close();
+//        currentRiddle = randomRiddle.getQuestion();
+//    } catch (IOException e) {
+//        e.printStackTrace();
+//    }
+//
+//    // Add a window listener to save the current riddle question when the window closes
+//    addWindowListener(new WindowAdapter() {
+//        @Override
+//        public void windowClosing(WindowEvent e) {
+//            try {
+//                FileWriter writer = new FileWriter("riddle.txt");
+//                writer.write(randomRiddle.getQuestion());
+//                writer.close();
+//            } catch (IOException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//    });
+//    }
+//
+//private void saveCurrentRiddle() {
+//    try {
+//        FileWriter writer = new FileWriter("riddle.txt");
+//        writer.write(randomRiddle.getQuestion());
+//        writer.close();
+//    } catch (IOException e) {
+//        e.printStackTrace();
+//    }
+//}
+//private void loadCurrentRiddle() {
+//    try {
+//        BufferedReader reader = new BufferedReader(new FileReader("riddle.txt"));
+//        String riddle = reader.readLine();
+//        reader.close();
+//        if (riddle != null) {
+//            randomRiddle = Riddle.getRiddle();
+//            jTextPane2.setText(randomRiddle.getQuestion());
+//            jTextField1.setVisible(true);
+//            jLabel1.setVisible(true);
+//        }
+//    } catch (IOException e) {
+//        e.printStackTrace();
+//    }
+//}
 public void displayQoutes() {
     Qoutes qoutes = new Qoutes();
     String randomQuote = qoutes.getRandomQuote();
@@ -183,7 +293,7 @@ public void times() {
         //time 00:00:00
         if (currentHour == 0 && currentMinute == 0 && currentSecond == 0) {
             displayQoutes();
-            displayRiddle();
+//            displayRiddle();
         }
    
         Date date = new Date();
@@ -223,8 +333,12 @@ public void times() {
         changeimage = new javax.swing.JLabel();
         panelRound4 = new MytaskManager.Components.PanelRound();
         jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         panelRound7 = new MytaskManager.Components.PanelRound();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
+        calendar1 = new CalendarUI.calendar.Calendar();
         panelRound2 = new MytaskManager.Components.PanelRound();
         Qoutes = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -235,6 +349,7 @@ public void times() {
         jTextPane2 = new javax.swing.JTextPane();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        userId = new javax.swing.JLabel();
 
         panelRound1.setRoundBottomLeft(90);
         panelRound1.setRoundBottomRight(90);
@@ -306,6 +421,23 @@ public void times() {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Statistics");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/circle3.png"))); // NOI18N
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(117, 118, 116));
+        jLabel5.setText("Completed");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/circle2.png"))); // NOI18N
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(117, 118, 116));
+        jLabel7.setText("Deadline");
+
         javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
         panelRound4.setLayout(panelRound4Layout);
         panelRound4Layout.setHorizontalGroup(
@@ -314,13 +446,37 @@ public void times() {
                 .addContainerGap(90, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(114, 114, 114))
+            .addGroup(panelRound4Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound4Layout.setVerticalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(panelRound4Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound4Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)))
+                .addGap(27, 27, 27))
         );
 
         panelRound7.setRoundBottomLeft(90);
@@ -333,16 +489,16 @@ public void times() {
         panelRound7Layout.setHorizontalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound7Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(45, 45, 45))
+                .addGap(18, 18, 18)
+                .addComponent(calendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound7Layout.setVerticalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound7Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
+                .addGap(18, 18, 18)
+                .addComponent(calendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         panelRound2.setRoundBottomLeft(90);
@@ -441,6 +597,8 @@ public void times() {
                 .addGap(17, 17, 17))
         );
 
+        userId.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -457,7 +615,9 @@ public void times() {
                         .addGap(18, 18, 18)
                         .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(panelRound7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(57, 57, 57))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(userId)
+                .addGap(8, 8, 8))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,12 +629,15 @@ public void times() {
                         .addGap(18, 18, 18)
                         .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(203, 203, 203)
+                                .addComponent(userId)))
                         .addGap(18, 18, 18)
                         .addComponent(panelRound7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -503,12 +666,16 @@ public void times() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Qoutes;
     private javax.swing.JLabel Riddlelabel;
+    private CalendarUI.calendar.Calendar calendar1;
     public javax.swing.JLabel changeimage;
     private javax.swing.JLabel dayGreetings;
-    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
@@ -520,5 +687,6 @@ public void times() {
     private MytaskManager.Components.PanelRound panelRound5;
     private MytaskManager.Components.PanelRound panelRound7;
     private javax.swing.JLabel t_time;
+    public javax.swing.JLabel userId;
     // End of variables declaration//GEN-END:variables
 }
