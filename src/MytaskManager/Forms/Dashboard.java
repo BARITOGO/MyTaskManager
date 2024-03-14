@@ -52,26 +52,22 @@ public class Dashboard extends javax.swing.JPanel {
         jTextPane1.setBorder(BorderFactory.createEmptyBorder());
         jScrollPane1.setBorder(null);
         jScrollPane1.setBorder(BorderFactory.createEmptyBorder());
-//        jTextPane2.setBorder(null);
-//        jTextPane2.setBorder(BorderFactory.createEmptyBorder());
-//        jScrollPane2.setBorder(null);
-//        jScrollPane2.setBorder(BorderFactory.createEmptyBorder());
+
       
         
         times();
         displayQoutes();
-//        displayRiddle();
-//        loadCurrentRiddle();
+
         updateDeadline();
         updateCompleted();
-//        updatetodo();
+        updatetodo();
         userId.setVisible(false); 
          
          timer = new Timer(5000, (e) -> {
-//            populateTable();
+            populateTable();
             updateDeadline();
             updateCompleted();
-//            updatetodo();
+            updatetodo();
             
         });
         timer.start();
@@ -110,109 +106,55 @@ public class Dashboard extends javax.swing.JPanel {
             e.printStackTrace();
         } 
     }
-//    public  void updatetodo(){
-//        try {
-//                        
-//            String sql3 = "SELECT COUNT(*) FROM todo WHERE userId = ?";
-//            String sqlv3 = "SELECT COUNT(*) FROM todo WHERE userId = ?";
-//            p = Database.getInstance().getConnection().prepareStatement(sql3);
-//            p = Database.getInstance().getConnection().prepareStatement(sqlv3);
-//            p.setString(1, userId.getText());
-//            ResultSet rsTodo = p.executeQuery();
-//            rsTodo.next();
-//            int todoCount = rsTodo.getInt(1);
-//            jLabel9.setText("" + todoCount);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public  void updatetodo(){
+        try {
+                        
+            String sql3 = "SELECT COUNT(*) FROM todo WHERE userId = ?";
+            String sqlv3 = "SELECT COUNT(*) FROM todo WHERE userId = ?";
+            p = Database.getInstance().getConnection().prepareStatement(sql3);
+            p = Database.getInstance().getConnection().prepareStatement(sqlv3);
+            p.setString(1, userId.getText());
+            ResultSet rsTodo = p.executeQuery();
+            rsTodo.next();
+            int todoCount = rsTodo.getInt(1);
+            jLabel9.setText("" + todoCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
     
           
           
-//     public void populateTable(){
-//        try {
-//           String sql = "SELECT * FROM todo WHERE userId = ?";
-//            PreparedStatement p = Database.getInstance().getConnection().prepareStatement(sql);
-//            p.setString(1,userId.getText());           
-//            ResultSet rs = p.executeQuery();
-//            
-//           
-//            DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
-//            model.setRowCount(0);
-//
-//            while (rs.next()) {
-//                String task = rs.getString("task");
-//                
-//                model.addRow(new Object[]{task});
-//            }
-//
-//            jTable5.setModel(model);
-//            p.close();
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//    }
+     public void populateTable(){
+        try {
+           String sql = "SELECT * FROM todo WHERE userId = ?";
+            PreparedStatement p = Database.getInstance().getConnection().prepareStatement(sql);
+            p.setString(1,userId.getText());           
+            ResultSet rs = p.executeQuery();
+            
+           
+            DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
+            model.setRowCount(0);
+
+            while (rs.next()) {
+                String task = rs.getString("task");
+                
+                model.addRow(new Object[]{task});
+            }
+
+            jTable5.setModel(model);
+            p.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     
     
     
     
 
-//     public void displayRiddle(){
-//        randomRiddle = Riddle.getRiddle();
-//        jTextPane2.setText(randomRiddle.getQuestion());   
-//        jTextField1.setVisible(true);
-//        jLabel1.setVisible(true);
-//        saveCurrentRiddle();
-//
-// try {
-//        FileWriter writer = new FileWriter("riddle.txt");
-//        writer.write(randomRiddle.getQuestion());
-//        writer.close();
-//        currentRiddle = randomRiddle.getQuestion();
-//    } catch (IOException e) {
-//        e.printStackTrace();
-//    }
-//
-//    // Add a window listener to save the current riddle question when the window closes
-//    addWindowListener(new WindowAdapter() {
-//        @Override
-//        public void windowClosing(WindowEvent e) {
-//            try {
-//                FileWriter writer = new FileWriter("riddle.txt");
-//                writer.write(randomRiddle.getQuestion());
-//                writer.close();
-//            } catch (IOException ex) {
-//                ex.printStackTrace();
-//            }
-//        }
-//    });
-//    }
-//
-//private void saveCurrentRiddle() {
-//    try {
-//        FileWriter writer = new FileWriter("riddle.txt");
-//        writer.write(randomRiddle.getQuestion());
-//        writer.close();
-//    } catch (IOException e) {
-//        e.printStackTrace();
-//    }
-//}
-//private void loadCurrentRiddle() {
-//    try {
-//        BufferedReader reader = new BufferedReader(new FileReader("riddle.txt"));
-//        String riddle = reader.readLine();
-//        reader.close();
-//        if (riddle != null) {
-//            randomRiddle = Riddle.getRiddle();
-//            jTextPane2.setText(randomRiddle.getQuestion());
-//            jTextField1.setVisible(true);
-//            jLabel1.setVisible(true);
-//        }
-//    } catch (IOException e) {
-//        e.printStackTrace();
-//    }
-//}
+
 public void displayQoutes() {
     Qoutes qoutes = new Qoutes();
     String randomQuote = qoutes.getRandomQuote();
@@ -231,12 +173,12 @@ public void displayQoutes() {
         try {
             jTextPane1.getDocument().insertString(jTextPane1.getDocument().getLength(), randomQuote + "\n", null);
 
-            // Save the quote to a file
+         
             FileWriter writer = new FileWriter("quote.txt");
             writer.write(randomQuote);
             writer.close();
 
-            // Update the current quote
+         
             currentQuote = randomQuote;
 
         } catch (IOException | BadLocationException e) {
@@ -288,12 +230,12 @@ public void times() {
         int currentHour = cal.get(Calendar.HOUR_OF_DAY);
         int currentMinute = cal.get(Calendar.MINUTE);
         int currentSecond = cal.get(Calendar.SECOND);
-//        int currentMilliSeconds = cal.get(Calendar.MILLISECOND);
+
         
-        //time 00:00:00
+      
         if (currentHour == 0 && currentMinute == 0 && currentSecond == 0) {
             displayQoutes();
-//            displayRiddle();
+
         }
    
         Date date = new Date();
@@ -301,19 +243,19 @@ public void times() {
         String currentTime = st.format(date);
         t_time.setText(currentTime);
 
-        // Check the time and update the image and greeting
+       
         if (currentHour >= 0 && currentHour < 12) {
-            // Load and set the morning icon for changeimage JLabel
+       
             ImageIcon icon = new ImageIcon(getClass().getResource("/MytaskManager/icon/morning.png"));
             changeimage.setIcon(icon);
             dayGreetings.setText("Good Morning");
         } else if (currentHour >= 12 && currentHour < 18) {
-            // Load and set the afternoon icon for changeimage JLabel
+           
             ImageIcon icon = new ImageIcon(getClass().getResource("/MytaskManager/icon/afternoon.png"));
             changeimage.setIcon(icon);
             dayGreetings.setText("Good Afternoon");
         } else {
-            // Load and set the evening icon for changeimage JLabel
+       
             ImageIcon icon = new ImageIcon(getClass().getResource("/MytaskManager/icon/evening.png"));
             changeimage.setIcon(icon);
             dayGreetings.setText("Good Evening");
@@ -344,11 +286,10 @@ public void times() {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         panelRound5 = new MytaskManager.Components.PanelRound();
-        Riddlelabel = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable5 = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         userId = new javax.swing.JLabel();
 
         panelRound1.setRoundBottomLeft(90);
@@ -544,57 +485,52 @@ public void times() {
         panelRound5.setRoundTopLeft(90);
         panelRound5.setRoundTopRight(90);
 
-        Riddlelabel.setFont(new java.awt.Font("Sylfaen", 1, 20)); // NOI18N
-        Riddlelabel.setForeground(new java.awt.Color(142, 117, 117));
-        Riddlelabel.setText("Riddle of the Day");
-
-        jTextPane2.setBorder(null);
-        jTextPane2.setFont(new java.awt.Font("Sylfaen", 1, 20)); // NOI18N
-        jTextPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jTextPane2.setOpaque(false);
-        jScrollPane2.setViewportView(jTextPane2);
-
-        jLabel1.setFont(new java.awt.Font("Sylfaen", 1, 20)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(142, 117, 117));
-        jLabel1.setText("Answer:");
-
-        jTextField1.setOpaque(true);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+        jTable5.setBackground(new java.awt.Color(242, 242, 242));
+        jTable5.setForeground(new java.awt.Color(117, 118, 116));
+        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Task"
             }
-        });
+        ));
+        jTable5.setSelectionForeground(new java.awt.Color(117, 118, 116));
+        jScrollPane3.setViewportView(jTable5);
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(142, 117, 117));
+        jLabel8.setText("Mytask");
+
+        jLabel9.setForeground(new java.awt.Color(117, 118, 116));
 
         javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
         panelRound5.setLayout(panelRound5Layout);
         panelRound5Layout.setHorizontalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound5Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Riddlelabel)
-                .addGap(38, 38, 38))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelRound5Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound5Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRound5Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         panelRound5Layout.setVerticalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound5Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(Riddlelabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(16, 16, 16)
                 .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(17, 17, 17))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         userId.setText("jLabel2");
@@ -641,46 +577,24 @@ public void times() {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-    String userAnswer = jTextField1.getText().trim().toLowerCase();
-    String correctAnswer = randomRiddle.getAnswer().toLowerCase();
-
-    if (userAnswer.isEmpty()) { 
-        
-    } else if (userAnswer.equals(correctAnswer)) {
-        JOptionPane.showMessageDialog(this, "Amazing! You are a Genius", "Correct", JOptionPane.INFORMATION_MESSAGE);
-
-        jTextField1.setVisible(false);
-        jLabel1.setVisible(false);
-        jTextPane2.setText("Waiting for another riddle..."); 
-        jTextField1.setText("");
-    } else {
-        JOptionPane.showMessageDialog(this, "Try again!", "Wrong!", JOptionPane.ERROR_MESSAGE);
-        jTextField1.setText("");
-    }
-
-    jTextField1.selectAll();
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Qoutes;
-    private javax.swing.JLabel Riddlelabel;
     private CalendarUI.calendar.Calendar calendar1;
     public javax.swing.JLabel changeimage;
     private javax.swing.JLabel dayGreetings;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable5;
     private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane2;
     private MytaskManager.Components.PanelRound panelRound1;
     private MytaskManager.Components.PanelRound panelRound2;
     private MytaskManager.Components.PanelRound panelRound4;
