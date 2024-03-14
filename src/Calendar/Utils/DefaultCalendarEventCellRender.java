@@ -4,7 +4,7 @@
  */
 package Calendar.Utils;
 
-import CalendarUI.model.ModelDate;
+import Calendar.Model.ModelDate;
 import com.formdev.flatlaf.ui.FlatUIUtils;
 import com.formdev.flatlaf.util.UIScale;
 import java.awt.Graphics2D;

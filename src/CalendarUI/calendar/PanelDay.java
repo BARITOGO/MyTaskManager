@@ -8,7 +8,7 @@ import Calendar.Model.ModelMonth;
 import Calendar.Utils.CalendarCellListener;
 import Calendar.Utils.CellRenderCustom;
 import Calendar.Utils.PanelDateListener;
-import CalendarUI.model.ModelDate;
+import Calendar.Model.ModelDate;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.ui.FlatUIUtils;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseMotionListener;

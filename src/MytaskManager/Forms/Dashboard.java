@@ -1,6 +1,7 @@
 
 package MytaskManager.Forms;
 
+import MytaskManager.Database.Database;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -17,71 +18,135 @@ import javax.swing.table.DefaultTableModel;
 
 public class Dashboard extends javax.swing.JPanel {
         private Timer timer;
+        PreparedStatement p;
   
     public Dashboard() {
         initComponents();
+        try {
+            Database.getInstance().ConnectToDatabase();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
         setOpaque(false);
         populateTable();
         times();
-        updateLabelCounts();
+        updateDeadline();
+        updateCompleted();
+        updatetodo();
+//        updateLabelCounts();
         userId.setVisible(false); 
          
          timer = new Timer(5000, (e) -> {
             populateTable();
-            updateLabelCounts();
+//            updateLabelCounts();
         });
         timer.start();
          
     }
-    
-    
-          public void updateLabelCounts() {
+    public void updateDeadline(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            
+            String sql = "SELECT * FROM deadlinedata WHERE userId = ?";
+            String sqlv1 = "SELECT COUNT(*) FROM deadlinedata WHERE userId = ?";
+            p = Database.getInstance().getConnection().prepareStatement(sql);
+           p = Database.getInstance().getConnection().prepareStatement(sqlv1);
           
-            PreparedStatement psDeadline = MyCon.prepareStatement("SELECT COUNT(*) FROM deadlinedata WHERE userId = ?");
-            psDeadline.setString(1, userId.getText());
-            ResultSet rsDeadline = psDeadline.executeQuery();
+            p.setString(1, userId.getText());
+            ResultSet rsDeadline = p.executeQuery();
             rsDeadline.next();
             int deadlineCount = rsDeadline.getInt(1);
-            
-           
-            PreparedStatement psCompleted = MyCon.prepareStatement("SELECT COUNT(*) FROM completed WHERE userId = ?");
-            psCompleted.setString(1, userId.getText());
-            ResultSet rsCompleted = psCompleted.executeQuery();
-            rsCompleted.next();
-            int completedCount = rsCompleted.getInt(1);
-            
-            
-            PreparedStatement psTodo = MyCon.prepareStatement("SELECT COUNT(*) FROM todo WHERE userId = ?");
-            psTodo.setString(1, userId.getText());
-            ResultSet rsTodo = psTodo.executeQuery();
-            rsTodo.next();
-            int todoCount = rsTodo.getInt(1);
-            
-            jLabel9.setText("" + todoCount);
-            jLabel4.setText("" + deadlineCount);
-            jLabel1.setText("" + completedCount);
-            
-            MyCon.close();
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+             jLabel4.setText("" + deadlineCount);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+    public void updateCompleted(){
+        try {
+            String sql2 = "SELECT COUNT(*) FROM completed WHERE userId = ?";
+            String sqlv2 = "SELECT COUNT(*) FROM completed WHERE userId = ?";
+            p = Database.getInstance().getConnection().prepareStatement(sql2);
+            p = Database.getInstance().getConnection().prepareStatement(sqlv2);
+            p.setString(1, userId.getText());
+            ResultSet rsCompleted = p.executeQuery();
+            rsCompleted.next();
+            int completedCount = rsCompleted.getInt(1);
+            jLabel1.setText("" + completedCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+    }
+    public  void updatetodo(){
+        try {
+                        
+            String sql3 = "SELECT COUNT(*) FROM todo WHERE userId = ?";
+            String sqlv3 = "SELECT COUNT(*) FROM todo WHERE userId = ?";
+            p = Database.getInstance().getConnection().prepareStatement(sql3);
+            p = Database.getInstance().getConnection().prepareStatement(sqlv3);
+            p.setString(1, userId.getText());
+            ResultSet rsTodo = p.executeQuery();
+            rsTodo.next();
+            int todoCount = rsTodo.getInt(1);
+            jLabel9.setText("" + todoCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+//          public void updateLabelCounts() {
+//        try {
+////            Class.forName("com.mysql.cj.jdbc.Driver");
+////            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");         
+////            PreparedStatement psDeadline = MyCon.prepareStatement("SELECT COUNT(*) FROM deadlinedata WHERE userId = ?");
+//
+////            String sql = "SELECT * FROM deadlinedata WHERE userId = ?";
+////            String sqlv2 = "SELECT COUNT(*) FROM deadlinedata WHERE userId = ?";
+////            p = Database.getInstance().getConnection().prepareStatement(sql);
+////           p = Database.getInstance().getConnection().prepareStatement(sqlv2);
+////          
+////            p.setString(1, userId.getText());
+////            ResultSet rsDeadline = p.executeQuery();
+////            rsDeadline.next();
+////            int deadlineCount = rsDeadline.getInt(1);
+//            
+////            String sql2 = "SELECT COUNT(*) FROM completed WHERE userId = ?";
+////            PreparedStatement pcompleted = Database.getInstance().getConnection().prepareStatement(sql2);
+////            PreparedStatement psCompleted = p.prepareStatement("SELECT COUNT(*) FROM completed WHERE userId = ?");
+////            psCompleted.setString(1, userId.getText());
+////            ResultSet rsCompleted = psCompleted.executeQuery();
+////            rsCompleted.next();
+////            int completedCount = rsCompleted.getInt(1);
+////            
+////            String sql3 = "SELECT COUNT(*) FROM todo WHERE userId = ?";
+////            p = Database.getInstance().getConnection().prepareStatement(sql3);
+////            PreparedStatement psTodo = p.prepareStatement("SELECT COUNT(*) FROM todo WHERE userId = ?");
+////            psTodo.setString(1, userId.getText());
+////            ResultSet rsTodo = psTodo.executeQuery();
+////            rsTodo.next();
+////            int todoCount = rsTodo.getInt(1);
+//            
+////            jLabel9.setText("" + todoCount);
+////            jLabel4.setText("" + deadlineCount);
+////            jLabel1.setText("" + completedCount);
+//            
+//            p.close();
+//        } catch (ClassNotFoundException | SQLException ex) {
+//            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//        }
+//    }
     
     
           
           
      public void populateTable(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo WHERE userId = ?");
-            ps.setString(1,userId.getText());
-            
-            ResultSet rs = ps.executeQuery();
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+//            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM todo WHERE userId = ?");
+
+            String sql = "SELECT * FROM todo WHERE userId = ?";
+            PreparedStatement p = Database.getInstance().getConnection().prepareStatement(sql);
+            p.setString(1,userId.getText());           
+            ResultSet rs = p.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
             model.setRowCount(0);
@@ -93,8 +158,8 @@ public class Dashboard extends javax.swing.JPanel {
             }
 
             jTable5.setModel(model);
-            MyCon.close();
-        } catch (ClassNotFoundException | SQLException ex) {
+            p.close();
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }

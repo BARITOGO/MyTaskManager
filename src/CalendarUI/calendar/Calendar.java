@@ -9,7 +9,7 @@ import Calendar.Utils.CalendarCellListener;
 import Calendar.Utils.CalendarEventCellRender;
 import Calendar.Utils.CalendarSelectedListener;
 import Calendar.Utils.DefaultCalendarEventCellRender;
-import CalendarUI.model.ModelDate;
+import Calendar.Model.ModelDate;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.Animator;
 import com.formdev.flatlaf.util.CubicBezierEasing;

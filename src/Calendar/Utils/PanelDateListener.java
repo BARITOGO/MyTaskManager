@@ -5,7 +5,7 @@
 package Calendar.Utils;
 
 
-import CalendarUI.model.ModelDate;
+import Calendar.Model.ModelDate;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 

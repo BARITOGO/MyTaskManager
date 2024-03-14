@@ -2,6 +2,7 @@
 package MytaskManager.Forms;
 
 
+import MytaskManager.Database.Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -22,8 +23,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 
 public class Completed extends javax.swing.JPanel {
-     Connection MyCon;
-     PreparedStatement ps;
+     PreparedStatement p;
      ResultSet rs;
      private DefaultTableCellRenderer centerRenderer;;
      private Timer timer;
@@ -31,6 +31,13 @@ public class Completed extends javax.swing.JPanel {
     
     public Completed() {
         initComponents();
+        try {
+            Database.getInstance().ConnectToDatabase();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
         setOpaque(false);
         compid.setText(userId);
         populateTable();
@@ -66,12 +73,14 @@ public class Completed extends javax.swing.JPanel {
     
      public void populateTable(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM completed WHERE userId = ?");
-            ps.setString(1,compid.getText());
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            Connection MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
+//            PreparedStatement ps = MyCon.prepareStatement("SELECT * FROM completed WHERE userId = ?");
+            String sql = "SELECT * FROM completed WHERE userId = ?";
+            p = Database.getInstance().getConnection().prepareStatement(sql);
+            p.setString(1,compid.getText());
             
-            ResultSet rs = ps.executeQuery();
+            ResultSet rs = p.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             model.setRowCount(0);
@@ -85,8 +94,8 @@ public class Completed extends javax.swing.JPanel {
             }
 
             jTable2.setModel(model);
-            MyCon.close();
-        } catch (ClassNotFoundException | SQLException ex) {
+           
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -209,18 +218,21 @@ public class Completed extends javax.swing.JPanel {
         String time = jTable2.getValueAt(selectedRow, 3).toString();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
-
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            MyCon = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/mytask", "root", "rootV12morjana");
             // Prepare the delete statement
-            PreparedStatement deleteFromDeadlinedata = MyCon.prepareStatement("DELETE FROM completed WHERE task = ? AND date = ? AND deadline = ? AND time = ?");
-            deleteFromDeadlinedata.setString(1, task);
-            deleteFromDeadlinedata.setString(2, date);
-             deleteFromDeadlinedata.setString(3, deadline);
-              deleteFromDeadlinedata.setString(4, time);
+            String sql = "SELECT * FROM completed WHERE userId = ?";
+            p = Database.getInstance().getConnection().prepareStatement(sql);
+            String sqlv1 = "DELETE FROM completed WHERE task = ? AND date = ? AND deadline = ? AND time = ?";
+            p = Database.getInstance().getConnection().prepareStatement(sqlv1);
+//            PreparedStatement deleteFromDeadlinedata = MyCon.prepareStatement("");
+            p.setString(1, task);
+            p.setString(2, date);
+             p.setString(3, deadline);
+              p.setString(4, time);
 
             // Execute the delete statement
-            int rowsAffected = deleteFromDeadlinedata.executeUpdate();
+            int rowsAffected = p.executeUpdate();
 
             // Check if the deletion was successful
             if (rowsAffected > 0) {
@@ -232,16 +244,9 @@ public class Completed extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(this, "Failed to delete the row from deadlinedata", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            try {
-                if (MyCon != null) {
-                    MyCon.close();
-                }
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Error closing connection: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
+         
         }
     } else {
         JOptionPane.showMessageDialog(this, "Please select a row to complete", "Error", JOptionPane.ERROR_MESSAGE);

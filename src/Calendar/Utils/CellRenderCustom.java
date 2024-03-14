@@ -4,7 +4,7 @@
  */
 package Calendar.Utils;
 
-import CalendarUI.swing.DynamicCell;
+import Calendar.swing.DynamicCell;
 import Calendar.swing.DynamicCellRender;
 import com.formdev.flatlaf.ui.FlatUIUtils;
 import com.formdev.flatlaf.util.UIScale;

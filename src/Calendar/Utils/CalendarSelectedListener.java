@@ -5,7 +5,7 @@
 package Calendar.Utils;
 
 
-import CalendarUI.model.ModelDate;
+import Calendar.Model.ModelDate;
 import java.awt.event.MouseEvent;
 
 /**

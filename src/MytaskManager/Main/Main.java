@@ -4,13 +4,11 @@
  */
 package MytaskManager.Main;
 //BENDIJO - CPE
-import MytaskManager.Forms.Calendar;
 import MytaskManager.Forms.Completed;
 import MytaskManager.Forms.Dashboard;
 import MytaskManager.Forms.Deadline;
 import MytaskManager.Forms.Statistic;
 import MytaskManager.Forms.Todo;
-import MytaskManager.Forms.addTask;
 import MytaskManager.LoginPage.Login;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.BorderLayout;
@@ -31,9 +29,7 @@ public class Main extends javax.swing.JFrame {
     private Todo todo;
     private Deadline deadline;
     private Completed completed;
-    private Calendar calendar;
     private Statistic statistic;
-    private addTask addtask;
     
     
     public Main() {
@@ -45,26 +41,11 @@ public class Main extends javax.swing.JFrame {
         todo = new Todo();
         dashboard = new Dashboard(); 
         completed = new Completed();
-        calendar = new Calendar();
         statistic = new Statistic();
-        addtask = new addTask();
         initMoving(this);
         showForm(dashboard);
         idtext();
         MainID.setVisible(false);
-        
-//        todo.add.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                  showForm(addtask);
-//            }
-//        });
-//        addtask.back.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                  showForm(todo);
-//            }
-//        });
     }
 
     private int x;
