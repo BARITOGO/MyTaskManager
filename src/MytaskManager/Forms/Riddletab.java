@@ -5,6 +5,11 @@ package MytaskManager.Forms;
 
 import MytaskManager.Components.Riddle;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.LayoutManager;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.WindowAdapter;
@@ -20,6 +25,8 @@ import javax.swing.Timer;
 import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 
 
 public class Riddletab extends javax.swing.JFrame {
@@ -33,7 +40,7 @@ public class Riddletab extends javax.swing.JFrame {
         setUndecorated(true);
         setBackground(new Color(0, 0, 0, 0));
         initComponents();
-     
+        setLocationRelativeTo(null);
         jTextPane2.setBorder(null);
         jTextPane2.setBorder(BorderFactory.createEmptyBorder());
         jScrollPane2.setBorder(null);
@@ -129,8 +136,7 @@ public void times() {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        panelRound1 = new MytaskManager.Components.PanelRound();
+        jPanel1 = new RoundedPanel(100, new Color(255,255,255));
         jLabel1 = new javax.swing.JLabel();
         Riddlelabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -139,27 +145,21 @@ public void times() {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel1.setForeground(new java.awt.Color(204, 204, 204));
         jPanel1.setOpaque(false);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 324, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 331, Short.MAX_VALUE)
-        );
-
-        panelRound1.setBackground(new java.awt.Color(255, 255, 255));
-        panelRound1.setForeground(new java.awt.Color(255, 255, 255));
-
-        jLabel1.setText("Done");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/done1.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
             }
         });
 
@@ -168,11 +168,13 @@ public void times() {
         Riddlelabel.setText("Riddle of the Day");
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setForeground(new java.awt.Color(255, 255, 255));
 
         jTextPane2.setBorder(null);
         jTextPane2.setFont(new java.awt.Font("Sylfaen", 1, 20)); // NOI18N
         jTextPane2.setForeground(new java.awt.Color(153, 153, 153));
         jTextPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTextPane2.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         jTextPane2.setOpaque(false);
         jScrollPane2.setViewportView(jTextPane2);
 
@@ -187,67 +189,67 @@ public void times() {
         jLabel2.setForeground(new java.awt.Color(142, 117, 117));
         jLabel2.setText("Answer:");
 
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(Riddlelabel))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(48, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGap(53, 53, 53)
+                            .addComponent(jLabel2)
+                            .addGap(18, 18, 18)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(Riddlelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(50, 50, 50))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(22, 22, 22))
         );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addComponent(Riddlelabel)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(34, 34, 34))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-    this.hide();
-        
-    }//GEN-LAST:event_jLabel1MouseClicked
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         String userAnswer = jTextField1.getText().trim().toLowerCase();
@@ -269,6 +271,18 @@ public void times() {
 
         jTextField1.selectAll();
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        this.hide();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+           jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/button (12).png")));
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+          jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/done1.png")));
+    }//GEN-LAST:event_jLabel1MouseExited
 
     
     public static void main(String args[]) {
@@ -311,6 +325,99 @@ public void times() {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextPane jTextPane2;
-    private MytaskManager.Components.PanelRound panelRound1;
     // End of variables declaration//GEN-END:variables
+    class RoundedPanel extends JPanel
+       {
+           private Color backgroundColor;
+           private int cornerRadius = 15;
+
+           public RoundedPanel(LayoutManager layout, int radius) {
+               super(layout);
+               cornerRadius = radius;
+           }
+
+           public RoundedPanel(LayoutManager layout, int radius, Color bgColor) {
+               super(layout);
+               cornerRadius = radius;
+               backgroundColor = bgColor;
+           }
+
+           public RoundedPanel(int radius) {
+               super();
+               cornerRadius = radius;
+           }
+
+           public RoundedPanel(int radius, Color bgColor) {
+               super();
+               cornerRadius = radius;
+               backgroundColor = bgColor;
+           }
+
+           @Override
+           protected void paintComponent(Graphics g) {
+               super.paintComponent(g);
+               Dimension arcs = new Dimension(cornerRadius, cornerRadius);
+               int width = getWidth();
+               int height = getHeight();
+               Graphics2D graphics = (Graphics2D) g;
+               graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+               //Draws the rounded panel with borders.
+               if (backgroundColor != null) {
+                   graphics.setColor(backgroundColor);
+               } else {
+                   graphics.setColor(getBackground());
+               }
+               graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
+               graphics.setColor(getForeground());
+               graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
+           }
+       }
+   }class RoundedPanel extends JPanel
+       {
+           private Color backgroundColor;
+           private int cornerRadius = 15;
+
+           public RoundedPanel(LayoutManager layout, int radius) {
+               super(layout);
+               cornerRadius = radius;
+           }
+
+           public RoundedPanel(LayoutManager layout, int radius, Color bgColor) {
+               super(layout);
+               cornerRadius = radius;
+               backgroundColor = bgColor;
+           }
+
+           public RoundedPanel(int radius) {
+               super();
+               cornerRadius = radius;
+           }
+
+           public RoundedPanel(int radius, Color bgColor) {
+               super();
+               cornerRadius = radius;
+               backgroundColor = bgColor;
+           }
+
+           @Override
+           protected void paintComponent(Graphics g) {
+               super.paintComponent(g);
+               Dimension arcs = new Dimension(cornerRadius, cornerRadius);
+               int width = getWidth();
+               int height = getHeight();
+               Graphics2D graphics = (Graphics2D) g;
+               graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+               //Draws the rounded panel with borders.
+               if (backgroundColor != null) {
+                   graphics.setColor(backgroundColor);
+               } else {
+                   graphics.setColor(getBackground());
+               }
+               graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
+               graphics.setColor(getForeground());
+               graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
+           }
+
 }

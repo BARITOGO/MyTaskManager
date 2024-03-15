@@ -45,7 +45,7 @@ public class Completed extends javax.swing.JPanel {
         centerRenderer = new DefaultTableCellRenderer();
         tableTextCenter();
         compid.setVisible(false);  
-        jButton1.setVisible(false);  
+       jButton1.setVisible(false);
         
         
           timer = new Timer(5000, (e) -> {
@@ -118,7 +118,7 @@ public class Completed extends javax.swing.JPanel {
         panelRound1.setRoundTopLeft(90);
         panelRound1.setRoundTopRight(90);
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(0, 204, 51));
         jTextField1.setText("Completed!");
         jTextField1.setBorder(null);
@@ -178,7 +178,7 @@ public class Completed extends javax.swing.JPanel {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                            .addComponent(jTextField1)
                             .addComponent(jButton1))
                         .addGap(36, 36, 36))
                     .addGroup(panelRound1Layout.createSequentialGroup()
@@ -206,43 +206,41 @@ public class Completed extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable2ComponentShown
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      int selectedRow = jTable2.getSelectedRow();
-    if (selectedRow != -1) { 
-        String task = jTable2.getValueAt(selectedRow, 0).toString();
-        String date = jTable2.getValueAt(selectedRow, 1).toString();
-        String deadline = jTable2.getValueAt(selectedRow, 2).toString();
-        String time = jTable2.getValueAt(selectedRow, 3).toString();
+        int selectedRow = jTable2.getSelectedRow();
+        if (selectedRow != -1) {
+            String task = jTable2.getValueAt(selectedRow, 0).toString();
+            String date = jTable2.getValueAt(selectedRow, 1).toString();
+            String deadline = jTable2.getValueAt(selectedRow, 2).toString();
+            String time = jTable2.getValueAt(selectedRow, 3).toString();
 
-        try {
-             String sql = "SELECT * FROM completed WHERE userId = ?";
-            ps = Database.getInstance().getConnection().prepareStatement(sql);
-            String sqlv1 = "DELETE FROM completed WHERE task = ? AND date = ? AND deadline = ? AND time = ?";
-            ps= Database.getInstance().getConnection().prepareStatement(sqlv1);
+            try {
+                String sql = "SELECT * FROM completed WHERE userId = ?";
+                ps = Database.getInstance().getConnection().prepareStatement(sql);
+                String sqlv1 = "DELETE FROM completed WHERE task = ? AND date = ? AND deadline = ? AND time = ?";
+                ps= Database.getInstance().getConnection().prepareStatement(sqlv1);
 
-            ps.setString(1, task);
-            ps.setString(2, date);
-            ps.setString(3, deadline);
-            ps.setString(4, time);
+                ps.setString(1, task);
+                ps.setString(2, date);
+                ps.setString(3, deadline);
+                ps.setString(4, time);
 
-          
-            int rowsAffected = ps.executeUpdate();
+                int rowsAffected = ps.executeUpdate();
 
-          
-            if (rowsAffected > 0) {
-                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-                model.removeRow(selectedRow);
-                jTable2.setModel(model);
-                
-                JOptionPane.showMessageDialog(this, "Success");
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to delete the row from deadlinedata", "Error", JOptionPane.ERROR_MESSAGE);
+                if (rowsAffected > 0) {
+                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                    model.removeRow(selectedRow);
+                    jTable2.setModel(model);
+
+                    JOptionPane.showMessageDialog(this, "Success");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to delete the row from deadlinedata", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a row to complete", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "Please select a row to complete", "Error", JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

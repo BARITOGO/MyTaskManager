@@ -159,7 +159,7 @@ public void displayQoutes() {
     Qoutes qoutes = new Qoutes();
     String randomQuote = qoutes.getRandomQuote();
 
-    jTextPane1.setText(""); // muerase sa past qoutes
+    jTextPane1.setText(""); 
 
     long currentTimeMillis = System.currentTimeMillis();
     Calendar cal = Calendar.getInstance();
@@ -465,10 +465,10 @@ public void times() {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Qoutes, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(43, 43, 43))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
