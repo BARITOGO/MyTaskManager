@@ -26,8 +26,7 @@ import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import java.awt.Font;
-import java.awt.FontMetrics;
+
 
 
 public class Riddletab extends javax.swing.JFrame {
@@ -36,12 +35,16 @@ public class Riddletab extends javax.swing.JFrame {
     SimpleDateFormat st ;
      private Riddle randomRiddle;
      private String currentRiddle;
+     
     public Riddletab() {
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(true);
         setBackground(new Color(0, 0, 0, 0));
+        
         initComponents();
         setLocationRelativeTo(null);
+     
         jTextPane2.setBorder(null);
         jTextPane2.setBorder(BorderFactory.createEmptyBorder());
         jScrollPane2.setBorder(null);
@@ -153,7 +156,8 @@ public void times() {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
+        setFocusCycleRoot(false);
+        setUndecorated(true);
 
         jPanel1.setForeground(new java.awt.Color(204, 204, 204));
         jPanel1.setOpaque(false);
@@ -211,8 +215,7 @@ public void times() {
                             .addGap(53, 53, 53)
                             .addComponent(jLabel2)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(Riddlelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
