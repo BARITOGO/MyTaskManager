@@ -280,22 +280,40 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
-             Main m = new Main();
-        String uname = username.getText();
-        char [] pWord = password.getPassword();
-        userController controller = new userController();
-        ModelUser login = new ModelUser();
-        login.setUserName(uname);
-        login.setPassWord(pWord);
-        ModelUser result = controller.Login(login);
-        if (result != null) {
-            m.MainID.setText(result.getUserId());
-            m.setVisible(true);
-            setVisible(false);
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Incorrect Username or Password, please Try again!");
-        } 
+//             Main m = new Main();
+//        String uname = username.getText();
+//        char [] pWord = password.getPassword();
+//        userController controller = new userController();
+//        ModelUser login = new ModelUser();
+//        login.setUserName(uname);
+//        login.setPassWord(pWord);
+//        ModelUser result = controller.Login(login);
+//        if (result != null) {
+//            m.MainID.setText(result.getUserId());
+//            m.setVisible(true);
+//            setVisible(false);
+//        }
+//        else{
+//            JOptionPane.showMessageDialog(this, "Incorrect Username or Password, please Try again!");
+//        } 
+
+
+            Main m = new Main();
+            String uname = username.getText();
+            char [] pWord = password.getPassword();
+            userController controller = new userController();
+            ModelUser login = new ModelUser();
+            login.setUserName(uname);
+            login.setPassWord(pWord);
+            ModelUser result = controller.Login(login);
+            if (result != null) {
+                m.MainID.setText(result.getUserId());
+                m.setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the main window
+                m.setVisible(true);
+                setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Incorrect Username or Password, please Try again!");
+            }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed

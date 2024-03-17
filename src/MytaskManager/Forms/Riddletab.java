@@ -26,7 +26,8 @@ import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+import java.awt.Font;
+import java.awt.FontMetrics;
 
 
 public class Riddletab extends javax.swing.JFrame {
@@ -51,12 +52,17 @@ public class Riddletab extends javax.swing.JFrame {
         
     }
     
+   
+        
+    
+    
          public void displayRiddle(){
         randomRiddle = Riddle.getRiddle();
         jTextPane2.setText(randomRiddle.getQuestion());   
         jTextField1.setVisible(true);
         jLabel1.setVisible(true);
         saveCurrentRiddle();
+         
 
  try {
         FileWriter writer = new FileWriter("riddle.txt");
@@ -106,6 +112,8 @@ private void loadCurrentRiddle() {
         e.printStackTrace();
     }
 }
+
+
 
 
 public void times() {
