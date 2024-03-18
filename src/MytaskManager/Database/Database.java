@@ -23,10 +23,10 @@ public class Database {
     
      public void ConnectToDatabase() throws  SQLException, ClassNotFoundException{
         String server = "127.0.0.1";
-        String port = "3307";
+        String port = "3306";
         String database ="mytask";
         String user = "root";
-        String password = "rootV12morjana";
+        String password = "morjana@0809";
         Class.forName("com.mysql.cj.jdbc.Driver");
         connection = (Connection) java.sql.DriverManager.getConnection("jdbc:mysql://"+server+":"+port+"/"+database,user,password);
     }

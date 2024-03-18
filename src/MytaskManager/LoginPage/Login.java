@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package MytaskManager.LoginPage;
 
 import MytaskManager.Controller.userController;
@@ -12,6 +9,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
 import javax.swing.JFrame;
@@ -298,22 +296,65 @@ public class Login extends javax.swing.JFrame {
 //        } 
 
 
+//            Main m = new Main();
+//            String uname = username.getText();
+//            char [] pWord = password.getPassword();
+//            userController controller = new userController();
+//            ModelUser login = new ModelUser();
+//            login.setUserName(uname);
+//            login.setPassWord(pWord);
+//            ModelUser result = controller.Login(login);
+//            if (result != null) {
+//                m.MainID.setText(result.getUserId());
+//                m.setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the main window
+//                m.setVisible(true);
+//                setVisible(false);
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Incorrect Username or Password, please Try again!");
+//            }
+
+
+        String adminUsername = "admin";
+        String adminPassword = "admin"; 
+
+        String enteredUsername = username.getText();
+        char[] enteredPassword = password.getPassword();
+        if (enteredUsername.equals(adminUsername) && Arrays.equals(enteredPassword, adminPassword.toCharArray())) {
+
+            JOptionPane.showMessageDialog(this, "Admin login successful!");
+
             Main m = new Main();
-            String uname = username.getText();
-            char [] pWord = password.getPassword();
+            m.MainID.setText("Admin"); 
+            m.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+            m.setVisible(true);
+            setVisible(false);
+        } else {
+
+            Main m = new Main();
             userController controller = new userController();
             ModelUser login = new ModelUser();
-            login.setUserName(uname);
-            login.setPassWord(pWord);
-            ModelUser result = controller.Login(login);
-            if (result != null) {
-                m.MainID.setText(result.getUserId());
-                m.setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the main window
-                m.setVisible(true);
-                setVisible(false);
+
+
+            if (enteredUsername != null && enteredPassword != null) {
+                login.setUserName(enteredUsername);
+                login.setPassWord(enteredPassword);
+
+                ModelUser result = controller.Login(login);
+                if (result != null) {
+                    m.MainID.setText(result.getUserId());
+                    m.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+                    m.setVisible(true);
+                    setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Incorrect Username or Password, please Try again!");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Incorrect Username or Password, please Try again!");
+                JOptionPane.showMessageDialog(this, "Username or Password cannot be empty!");
             }
+        }
+
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
