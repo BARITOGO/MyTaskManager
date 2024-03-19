@@ -20,6 +20,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.table.DefaultTableModel;
 
 
 public class Main extends javax.swing.JFrame {
@@ -50,6 +55,10 @@ public class Main extends javax.swing.JFrame {
         showForm(dashboard);
          idtext();
         MainID.setVisible(false);
+        
+        
+       
+       
         
 //        todo.add.addActionListener(new ActionListener() {
 //            @Override
@@ -327,6 +336,11 @@ public class Main extends javax.swing.JFrame {
         panelRound2.setRoundTopRight(60);
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/Search (2).png"))); // NOI18N
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(142, 117, 117));
@@ -536,6 +550,56 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/riddle1.png"))); 
     }//GEN-LAST:event_jLabel1MouseExited
 
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+       showForm(todo);
+    searchTask(jTextField1.getText());
+    
+    }//GEN-LAST:event_jLabel11MouseClicked
+        
+//    private void searchTask(String query) {
+//   DefaultTableModel model = (DefaultTableModel) todo.jTable1.getModel();
+//    boolean taskFound = false;
+//    
+//    for (int i = 0; i < model.getRowCount(); i++) {
+//        String task = model.getValueAt(i, 0).toString(); 
+//        if (task.contains(query)) {
+//            taskFound = true;
+//            JOptionPane.showMessageDialog(this, "Task found: " + task);
+//            
+//            break; 
+//        }
+//    }
+//    if (!taskFound) {
+//        JOptionPane.showMessageDialog(this, "Task not found!");
+//    }
+//}
+
+    private void searchTask(String query) {
+    DefaultTableModel model = (DefaultTableModel) todo.jTable1.getModel();
+    boolean taskFound = false;
+    
+    for (int i = 0; i < model.getRowCount(); i++) {
+        String task = model.getValueAt(i, 0).toString(); 
+        String date = model.getValueAt(i, 1).toString(); 
+        String deadline = model.getValueAt(i, 2).toString(); 
+        String time = model.getValueAt(i, 3).toString(); 
+        if (task.contains(query) || date.contains(query) || deadline.contains(query) || time.contains(query)) {
+            taskFound = true;
+            JOptionPane.showMessageDialog(this, "Task found: " + task + "\nDate: " + date + "\nDeadline: "
+            + deadline + "\nTime: " + time);
+         
+            todo.jTable1.setRowSelectionInterval(i, i);
+            todo.jTable1.scrollRectToVisible(todo.jTable1.getCellRect(i, 0, true));
+            break; 
+        }
+    }
+    
+    if (!taskFound) {
+        JOptionPane.showMessageDialog(this, "Task not found!");
+    }
+}
+
+    
     /**
      * @param args the command line arguments
      */
