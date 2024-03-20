@@ -82,6 +82,11 @@
       </Layout>
       <SubComponents>
         <Container class="MytaskManager.Components.PanelGradient" name="panelGradient1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
 
           <Layout>
             <DimensionLayout dim="0">

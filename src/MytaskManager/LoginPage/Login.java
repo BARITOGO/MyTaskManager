@@ -86,6 +86,8 @@ public class Login extends javax.swing.JFrame {
         panelRound1.setRoundTopLeft(90);
         panelRound1.setRoundTopRight(90);
 
+        panelGradient1.setBackground(new java.awt.Color(255, 255, 255));
+
         panelRound2.setBackground(new java.awt.Color(255, 255, 255));
         panelRound2.setRoundBottomLeft(90);
         panelRound2.setRoundBottomRight(90);
