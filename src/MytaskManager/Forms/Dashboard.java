@@ -3,6 +3,7 @@ package MytaskManager.Forms;
 import MytaskManager.Components.Qoutes;
 import MytaskManager.Components.Riddle;
 import MytaskManager.Database.Database;
+import MytaskManager.LoginPage.Login;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
 public class Dashboard extends javax.swing.JPanel {
       private Timer timer;
       PreparedStatement p;
-         
+    private String username;
     private Riddle randomRiddle;
     private String currentQuote;
     private String currentRiddle;
@@ -53,14 +54,14 @@ public class Dashboard extends javax.swing.JPanel {
         jScrollPane1.setBorder(null);
         jScrollPane1.setBorder(BorderFactory.createEmptyBorder());
 
-      
-        
+        this.username = username;
         times();
         displayQoutes();
 
         updateDeadline();
         updateCompleted();
         updatetodo();
+        username();
         userId.setVisible(false); 
          
          timer = new Timer(5000, (e) -> {
@@ -68,6 +69,7 @@ public class Dashboard extends javax.swing.JPanel {
             updateDeadline();
             updateCompleted();
             updatetodo();
+            username();
             
         });
         timer.start();
@@ -122,6 +124,28 @@ public class Dashboard extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
+    
+ 
+public void username() {
+    try {
+       
+        String sql = "SELECT userName FROM userdata WHERE userId = ?";
+        p = Database.getInstance().getConnection().prepareStatement(sql);
+        p.setString(1, userId.getText());
+        ResultSet rsUsername = p.executeQuery();
+        
+        if (rsUsername.next()) {
+            String username = rsUsername.getString("userName");
+            jLabel6.setText(username);
+        } else {
+            jLabel6.setText("User not found");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+
     
     
           
@@ -271,8 +295,8 @@ public void times() {
         panelRound1 = new MytaskManager.Components.PanelRound();
         dayGreetings = new javax.swing.JLabel();
         t_time = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         changeimage = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         panelRound4 = new MytaskManager.Components.PanelRound();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -306,33 +330,29 @@ public void times() {
         t_time.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         t_time.setText("0");
 
+        changeimage.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        changeimage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/morning.png"))); // NOI18N
+
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 255, 51));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Admin");
-
-        changeimage.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        changeimage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/morning.png"))); // NOI18N
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(t_time, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelRound1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(t_time, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelRound1Layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(changeimage))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(dayGreetings, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(dayGreetings, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
         panelRound1Layout.setVerticalGroup(
@@ -344,12 +364,12 @@ public void times() {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(t_time, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(changeimage, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(46, Short.MAX_VALUE))))
         );
 
         panelRound4.setRoundBottomLeft(90);
@@ -514,12 +534,12 @@ public void times() {
             .addGroup(panelRound5Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelRound5Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(38, 38, 38))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound5Layout.setVerticalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -529,8 +549,8 @@ public void times() {
                     .addComponent(jLabel8)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         userId.setText("jLabel2");
@@ -587,7 +607,7 @@ public void times() {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    public javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

@@ -23,6 +23,7 @@ public class Login extends javax.swing.JFrame {
         setBackground(new Color(0,0,0,0));
         initMoving(this);
         userid.setVisible(false);
+        
     }
  private int x;
     private int y;
@@ -392,6 +393,6 @@ public class Login extends javax.swing.JFrame {
     private MytaskManager.Components.PanelRound panelRound2;
     private javax.swing.JPasswordField password;
     public javax.swing.JLabel userid;
-    private javax.swing.JTextField username;
+    public javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }
