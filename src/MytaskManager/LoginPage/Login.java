@@ -278,23 +278,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
-//             Main m = new Main();
-//        String uname = username.getText();
-//        char [] pWord = password.getPassword();
-//        userController controller = new userController();
-//        ModelUser login = new ModelUser();
-//        login.setUserName(uname);
-//        login.setPassWord(pWord);
-//        ModelUser result = controller.Login(login);
-//        if (result != null) {
-//            m.MainID.setText(result.getUserId());
-//            m.setVisible(true);
-//            setVisible(false);
-//        }
-//        else{
-//            JOptionPane.showMessageDialog(this, "Incorrect Username or Password, please Try again!");
-//        } 
-
+      
 
 //            Main m = new Main();
 //            String uname = username.getText();
@@ -352,6 +336,7 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Username or Password cannot be empty!");
             }
         }
+
 
 
 
