@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\dist\MyTaskManager.jar</jar>
+  <outfile>C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\MyTask.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>true</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>D:\Vea icon\MyTask.ico</icon>
+  <jre>
+    <path>JRE</path>
+    <requiresJdk>false</requiresJdk>
+    <requires64Bit>false</requires64Bit>
+    <minVersion></minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion>test</txtFileVersion>
+    <fileDescription>test</fileDescription>
+    <copyright>test</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion>test</txtProductVersion>
+    <productName>test</productName>
+    <companyName>test</companyName>
+    <internalName>test</internalName>
+    <originalFilename>test.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>ENGLISH_US</language>
+  </versionInfo>
+</launch4jConfig>

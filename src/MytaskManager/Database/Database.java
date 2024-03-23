@@ -28,7 +28,7 @@ public class Database {
         String database = "mytask";
         String user = "root";
 //             String user = "mytask";
-        String password = "morjana@0809";
+        String password = "Aldaya@1234";
 //        String password = "aldaya@123";
         Class.forName("com.mysql.cj.jdbc.Driver");
         connection = (Connection) java.sql.DriverManager.getConnection("jdbc:mysql://"+server+":"+port+"/"+database,user,password);

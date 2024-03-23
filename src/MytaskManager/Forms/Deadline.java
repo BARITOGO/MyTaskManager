@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.Timer;
+import java.sql.Timestamp;
 
 public class Deadline extends javax.swing.JPanel {
 
@@ -155,12 +156,13 @@ public class Deadline extends javax.swing.JPanel {
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabel2)
+                        .addGap(24, 24, 24))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(65, 65, 65)
-                        .addComponent(deadid)))
-                .addGap(24, 24, 24))
+                        .addComponent(deadid)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,11 +173,11 @@ public class Deadline extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel2)))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
 
@@ -194,6 +196,7 @@ public class Deadline extends javax.swing.JPanel {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         int selectedRow = jTable3.getSelectedRow();
         String task = jTable3.getValueAt(selectedRow, 0).toString();
+         String deadline = jTable3.getValueAt(selectedRow, 0).toString();
 
         try {
               String sql = "DELETE FROM deadlinedata WHERE task = ?";
@@ -219,9 +222,7 @@ public class Deadline extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Error closing connection: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         
-
-
-
+    
 
 
     }//GEN-LAST:event_jLabel2MouseClicked
