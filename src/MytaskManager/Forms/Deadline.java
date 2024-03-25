@@ -103,7 +103,7 @@ public class Deadline extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         deadid = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setRoundBottomLeft(90);
@@ -133,16 +133,10 @@ public class Deadline extends javax.swing.JPanel {
 
         deadid.setText("jLabel2");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/check.png"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel2MouseExited(evt);
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/check.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -155,8 +149,8 @@ public class Deadline extends javax.swing.JPanel {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
                         .addGap(24, 24, 24))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -176,8 +170,8 @@ public class Deadline extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel2)))
+                        .addGap(46, 46, 46)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
 
@@ -193,8 +187,8 @@ public class Deadline extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        int selectedRow = jTable3.getSelectedRow();
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      int selectedRow = jTable3.getSelectedRow();
         String task = jTable3.getValueAt(selectedRow, 0).toString();
          String deadline = jTable3.getValueAt(selectedRow, 0).toString();
 
@@ -224,22 +218,13 @@ public class Deadline extends javax.swing.JPanel {
         
     
 
-
-    }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/check2.png")));
-    }//GEN-LAST:event_jLabel2MouseEntered
-
-    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
-       jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/check.png")));
-    }//GEN-LAST:event_jLabel2MouseExited
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel deadid;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable3;
     private MytaskManager.Components.PanelRound panelRound1;

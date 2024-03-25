@@ -45,7 +45,7 @@ public class Completed extends javax.swing.JPanel {
         centerRenderer = new DefaultTableCellRenderer();
         tableTextCenter();
         compid.setVisible(false);  
-       jButton1.setVisible(false);
+       
         
         
           timer = new Timer(5000, (e) -> {
@@ -110,7 +110,6 @@ public class Completed extends javax.swing.JPanel {
         compid = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,7 +140,7 @@ public class Completed extends javax.swing.JPanel {
 
         compid.setText("jLabel1");
 
-        jButton1.setText("jButton1");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/check.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -151,13 +150,6 @@ public class Completed extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 51));
         jLabel1.setText("Completed");
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/check.png"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -169,32 +161,28 @@ public class Completed extends javax.swing.JPanel {
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addGap(24, 24, 24))
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(compid)
-                        .addGap(109, 109, 109)
-                        .addComponent(jButton1)
-                        .addGap(222, 222, 222))))
+                        .addGap(362, 362, 362))))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(compid)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(compid)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel2)))
+                        .addGap(53, 53, 53)
+                        .addComponent(jButton1)))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
 
@@ -253,36 +241,11 @@ public class Completed extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        int selectedRow = jTable2.getSelectedRow();
-        String task = jTable2.getValueAt(selectedRow, 0).toString();
-
-        try {
-              String sql = "DELETE FROM completed WHERE task = ?";
-             ps = Database.getInstance().getInstance().getConnection().prepareStatement(sql);
-             ps.setString(1, task);
-             int rowsAffected = ps.executeUpdate();
-
-
-            if (rowsAffected > 0) {
-                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-                model.removeRow(selectedRow);
-                jTable2.setModel(model);
-                JOptionPane.showMessageDialog(this, "Success");
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to delete the row from the database", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Error closing connection: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-    }//GEN-LAST:event_jLabel2MouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel compid;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable2;
     private MytaskManager.Components.PanelRound panelRound1;

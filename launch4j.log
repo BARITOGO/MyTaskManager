@@ -51,3 +51,153 @@ Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
 Launcher args:	-jar "C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\MyTask.exe"
 Args length:	71/32768 chars
 Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\Mytask.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\.
+Requires JDK:	Yes
+Requires 64-Bit: Yes
+Java min ver:	1.021.000
+Java max ver:	
+JRE paths:	JRE
+Check launcher:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\JRE\bin\javaw.exe (not found)
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Check:		SOFTWARE\JavaSoft\JDK\21.0.2
+Version string: 1.021.000_002 / 64-Bit (OK)
+Check launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe (OK)
+Check javac:	C:\Program Files\Java\jdk-21\bin\javac.exe (OK)
+Match:		1.021.000_002
+Runtime used:	1.021.000_002 (64-bit)
+Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
+Launcher args:	-jar "C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\Mytask.exe"
+Args length:	71/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\Mytask.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\.
+Requires JDK:	Yes
+Requires 64-Bit: Yes
+Java min ver:	1.021.000
+Java max ver:	
+JRE paths:	JRE
+Check launcher:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\JRE\bin\javaw.exe (not found)
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Check:		SOFTWARE\JavaSoft\JDK\21.0.2
+Version string: 1.021.000_002 / 64-Bit (OK)
+Check launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe (OK)
+Check javac:	C:\Program Files\Java\jdk-21\bin\javac.exe (OK)
+Match:		1.021.000_002
+Runtime used:	1.021.000_002 (64-bit)
+Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
+Launcher args:	-jar "C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\Mytask.exe"
+Args length:	71/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\Mytask.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\.
+Requires JDK:	Yes
+Requires 64-Bit: Yes
+Java min ver:	1.021.000
+Java max ver:	
+JRE paths:	JRE
+Check launcher:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\JRE\bin\javaw.exe (not found)
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Check:		SOFTWARE\JavaSoft\JDK\21.0.2
+Version string: 1.021.000_002 / 64-Bit (OK)
+Check launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe (OK)
+Check javac:	C:\Program Files\Java\jdk-21\bin\javac.exe (OK)
+Match:		1.021.000_002
+Runtime used:	1.021.000_002 (64-bit)
+Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
+Launcher args:	-jar "C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\Mytask.exe"
+Args length:	71/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\Mytask.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\.
+Requires JDK:	Yes
+Requires 64-Bit: Yes
+Java min ver:	1.021.000
+Java max ver:	
+JRE paths:	JRE
+Check launcher:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\JRE\bin\javaw.exe (not found)
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Check:		SOFTWARE\JavaSoft\JDK\21.0.2
+Version string: 1.021.000_002 / 64-Bit (OK)
+Check launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe (OK)
+Check javac:	C:\Program Files\Java\jdk-21\bin\javac.exe (OK)
+Match:		1.021.000_002
+Runtime used:	1.021.000_002 (64-bit)
+Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
+Launcher args:	-jar "C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\Mytask.exe"
+Args length:	71/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\MyTask.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\.
+Requires JDK:	Yes
+Requires 64-Bit: Yes
+Java min ver:	1.021.000
+Java max ver:	
+JRE paths:	JRE
+Check launcher:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\JRE\bin\javaw.exe (not found)
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Check:		SOFTWARE\JavaSoft\JDK\21.0.2
+Version string: 1.021.000_002 / 64-Bit (OK)
+Check launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe (OK)
+Check javac:	C:\Program Files\Java\jdk-21\bin\javac.exe (OK)
+Match:		1.021.000_002
+Runtime used:	1.021.000_002 (64-bit)
+Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
+Launcher args:	-jar "C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\MyTask.exe"
+Args length:	71/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\MyTask.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\.
+Requires JDK:	Yes
+Requires 64-Bit: Yes
+Java min ver:	1.021.000
+Java max ver:	
+JRE paths:	JRE
+Check launcher:	C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\JRE\bin\javaw.exe (not found)
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Check:		SOFTWARE\JavaSoft\JDK\21.0.2
+Version string: 1.021.000_002 / 64-Bit (OK)
+Check launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe (OK)
+Check javac:	C:\Program Files\Java\jdk-21\bin\javac.exe (OK)
+Match:		1.021.000_002
+Runtime used:	1.021.000_002 (64-bit)
+Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
+Launcher args:	-jar "C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\MyTask.exe"
+Args length:	71/32768 chars
+Exit code:	1

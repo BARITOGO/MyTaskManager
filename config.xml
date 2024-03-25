@@ -3,7 +3,7 @@
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
   <jar>C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\dist\MyTaskManager.jar</jar>
-  <outfile>C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\MyTask.exe</outfile>
+  <outfile>C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\dist\MyTaskManager.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -14,11 +14,15 @@
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
   <icon>C:\Users\Vea\Documents\NetBeansProjects\MyTaskManager\MyTask.ico</icon>
+  <singleInstance>
+    <mutexName>MyTaskManager.exe</mutexName>
+    <windowTitle>MyTaskManager.exe</windowTitle>
+  </singleInstance>
   <jre>
     <path>JRE</path>
     <requiresJdk>true</requiresJdk>
     <requires64Bit>true</requires64Bit>
-    <minVersion>21</minVersion>
+    <minVersion>1.6.0</minVersion>
     <maxVersion></maxVersion>
   </jre>
 </launch4jConfig>

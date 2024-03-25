@@ -1,5 +1,4 @@
 package MytaskManager.Main;
-//BENDIJO - CPE
 import MytaskManager.Forms.Calendar;
 import MytaskManager.Forms.Completed;
 import MytaskManager.Forms.Dashboard;
@@ -43,7 +42,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         setBackground(new Color(0,0,0,0));
              
-        changeForm.setLayout(new BorderLayout());
+    
         deadline = new Deadline();
         todo = new Todo();
         dashboard = new Dashboard(); 
@@ -51,10 +50,11 @@ public class Main extends javax.swing.JFrame {
         calendar = new Calendar();
         statistic = new Statistic();
         addtask = new addTask();
-        initMoving(this);
+        
         showForm(dashboard);
          idtext();
         MainID.setVisible(false);
+        initMoving(this);
         
         
        
@@ -154,8 +154,8 @@ public class Main extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         MainID = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         panelRound2 = new MytaskManager.Components.PanelRound();
         jLabel11 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -272,29 +272,27 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/riddle1.png"))); // NOI18N
-        jLabel1.setText("Click me!");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        MainID.setText("jLabel1");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/riddle1.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel1MouseExited(evt);
+                jLabel2MouseClicked(evt);
             }
         });
-
-        MainID.setText("jLabel1");
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound3Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(MainID)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
                 .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
                     .addComponent(jButton4)
                     .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -305,13 +303,8 @@ public class Main extends javax.swing.JFrame {
                                 .addGap(3, 3, 3))
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17))
-            .addGroup(panelRound3Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(MainID)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,8 +326,8 @@ public class Main extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addComponent(jLabel2)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         panelRound2.setBackground(new java.awt.Color(255, 255, 255));
@@ -510,7 +503,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         Login l = new Login();
-        this.hide();
+        this.setVisible(false);
         l.setVisible(true);   
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -537,42 +530,18 @@ public class Main extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formComponentResized
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-       Riddletab l = new Riddletab();
-        l.setVisible(true); 
-    }//GEN-LAST:event_jLabel1MouseClicked
-
-    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/riddle2.png")));                                
-    }//GEN-LAST:event_jLabel1MouseEntered
-
-    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/riddle1.png"))); 
-    }//GEN-LAST:event_jLabel1MouseExited
-
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
        showForm(todo);
     searchTask(jTextField1.getText());
     
     }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+       Riddletab l = new Riddletab();
+        l.setVisible(true); 
+    }//GEN-LAST:event_jLabel2MouseClicked
         
-//    private void searchTask(String query) {
-//   DefaultTableModel model = (DefaultTableModel) todo.jTable1.getModel();
-//    boolean taskFound = false;
-//    
-//    for (int i = 0; i < model.getRowCount(); i++) {
-//        String task = model.getValueAt(i, 0).toString(); 
-//        if (task.contains(query)) {
-//            taskFound = true;
-//            JOptionPane.showMessageDialog(this, "Task found: " + task);
-//            
-//            break; 
-//        }
-//    }
-//    if (!taskFound) {
-//        JOptionPane.showMessageDialog(this, "Task not found!");
-//    }
-//}
+
 
     private void searchTask(String query) {
     DefaultTableModel model = (DefaultTableModel) todo.jTable1.getModel();
@@ -628,8 +597,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField1;

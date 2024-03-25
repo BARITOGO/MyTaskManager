@@ -38,7 +38,7 @@ public class Calendar extends JPanel {
     private Animator animator;
     private ModelDate date = new ModelDate();
     private int selected = 1;
-    private CalendarEventCellRender calendarEventCellRender = new DefaultCalendarEventCellRender();
+    private CalendarEventCellRender<ModelDate> calendarEventCellRender = new DefaultCalendarEventCellRender();
     private final List<CalendarSelectedListener> events = new ArrayList<>();
 
     public Calendar() {
@@ -137,7 +137,7 @@ public class Calendar extends JPanel {
         panel.add(panelMonth);
         panel.add(panelYear);
 
-        panelDay.setPanelDateListener((Graphics2D g2, Rectangle2D rectangle, ModelDate e) -> {
+       panelDay.setPanelDateListener((Graphics2D g2, Rectangle2D rectangle, ModelDate e) -> {
             if (calendarEventCellRender != null) {
                 boolean active = panelDay.getSelectedDate() != null && e.compareTo(panelDay.getSelectedDate());
                 calendarEventCellRender.paint(g2, rectangle, active, e);

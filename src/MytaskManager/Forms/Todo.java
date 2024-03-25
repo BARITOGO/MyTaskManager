@@ -20,6 +20,7 @@ import javax.swing.Timer;
 import java.sql.Timestamp;
 
 
+
 public class Todo extends javax.swing.JPanel {
     
     
@@ -52,7 +53,7 @@ public class Todo extends javax.swing.JPanel {
         
         panelRound5.setVisible(false);
         panelRound2.setVisible(false);
-        add.setVisible(false);
+//        add.setVisible(false);
         mdate = new DateChooser();
         mdeadline = new DateChooser();
         mdate.setTextField(date);
@@ -165,12 +166,9 @@ public class Todo extends javax.swing.JPanel {
         timePicker1 = new com.raven.swing.TimePicker();
         panelRound1 = new MytaskManager.Components.PanelRound();
         jLabel1 = new javax.swing.JLabel();
-        add = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         panelRound5 = new MytaskManager.Components.PanelRound();
-        jLabel9 = new javax.swing.JLabel();
         time = new javax.swing.JTextField();
         jToggleButton2 = new javax.swing.JToggleButton();
         jLabel6 = new javax.swing.JLabel();
@@ -180,13 +178,15 @@ public class Todo extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         task = new javax.swing.JTextField();
         ass = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         todoid = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         panelRound2 = new MytaskManager.Components.PanelRound();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         timePicker1.setForeground(new java.awt.Color(186, 230, 151));
         timePicker1.setDisplayText(time);
@@ -202,15 +202,6 @@ public class Todo extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("My Task");
-
-        add.setBackground(new java.awt.Color(255, 234, 234));
-        add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/addtask.png"))); // NOI18N
-        add.setBorder(null);
-        add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addActionPerformed(evt);
-            }
-        });
 
         jTable1.setForeground(new java.awt.Color(117, 118, 116));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -237,19 +228,6 @@ public class Todo extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/check.png"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel2MouseExited(evt);
-            }
-        });
-
         panelRound5.setBackground(new java.awt.Color(246, 245, 245));
         panelRound5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         panelRound5.setForeground(new java.awt.Color(204, 204, 204));
@@ -257,19 +235,6 @@ public class Todo extends javax.swing.JPanel {
         panelRound5.setRoundBottomRight(90);
         panelRound5.setRoundTopLeft(90);
         panelRound5.setRoundTopRight(90);
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/new add.png"))); // NOI18N
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel9MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel9MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel9MouseExited(evt);
-            }
-        });
 
         time.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,16 +267,17 @@ public class Todo extends javax.swing.JPanel {
         ass.setForeground(new java.awt.Color(102, 102, 102));
         ass.setText("Task");
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/done1.png"))); // NOI18N
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/done1.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel7MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel7MouseExited(evt);
+        });
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/new add.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -339,11 +305,11 @@ public class Todo extends javax.swing.JPanel {
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jToggleButton2)))
-                .addGap(28, 28, 28)
-                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel9)
-                .addGap(28, 28, 28))
+                .addComponent(jButton3)
+                .addGap(30, 30, 30))
         );
         panelRound5Layout.setVerticalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,37 +331,13 @@ public class Todo extends javax.swing.JPanel {
                             .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelRound5Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/add.png"))); // NOI18N
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel3MouseExited(evt);
-            }
-        });
-
         todoid.setText("jLabel8");
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(117, 118, 116));
-        jLabel8.setText("...");
-        jLabel8.setFocusable(false);
-        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
-            }
-        });
 
         panelRound2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -436,6 +378,30 @@ public class Todo extends javax.swing.JPanel {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/add.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(117, 118, 116));
+        jButton5.setText("...");
+        jButton5.setToolTipText("");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/check.png"))); // NOI18N
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
@@ -449,23 +415,21 @@ public class Todo extends javax.swing.JPanel {
                         .addComponent(todoid)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(add)
-                            .addComponent(jLabel3))
-                        .addGap(24, 24, 24)
-                        .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
-                        .addGap(18, 18, 18)
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelRound1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(jButton6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(25, 25, 25))))
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addGap(0, 50, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -479,22 +443,20 @@ public class Todo extends javax.swing.JPanel {
                         .addComponent(todoid)
                         .addGap(22, 22, 22)))
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(add))
-                    .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -509,17 +471,107 @@ public class Todo extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addActionPerformed
-
     private void jTable1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable1ComponentShown
     
        
 
     }//GEN-LAST:event_jTable1ComponentShown
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+//       
+//        int selectedRow = jTable1.getSelectedRow();
+//        DefaultTableModel model =(DefaultTableModel)jTable1.getModel();
+
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void timeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeActionPerformed
+
+    }//GEN-LAST:event_timeActionPerformed
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+             timePicker1.showPopup(time, 100, 100);
+
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void taskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskActionPerformed
+
+    }//GEN-LAST:event_taskActionPerformed
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        panelRound2.setVisible(false);
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        int selectedRow = jTable1.getSelectedRow();
+        String task = jTable1.getValueAt(selectedRow, 0).toString();
+
+        try {
+              String sql = "DELETE FROM deadlinedata WHERE task = ?";
+             ps = Database.getInstance().getInstance().getConnection().prepareStatement(sql);
+             ps.setString(1, task);
+             int rowsAffected = ps.executeUpdate();
+
+          
+            String sqlv = "DELETE FROM todo WHERE task = ?";
+            ps = Database.getInstance().getInstance().getConnection().prepareStatement(sqlv);
+            ps.setString(1, task);
+            rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.removeRow(selectedRow);
+                jTable1.setModel(model);
+                JOptionPane.showMessageDialog(this, "Success");
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to delete the row from the database", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Error closing connection: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        
+
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         panelRound5.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+          panelRound5.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        try {
+          String sql = "INSERT INTO todo (userId, task, date, deadline, time, timestamp) VALUES (?, ?, ?, ?, ?, ?)";
+          ps = Database.getInstance().getConnection().prepareStatement(sql); 
+                
+         
+         ps.setString(1, todoid.getText());
+         ps.setString(2, task.getText());
+         ps.setString(3, date.getText());
+         ps.setString(4, deadline.getText());
+         ps.setString(5, time.getText());
+
+       
+         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+         ps.setTimestamp(6, timestamp);
+
+         ps.execute();
+         populateTable();
+         JOptionPane.showMessageDialog(this, "Success");
+
+     } catch (SQLException ex) {
+         JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
+     }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+         panelRound2.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         int selectedRow = jTable1.getSelectedRow();
         if (selectedRow != -1) { 
         String task = jTable1.getValueAt(selectedRow, 0).toString();    
@@ -561,163 +613,24 @@ public class Todo extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Error closing connection: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-
-        
-
-
-        
-    }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-       
-        int selectedRow = jTable1.getSelectedRow();
-        DefaultTableModel model =(DefaultTableModel)jTable1.getModel();
-
-        
-    }//GEN-LAST:event_jTable1MouseClicked
-
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-     
-     
-        try {
-          String sql = "INSERT INTO todo (userId, task, date, deadline, time, timestamp) VALUES (?, ?, ?, ?, ?, ?)";
-          ps = Database.getInstance().getConnection().prepareStatement(sql); 
-                
-         
-         ps.setString(1, todoid.getText());
-         ps.setString(2, task.getText());
-         ps.setString(3, date.getText());
-         ps.setString(4, deadline.getText());
-         ps.setString(5, time.getText());
-
-       
-         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-         ps.setTimestamp(6, timestamp);
-
-         ps.execute();
-         populateTable();
-         JOptionPane.showMessageDialog(this, "Success");
-
-     } catch (SQLException ex) {
-         JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
-     }
-
-        
-      
-    
-
-    }//GEN-LAST:event_jLabel9MouseClicked
-
-    private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/add2.png")));
-    }//GEN-LAST:event_jLabel9MouseEntered
-
-    private void jLabel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseExited
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/new add.png")));
-    }//GEN-LAST:event_jLabel9MouseExited
-
-    private void timeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeActionPerformed
-
-    }//GEN-LAST:event_timeActionPerformed
-
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-             timePicker1.showPopup(time, 100, 100);
-
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
-
-    private void taskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskActionPerformed
-
-    }//GEN-LAST:event_taskActionPerformed
-
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        //done
-        panelRound5.setVisible(false);
-    }//GEN-LAST:event_jLabel7MouseClicked
-
-    private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/button (12).png")));
-    }//GEN-LAST:event_jLabel7MouseEntered
-
-    private void jLabel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseExited
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/done1.png")));
-    }//GEN-LAST:event_jLabel7MouseExited
-
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-      panelRound5.setVisible(true);
-    }//GEN-LAST:event_jLabel3MouseClicked
-
-    private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/plus2.png")));
-    }//GEN-LAST:event_jLabel3MouseEntered
-
-    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
-         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/add.png")));
-    }//GEN-LAST:event_jLabel3MouseExited
-
-    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/check2.png")));
-    }//GEN-LAST:event_jLabel2MouseEntered
-
-    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
-       jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/check.png")));
-    }//GEN-LAST:event_jLabel2MouseExited
-
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        panelRound2.setVisible(true);
-    }//GEN-LAST:event_jLabel8MouseClicked
-
-    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
-        panelRound2.setVisible(false);
-    }//GEN-LAST:event_jLabel12MouseClicked
-
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        int selectedRow = jTable1.getSelectedRow();
-        String task = jTable1.getValueAt(selectedRow, 0).toString();
-
-        try {
-              String sql = "DELETE FROM deadlinedata WHERE task = ?";
-             ps = Database.getInstance().getInstance().getConnection().prepareStatement(sql);
-             ps.setString(1, task);
-             int rowsAffected = ps.executeUpdate();
-
-          
-            String sqlv = "DELETE FROM todo WHERE task = ?";
-            ps = Database.getInstance().getInstance().getConnection().prepareStatement(sqlv);
-            ps.setString(1, task);
-            rowsAffected = ps.executeUpdate();
-
-            if (rowsAffected > 0) {
-                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                model.removeRow(selectedRow);
-                jTable1.setModel(model);
-                JOptionPane.showMessageDialog(this, "Success");
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to delete the row from the database", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Error closing connection: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        
-
-    }//GEN-LAST:event_jLabel11MouseClicked
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JToggleButton add;
     private javax.swing.JLabel ass;
     private javax.swing.JTextField date;
     private javax.swing.JTextField deadline;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton2;

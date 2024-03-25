@@ -304,7 +304,7 @@ public void times() {
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         panelRound7 = new MytaskManager.Components.PanelRound();
-        calendar1 = new CalendarUI.calendar.Calendar();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
         panelRound2 = new MytaskManager.Components.PanelRound();
         Qoutes = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -450,16 +450,16 @@ public void times() {
         panelRound7Layout.setHorizontalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound7Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(calendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
-                .addGap(46, 46, 46))
+                .addGap(20, 20, 20)
+                .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(23, 23, 23))
         );
         panelRound7Layout.setVerticalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound7Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(calendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         panelRound2.setRoundBottomLeft(90);
@@ -593,16 +593,16 @@ public void times() {
                                 .addComponent(userId)))
                         .addGap(18, 18, 18)
                         .addComponent(panelRound7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Qoutes;
-    private CalendarUI.calendar.Calendar calendar1;
     public javax.swing.JLabel changeimage;
     private javax.swing.JLabel dayGreetings;
+    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

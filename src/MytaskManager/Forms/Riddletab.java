@@ -63,7 +63,7 @@ public class Riddletab extends javax.swing.JFrame {
         randomRiddle = Riddle.getRiddle();
         jTextPane2.setText(randomRiddle.getQuestion());   
         jTextField1.setVisible(true);
-        jLabel1.setVisible(true);
+       
         saveCurrentRiddle();
          
 
@@ -109,7 +109,7 @@ private void loadCurrentRiddle() {
             randomRiddle = Riddle.getRiddle();
             jTextPane2.setText(randomRiddle.getQuestion());
             jTextField1.setVisible(true);
-            jLabel1.setVisible(true);
+            
         }
     } catch (IOException e) {
         e.printStackTrace();
@@ -148,12 +148,12 @@ public void times() {
     private void initComponents() {
 
         jPanel1 = new RoundedPanel(100, new Color(255,255,255));
-        jLabel1 = new javax.swing.JLabel();
         Riddlelabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextPane2 = new javax.swing.JTextPane();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusCycleRoot(false);
@@ -161,19 +161,6 @@ public void times() {
 
         jPanel1.setForeground(new java.awt.Color(204, 204, 204));
         jPanel1.setOpaque(false);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/done1.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel1MouseExited(evt);
-            }
-        });
 
         Riddlelabel.setFont(new java.awt.Font("Sylfaen", 1, 20)); // NOI18N
         Riddlelabel.setForeground(new java.awt.Color(142, 117, 117));
@@ -201,29 +188,34 @@ public void times() {
         jLabel2.setForeground(new java.awt.Color(142, 117, 117));
         jLabel2.setText("Answer:");
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/done1.png"))); // NOI18N
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(53, 53, 53)
-                            .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(Riddlelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(50, 50, 50))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(22, 22, 22))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(72, 72, 72)
+                            .addComponent(Riddlelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(jScrollPane2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(46, 46, 46))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,7 +229,7 @@ public void times() {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
 
@@ -272,7 +264,7 @@ public void times() {
             JOptionPane.showMessageDialog(this, "Amazing! You are a Genius", "Correct", JOptionPane.INFORMATION_MESSAGE);
 
             jTextField1.setVisible(false);
-            jLabel1.setVisible(false);
+           
             jTextPane2.setText("Waiting for another riddle...");
             jTextField1.setText("");
         } else {
@@ -283,17 +275,9 @@ public void times() {
         jTextField1.selectAll();
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        this.hide();
-    }//GEN-LAST:event_jLabel1MouseClicked
-
-    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
-           jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/button (12).png")));
-    }//GEN-LAST:event_jLabel1MouseEntered
-
-    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
-          jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyTaskManager/icon/done1.png")));
-    }//GEN-LAST:event_jLabel1MouseExited
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     
     public static void main(String args[]) {
@@ -330,8 +314,8 @@ public void times() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Riddlelabel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
