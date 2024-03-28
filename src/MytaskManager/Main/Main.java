@@ -50,29 +50,14 @@ public class Main extends javax.swing.JFrame {
         calendar = new Calendar();
         statistic = new Statistic();
         addtask = new addTask();
+    
         
         showForm(dashboard);
          idtext();
         MainID.setVisible(false);
         initMoving(this);
         
-        
-       
-       
-        
-//        todo.add.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                  showForm(addtask);
-//            }
-//        });
-//        addtask.back.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                  showForm(todo);
-//            }
-//        });
-//        todo.populateTable();
+ 
     }
 
     private int x;
@@ -285,10 +270,6 @@ public class Main extends javax.swing.JFrame {
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound3Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(MainID)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
                 .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,6 +286,10 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17))
+            .addGroup(panelRound3Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(MainID)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -539,6 +524,7 @@ public class Main extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
        Riddletab l = new Riddletab();
         l.setVisible(true); 
+        
     }//GEN-LAST:event_jLabel2MouseClicked
         
 

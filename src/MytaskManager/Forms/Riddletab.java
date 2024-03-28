@@ -11,7 +11,6 @@ import java.awt.Graphics2D;
 import java.awt.LayoutManager;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
@@ -50,16 +49,14 @@ public class Riddletab extends javax.swing.JFrame {
         jScrollPane2.setBorder(null);
         jScrollPane2.setBorder(BorderFactory.createEmptyBorder());
         
+        displayRiddle();
          times();
-       displayRiddle();
+    
         
     }
     
-   
-        
-    
-    
-         public void displayRiddle(){
+ public void displayRiddle(){
+     
         randomRiddle = Riddle.getRiddle();
         jTextPane2.setText(randomRiddle.getQuestion());   
         jTextField1.setVisible(true);
@@ -88,7 +85,9 @@ public class Riddletab extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
-    });
+    }
+    
+    );
     }
 
 private void saveCurrentRiddle() {
@@ -357,15 +356,14 @@ public void times() {
                Graphics2D graphics = (Graphics2D) g;
                graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-               //Draws the rounded panel with borders.
                if (backgroundColor != null) {
                    graphics.setColor(backgroundColor);
                } else {
                    graphics.setColor(getBackground());
                }
-               graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
+               graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); 
                graphics.setColor(getForeground());
-               graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
+               graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); 
            }
        }
    }class RoundedPanel extends JPanel
@@ -404,15 +402,14 @@ public void times() {
                Graphics2D graphics = (Graphics2D) g;
                graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-               //Draws the rounded panel with borders.
                if (backgroundColor != null) {
                    graphics.setColor(backgroundColor);
                } else {
                    graphics.setColor(getBackground());
                }
-               graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
+               graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); 
                graphics.setColor(getForeground());
-               graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
+               graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); 
            }
 
 }

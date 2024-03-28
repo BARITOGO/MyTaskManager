@@ -1,12 +1,9 @@
 package MytaskManager.Forms;
 
 import MytaskManager.Components.Qoutes;
-import MytaskManager.Components.Riddle;
 import MytaskManager.Database.Database;
-import MytaskManager.LoginPage.Login;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
@@ -17,12 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.Timer;
-import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
@@ -33,9 +27,7 @@ public class Dashboard extends javax.swing.JPanel {
       private Timer timer;
       PreparedStatement p;
     private String username;
-    private Riddle randomRiddle;
     private String currentQuote;
-    private String currentRiddle;
     Timer t ;
     SimpleDateFormat st ;
 
@@ -145,10 +137,6 @@ public void username() {
     }
 }
 
-
-    
-    
-          
           
      public void populateTable(){
         try {
@@ -192,7 +180,6 @@ public void displayQoutes() {
     int currentMinute = cal.get(Calendar.MINUTE);
     int currentSecond = cal.get(Calendar.SECOND);
 
-    
     if (currentHour == 0 && currentMinute == 0 && currentSecond == 0) {
         try {
             jTextPane1.getDocument().insertString(jTextPane1.getDocument().getLength(), randomQuote + "\n", null);
@@ -216,7 +203,6 @@ public void displayQoutes() {
             reader.close();
 
             jTextPane1.setText(quote);
-
             currentQuote = quote;
 
         } catch (IOException e) {
@@ -270,18 +256,18 @@ public void times() {
        
         if (currentHour >= 0 && currentHour < 12) {
        
-            ImageIcon icon = new ImageIcon(getClass().getResource("/MytaskManager/icon/morning.png"));
-            changeimage.setIcon(icon);
+//            ImageIcon icon = new ImageIcon(getClass().getResource("/MytaskManager/icon/morning.png"));
+//            changeimage.setIcon(icon);
             dayGreetings.setText("Good Morning");
         } else if (currentHour >= 12 && currentHour < 18) {
            
-            ImageIcon icon = new ImageIcon(getClass().getResource("/MytaskManager/icon/afternoon.png"));
-            changeimage.setIcon(icon);
+//            ImageIcon icon = new ImageIcon(getClass().getResource("/MytaskManager/icon/afternoon.png"));
+//            changeimage.setIcon(icon);
             dayGreetings.setText("Good Afternoon");
         } else {
        
-            ImageIcon icon = new ImageIcon(getClass().getResource("/MytaskManager/icon/evening.png"));
-            changeimage.setIcon(icon);
+//            ImageIcon icon = new ImageIcon(getClass().getResource("/MytaskManager/icon/evening.png"));
+//            changeimage.setIcon(icon);
             dayGreetings.setText("Good Evening");
         }
     });
@@ -327,49 +313,51 @@ public void times() {
 
         t_time.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         t_time.setForeground(new java.awt.Color(142, 117, 117));
-        t_time.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        t_time.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         t_time.setText("0");
+        t_time.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         changeimage.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        changeimage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/morning.png"))); // NOI18N
+        changeimage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/girl2.png"))); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 255, 51));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(33, 33, 33)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(dayGreetings, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(67, Short.MAX_VALUE))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(t_time, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelRound1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(t_time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(changeimage))
-                    .addComponent(dayGreetings, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                        .addComponent(changeimage)
+                        .addGap(12, 12, 12))))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(dayGreetings, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(dayGreetings, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(t_time, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34))
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(changeimage, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(46, Short.MAX_VALUE))))
+                        .addComponent(changeimage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(38, 38, 38))))
         );
 
         panelRound4.setRoundBottomLeft(90);
@@ -483,11 +471,11 @@ public void times() {
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Qoutes, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(Qoutes, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                 .addGap(43, 43, 43))
         );
         panelRound2Layout.setVerticalGroup(
